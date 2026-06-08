@@ -126,6 +126,43 @@
   .pasien-list{display:flex;flex-direction:column;gap:10px;}
   .pasien-card{background:var(--putih);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);border-left:4px solid var(--abu2);cursor:pointer;transition:transform 0.15s;}
   .pasien-card:hover{transform:translateY(-1px);}
+  /* ===== KRITERIA KONDISI ===== */
+  .kondisi-info-panel{border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow);}
+  .kondisi-info-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;user-select:none;-webkit-user-select:none;}
+  .kondisi-info-header.hijau{background:var(--hijau-bg);border-left:4px solid var(--hijau);}
+  .kondisi-info-header.kuning{background:var(--kuning-bg);border-left:4px solid var(--kuning);}
+  .kondisi-info-header.merah{background:var(--merah-bg);border-left:4px solid var(--merah);}
+  .kih-left{display:flex;align-items:center;gap:8px;}
+  .kih-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+  .kih-dot.hijau{background:var(--hijau);}
+  .kih-dot.kuning{background:var(--kuning);}
+  .kih-dot.merah{background:var(--merah);}
+  .kih-label{font-size:0.88rem;font-weight:700;}
+  .kih-label.hijau{color:var(--hijau);}
+  .kih-label.kuning{color:var(--kuning);}
+  .kih-label.merah{color:var(--merah);}
+  .kih-count{font-size:0.72rem;color:var(--teks2);background:var(--putih);padding:2px 8px;border-radius:10px;font-weight:600;}
+  .kih-toggle{font-size:0.7rem;color:var(--abu3);transition:transform 0.2s;}
+  .kih-toggle.open{transform:rotate(180deg);}
+  .kondisi-info-body{display:none;background:var(--putih);padding:10px 14px 12px;border-top:1px solid var(--abu2);}
+  .kondisi-info-body.open{display:block;}
+  .kib-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0;}
+  .kib-col-title{font-size:0.7rem;font-weight:700;color:var(--teks2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px;}
+  .kib-item{font-size:0.76rem;color:var(--teks);line-height:1.5;display:flex;align-items:flex-start;gap:5px;margin-bottom:3px;}
+  .kib-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+  .kib-tindak{margin-top:8px;padding-top:8px;border-top:1px dashed var(--abu2);}
+  .kib-tindak-label{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;}
+  .kib-tindak-label.hijau{color:var(--hijau);}
+  .kib-tindak-label.kuning{color:var(--kuning);}
+  .kib-tindak-label.merah{color:var(--merah);}
+  .kib-tindak-item{font-size:0.76rem;color:var(--teks);line-height:1.5;display:flex;align-items:flex-start;gap:5px;margin-bottom:2px;}
+  /* Kartu pasien — baris kondisi info */
+  .pc-kondisi-info{margin-top:6px;padding:6px 8px;border-radius:7px;font-size:0.72rem;line-height:1.55;}
+  .pc-kondisi-info.hijau{background:var(--hijau-bg);color:var(--hijau);}
+  .pc-kondisi-info.kuning{background:var(--kuning-bg);color:var(--kuning);}
+  .pc-kondisi-info.merah{background:var(--merah-bg);color:var(--merah);}
+  .pc-ki-kriteria{color:var(--teks2);font-size:0.71rem;margin-top:3px;line-height:1.45;}
+  .pc-ki-tindak{font-weight:600;margin-top:3px;}
   .pasien-card.hijau{border-left-color:var(--hijau);}
   .pasien-card.kuning{border-left-color:var(--kuning);}
   .pasien-card.merah{border-left-color:var(--merah);}
@@ -324,7 +361,425 @@
   .instruksi-dari{font-size:0.72rem;color:var(--biru);font-weight:700;margin-bottom:4px;}
   .instruksi-teks{font-size:0.88rem;color:var(--teks);line-height:1.5;}
   .instruksi-waktu{font-size:0.72rem;color:var(--abu3);margin-top:4px;}
+
+  /* ======================================================
+   * FITUR BARU: ADOPSI SAHABAT LANSIA + SOS v5.0
+   * ====================================================== */
+
+  /* SOS Floating Button */
+  .sos-fab{position:relative;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--merah);border:2px solid #e87e74;cursor:pointer;animation:sosPulseRing 2s infinite;gap:1px;}
+  .sos-fab:hover{opacity:0.9;transform:scale(1.05);}
+  .sos-fab span{font-size:0.6rem;color:#fff;font-weight:700;line-height:1;}
+  .sos-fab .sos-fab-icon{font-size:1rem;color:#fff;}
+  @keyframes sosPulseRing{0%,100%{box-shadow:0 0 0 0 rgba(192,57,43,0.5);}50%{box-shadow:0 0 0 7px rgba(192,57,43,0);}}
+
+  /* SOS Modal */
+  .sos-modal-overlay{position:fixed;inset:0;background:rgba(13,45,94,0.6);z-index:9000;display:none;align-items:center;justify-content:center;padding:1rem;}
+  .sos-modal-overlay.open{display:flex;}
+  .sos-modal-box{background:var(--putih);border-radius:20px;width:100%;max-width:380px;box-shadow:0 12px 48px rgba(0,0,0,0.3);overflow:hidden;}
+  .sos-close-btn{position:absolute;top:12px;right:14px;width:28px;height:28px;border-radius:50%;background:var(--merah-bg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--merah);}
+  .sos-modal-header{text-align:center;padding:1.5rem 1.5rem 1rem;position:relative;}
+  .sos-header-icon-wrap{width:64px;height:64px;border-radius:50%;background:var(--merah-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;font-size:2rem;border:2px solid var(--merah-border);}
+  .sos-modal-title{font-size:1.15rem;font-weight:700;color:var(--merah);letter-spacing:0.5px;margin-bottom:0.35rem;}
+  .sos-modal-sub{font-size:0.8rem;color:var(--teks2);line-height:1.5;}
+  .sos-actions{padding:0 1rem 0.5rem;}
+  .sos-row{display:flex;align-items:center;gap:12px;padding:10px 13px;border:1.5px solid var(--abu2);border-radius:12px;margin-bottom:8px;background:var(--putih);}
+  .sos-row-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+  .sos-row-icon.kuning{background:var(--kuning-bg);}
+  .sos-row-icon.hijau{background:var(--hijau-bg);}
+  .sos-row-icon.teal{background:#e0f4f1;}
+  .sos-row-body{flex:1;}
+  .sos-row-label{font-size:0.7rem;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:2px;}
+  .sos-row-label.biru{color:var(--biru);}
+  .sos-row-label.hijau{color:var(--hijau);}
+  .sos-row-label.teal{color:#0f766e;}
+  .sos-row-name{font-size:0.92rem;font-weight:700;color:var(--teks);}
+  .sos-row-num{font-size:0.78rem;color:var(--abu3);}
+  .sos-call-btn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;transition:all 0.15s;}
+  .sos-call-btn.hijau{background:var(--hijau);}
+  .sos-call-btn.teal{background:#0f766e;}
+  .sos-call-btn:hover{opacity:0.85;transform:scale(1.08);}
+  .sos-ambulans-row{display:flex;align-items:center;gap:12px;padding:11px 13px;border-radius:12px;margin-bottom:8px;background:var(--merah);}
+  .sos-ambulans-body{flex:1;}
+  .sos-ambulans-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:3px;letter-spacing:0.05em;}
+  .sos-ambulans-name{font-size:0.95rem;font-weight:700;color:#fff;}
+  .sos-ambulans-sub{font-size:0.72rem;color:rgba(255,255,255,0.8);}
+  .sos-btn-119{display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:10px;background:#fff;border:none;cursor:pointer;font-size:1rem;font-weight:700;color:var(--merah);flex-shrink:0;transition:opacity 0.15s;}
+  .sos-btn-119:hover{opacity:0.85;}
+  .sos-sirine-row{display:flex;align-items:center;gap:12px;padding:10px 13px;border:1.5px solid var(--abu2);border-radius:12px;margin-bottom:8px;}
+  .sos-btn-sirine{padding:7px 14px;border-radius:8px;background:var(--merah);color:#fff;border:none;cursor:pointer;font-size:0.78rem;font-weight:700;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+  .sos-btn-sirine.aktif{background:var(--hijau);animation:sirinePulse 0.7s infinite alternate;}
+  @keyframes sirinePulse{from{opacity:1;}to{opacity:0.65;}}
+  .sos-cancel-row{text-align:center;padding:0.5rem 1rem 1.2rem;}
+  .sos-cancel-link{background:none;border:none;color:var(--abu3);font-size:0.82rem;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;}
+
+  /* Pasien card vital row */
+  .pc-vital-row{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--abu);border-radius:8px;padding:6px;margin:5px 0;}
+  .pv-item{text-align:center;}
+  .pv-val{font-size:0.78rem;font-weight:700;}
+  .pv-val.merah{color:var(--merah);}
+  .pv-val.kuning{color:var(--kuning);}
+  .pv-val.hijau{color:var(--hijau);}
+  .pv-lbl{font-size:0.65rem;color:var(--abu3);}
+  .pc-skrining-row{display:flex;gap:3px;flex-wrap:wrap;margin:4px 0;}
+  .sk-chip{font-size:0.65rem;padding:2px 6px;border-radius:8px;font-weight:600;}
+  .sk-chip.hijau{background:var(--hijau-bg);color:var(--hijau);}
+  .sk-chip.kuning{background:var(--kuning-bg);color:var(--kuning);}
+  .sk-chip.merah{background:var(--merah-bg);color:var(--merah);}
+
+  /* Vital form in kunjungan */
+  .vital-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem;}
+  .vf-item{background:var(--abu);border-radius:10px;padding:9px;}
+  .vf-item label{font-size:0.72rem;color:var(--abu3);display:block;margin-bottom:4px;}
+  .vf-item .vf-normal-hint{font-size:0.65rem;color:var(--abu3);}
+  .vf-input{width:100%;border:1.5px solid var(--abu2);border-radius:8px;padding:8px 10px;font-size:0.9rem;font-weight:600;font-family:'DM Sans',sans-serif;background:var(--putih);outline:none;transition:border 0.15s;}
+  .vf-input:focus{border-color:var(--biru);}
+  .vf-input.ok{border-color:var(--hijau);background:var(--hijau-bg);}
+  .vf-input.warn{border-color:var(--kuning);background:var(--kuning-bg);}
+  .vf-input.bad{border-color:var(--merah);background:var(--merah-bg);}
+  .vf-hint{font-size:0.68rem;margin-top:3px;font-weight:600;}
+  .vf-hint.ok{color:var(--hijau);}
+  .vf-hint.warn{color:var(--kuning);}
+  .vf-hint.bad{color:var(--merah);}
+  .vf-tensi-row{display:flex;gap:6px;align-items:center;}
+  .vf-tensi-sep{color:var(--abu3);font-size:1.1rem;}
+
+  /* Riwayat vital in kunjungan */
+  .riwayat-vital-list{margin-bottom:1rem;}
+  .rv-item{background:var(--putih);border-radius:10px;padding:8px 10px;margin-bottom:6px;box-shadow:var(--shadow);border-left:3px solid var(--abu2);}
+  .rv-item.hijau{border-left-color:var(--hijau);}
+  .rv-item.kuning{border-left-color:var(--kuning);}
+  .rv-item.merah{border-left-color:var(--merah);}
+  .rv-tgl{font-size:0.72rem;color:var(--biru);font-weight:600;}
+  .rv-vals{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:4px;}
+  .rv-val-item{text-align:center;}
+  .rv-val-num{font-size:0.8rem;font-weight:700;}
+  .rv-val-lbl{font-size:0.62rem;color:var(--abu3);}
+  .rv-catatan{font-size:0.75rem;color:var(--teks2);margin-top:4px;font-style:italic;}
+
+  /* Skrining dalam kunjungan */
+  .skrining-section{margin-bottom:1rem;}
+  .skrining-tab-row{display:flex;gap:5px;overflow-x:auto;padding-bottom:4px;margin-bottom:8px;}
+  .skrining-tab{padding:6px 12px;border-radius:20px;border:1.5px solid var(--abu2);background:var(--putih);cursor:pointer;font-size:0.72rem;font-weight:600;color:var(--abu3);font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.15s;}
+  .skrining-tab.active{background:var(--biru-bg);border-color:var(--biru);color:var(--biru);}
+  .skrining-tab.done{background:var(--hijau-bg);border-color:var(--hijau);color:var(--hijau);}
+  .skrining-panel{display:none;}
+  .skrining-panel.active{display:block;}
+  .skrining-header{background:var(--biru-bg);border-radius:10px;padding:8px 12px;margin-bottom:8px;}
+  .skrining-header h4{font-size:0.85rem;font-weight:700;color:var(--biru-tua);}
+  .skrining-header p{font-size:0.72rem;color:var(--teks2);margin-top:2px;}
+  .skrining-q{background:var(--putih);border-radius:10px;padding:10px 12px;margin-bottom:6px;box-shadow:0 1px 4px rgba(13,45,94,0.07);}
+  .skrining-q p{font-size:0.85rem;color:var(--teks);margin-bottom:7px;line-height:1.5;}
+  .skrining-btns{display:flex;gap:6px;}
+  .skrining-btn{flex:1;padding:8px;border-radius:9px;border:1.5px solid var(--abu2);background:var(--abu);cursor:pointer;font-size:0.8rem;font-weight:600;font-family:'DM Sans',sans-serif;color:var(--teks2);transition:all 0.15s;}
+  .skrining-btn.sel-ya,.skrining-btn.sel-salah,.skrining-btn.sel-lupa,.skrining-btn.sel-bantuan{background:var(--merah-bg);border-color:var(--merah);color:var(--merah);}
+  .skrining-btn.sel-tidak,.skrining-btn.sel-benar,.skrining-btn.sel-ingat,.skrining-btn.sel-mandiri{background:var(--hijau-bg);border-color:var(--hijau);color:var(--hijau);}
+  .adl-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .adl-item{background:var(--putih);border-radius:8px;padding:8px;box-shadow:0 1px 4px rgba(13,45,94,0.07);}
+  .adl-lbl{font-size:0.78rem;color:var(--teks2);margin-bottom:5px;}
+  .adl-btns{display:flex;gap:4px;}
+  .adl-btn{flex:1;padding:6px 4px;border-radius:7px;border:1.5px solid var(--abu2);background:var(--abu);cursor:pointer;font-size:0.72rem;font-weight:600;font-family:'DM Sans',sans-serif;color:var(--teks2);transition:all 0.15s;}
+  .adl-btn.sel-mandiri{background:var(--hijau-bg);border-color:var(--hijau);color:var(--hijau);}
+  .adl-btn.sel-bantuan{background:var(--kuning-bg);border-color:var(--kuning);color:var(--kuning);}
+  .skrining-progress{height:5px;background:var(--abu2);border-radius:3px;margin-bottom:8px;overflow:hidden;}
+  .skrining-progress-fill{height:100%;background:var(--biru);border-radius:3px;transition:width 0.3s;}
+  .hasil-skrining-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:1rem;}
+  .hs-item{border-radius:9px;padding:8px;text-align:center;}
+  .hs-item.hijau{background:var(--hijau-bg);}
+  .hs-item.kuning{background:var(--kuning-bg);}
+  .hs-item.merah{background:var(--merah-bg);}
+  .hs-icon{font-size:1.1rem;margin-bottom:2px;}
+  .hs-label{font-size:0.72rem;font-weight:700;}
+  .hs-item.hijau .hs-label{color:var(--hijau);}
+  .hs-item.kuning .hs-label{color:var(--kuning);}
+  .hs-item.merah .hs-label{color:var(--merah);}
+  .hs-status{font-size:0.65rem;}
+  .hs-item.hijau .hs-status{color:var(--hijau);}
+  .hs-item.kuning .hs-status{color:var(--kuning);}
+  .hs-item.merah .hs-status{color:var(--merah);}
+
+  /* Pengingat tab */
+  .pengingat-header{background:linear-gradient(90deg,#0d2d5e,#1565c0);color:#fff;border-radius:var(--radius);padding:0.9rem 1rem;margin-bottom:0.75rem;}
+  .ping-counter-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:0.75rem;}
+  .ping-counter{background:var(--putih);border-radius:10px;padding:0.6rem;text-align:center;box-shadow:var(--shadow);}
+  .ping-counter .num{font-size:1.4rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;}
+  .ping-counter .num.g{color:var(--hijau);}
+  .ping-counter .num.b{color:var(--biru);}
+  .ping-counter .num.y{color:var(--kuning);}
+  .ping-counter .lbl{font-size:0.65rem;color:var(--teks2);}
+  .ping-filter-row{display:flex;gap:5px;overflow-x:auto;margin-bottom:0.75rem;padding-bottom:2px;}
+  .ping-filter-btn{padding:5px 12px;border-radius:20px;border:1.5px solid var(--abu2);background:var(--putih);cursor:pointer;font-size:0.72rem;font-weight:600;color:var(--abu3);font-family:'DM Sans',sans-serif;white-space:nowrap;}
+  .ping-filter-btn.active{background:var(--biru-bg);border-color:var(--biru);color:var(--biru);}
+  .ping-card-new{background:var(--putih);border-radius:11px;padding:10px 12px;box-shadow:var(--shadow);margin-bottom:7px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:transform 0.12s;}
+  .ping-card-new:hover{transform:translateY(-1px);}
+  .ping-card-new.done{opacity:0.55;}
+  .ping-check-box{width:20px;height:20px;border-radius:5px;border:2px solid var(--abu2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+  .ping-card-new.done .ping-check-box{background:var(--hijau);border-color:var(--hijau);}
+  .ping-card-new.done .ping-check-box::after{content:'✓';color:#fff;font-size:0.75rem;font-weight:700;}
+  .ping-icon-badge{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .pib-obat{background:var(--merah-bg);}
+  .pib-aktv{background:var(--hijau-bg);}
+  .pib-skrining{background:var(--biru-bg);}
+  .pib-vital{background:var(--kuning-bg);}
+  .ping-body{flex:1;min-width:0;}
+  .ping-nama-new{font-size:0.85rem;font-weight:600;color:var(--teks);}
+  .ping-pasien-new{font-size:0.72rem;color:var(--abu3);}
+  .ping-cat-badge{font-size:0.65rem;padding:1px 7px;border-radius:8px;font-weight:600;display:inline-block;margin-top:3px;}
+  .pcat-obat{background:var(--merah-bg);color:var(--merah);}
+  .pcat-aktv{background:var(--hijau-bg);color:var(--hijau);}
+  .pcat-skrining{background:var(--biru-bg);color:var(--biru);}
+  .pcat-vital{background:var(--kuning-bg);color:var(--kuning);}
+  .ping-note-new{font-size:0.7rem;color:var(--teks2);font-style:italic;}
+  .ping-right-new{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+  .ping-jam-new{font-size:0.78rem;font-weight:600;color:var(--biru);}
+  .ping-del-btn{background:none;border:none;cursor:pointer;font-size:0.85rem;color:var(--merah-border);}
+  .ping-form-card{background:var(--putih);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem;}
+  /* Dynamic form styles */
+  .ping-dynamic-form{margin-top:10px;}
+  .ping-form-hint{font-size:0.78rem;color:var(--teks2);background:var(--abu);border-radius:8px;padding:6px 10px;margin-bottom:10px;line-height:1.5;}
+  .ping-quick-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+  .ping-quick-chip{font-size:0.7rem;padding:4px 10px;border-radius:20px;border:1.5px solid var(--abu2);background:var(--putih);cursor:pointer;font-weight:600;color:var(--teks2);transition:all 0.12s;}
+  .ping-quick-chip:hover{border-color:var(--biru);color:var(--biru);}
+  .ping-quick-chip.sel-chip{border-color:var(--biru);background:var(--biru-bg);color:var(--biru);}
+  .ping-vital-target-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:8px;}
+  .ping-vital-target{background:var(--abu);border-radius:8px;padding:6px 8px;}
+  .ping-vital-target label{font-size:0.68rem;font-weight:600;color:var(--teks2);display:block;margin-bottom:3px;}
+  .ping-vital-target input{width:100%;border:1.5px solid var(--abu2);border-radius:7px;padding:5px 8px;font-size:0.8rem;background:var(--putih);}
+  .ping-card-detail{font-size:0.68rem;color:var(--teks2);margin-top:2px;}
+  .ping-card-detail span{margin-right:6px;}
+  .cat-sel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:0.75rem;}
+  .cat-sel-btn{padding:8px 4px;border-radius:9px;border:1.5px solid var(--abu2);background:var(--abu);cursor:pointer;text-align:center;font-size:0.7rem;font-weight:600;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+  .cat-sel-btn .cat-ic{font-size:1.1rem;display:block;margin-bottom:2px;}
+  .cat-sel-btn.sel-obat{border-color:var(--merah);background:var(--merah-bg);color:var(--merah);}
+  .cat-sel-btn.sel-aktv{border-color:var(--hijau);background:var(--hijau-bg);color:var(--hijau);}
+  .cat-sel-btn.sel-skrining{border-color:var(--biru);background:var(--biru-bg);color:var(--biru);}
+  .cat-sel-btn.sel-vital{border-color:var(--kuning);background:var(--kuning-bg);color:var(--kuning);}
+  .pasien-chips-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:0.75rem;}
+  .pasien-chip{padding:4px 10px;border-radius:20px;border:1.5px solid var(--abu2);background:var(--abu);cursor:pointer;font-size:0.75rem;font-weight:600;color:var(--teks2);transition:all 0.15s;}
+  .pasien-chip.sel{background:var(--biru-bg);border-color:var(--biru);color:var(--biru);}
+
+  /* Tanya Puskesmas tab */
+  .tanya-layout{display:grid;grid-template-columns:180px 1fr;gap:0;min-height:calc(100vh - 120px);}
+  .tanya-sidebar{background:var(--putih);border-right:1.5px solid var(--abu2);padding:12px;display:flex;flex-direction:column;gap:0;}
+  .dr-card{text-align:center;padding-bottom:12px;border-bottom:1.5px solid var(--abu2);margin-bottom:12px;}
+  .dr-avatar-wrap{position:relative;width:56px;height:56px;margin:0 auto 8px;}
+  .dr-avatar-circle{width:56px;height:56px;border-radius:50%;background:var(--hijau-bg);border:2.5px solid var(--hijau);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+  .dr-online-dot{position:absolute;bottom:2px;right:2px;width:12px;height:12px;border-radius:50%;background:var(--hijau);border:2px solid var(--putih);animation:pulse 1.4s infinite;}
+  .dr-name{font-size:0.88rem;font-weight:700;color:var(--teks);}
+  .dr-role-text{font-size:0.7rem;color:var(--hijau);font-weight:600;}
+  .dr-status-badge{display:inline-flex;align-items:center;gap:4px;background:var(--hijau-bg);color:var(--hijau);border-radius:10px;padding:2px 8px;font-size:0.68rem;font-weight:600;margin-top:4px;}
+  .dr-status-dot{width:5px;height:5px;border-radius:50%;background:var(--hijau);animation:pulse 1.4s infinite;}
+  .sidebar-info-sec{margin-bottom:10px;}
+  .si-label{font-size:0.65rem;font-weight:700;text-transform:uppercase;color:var(--abu3);letter-spacing:0.05em;margin-bottom:4px;}
+  .si-row{display:flex;gap:5px;margin-bottom:3px;align-items:flex-start;}
+  .si-row-icon{font-size:0.85rem;color:var(--abu3);flex-shrink:0;margin-top:1px;}
+  .si-row-text{font-size:0.72rem;color:var(--teks2);line-height:1.4;}
+  .shift-item{display:flex;justify-content:space-between;margin-bottom:3px;}
+  .shift-nama{font-size:0.72rem;color:var(--teks2);}
+  .shift-jam{font-size:0.68rem;color:var(--abu3);}
+  .shift-aktif{display:flex;align-items:center;gap:3px;font-size:0.68rem;color:var(--hijau);font-weight:600;}
+  .shift-aktif-dot{width:5px;height:5px;border-radius:50%;background:var(--hijau);}
+  .sidebar-btns-wrap{margin-top:auto;padding-top:12px;border-top:1.5px solid var(--abu2);display:flex;flex-direction:column;gap:7px;}
+  .btn-wa-puskesmas{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:10px;background:var(--hijau);color:#fff;border:none;cursor:pointer;font-size:0.78rem;font-weight:600;font-family:'DM Sans',sans-serif;}
+  .btn-sos-tanya{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border-radius:10px;background:var(--merah);color:#fff;border:none;cursor:pointer;font-size:0.78rem;font-weight:600;font-family:'DM Sans',sans-serif;}
+  .tanya-chat-area{display:flex;flex-direction:column;background:#eef1f8;}
+  .chat-header-bar{background:var(--putih);padding:8px 12px;border-bottom:1.5px solid var(--abu2);display:flex;align-items:center;justify-content:space-between;}
+  .chb-left{display:flex;align-items:center;gap:8px;}
+  .chb-avatar{width:30px;height:30px;border-radius:50%;background:var(--hijau-bg);border:1.5px solid var(--hijau);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:var(--hijau);}
+  .chb-title{font-size:0.85rem;font-weight:700;color:var(--teks);}
+  .chb-sub{font-size:0.7rem;color:var(--teks2);}
+  .btn-hapus-obrolan{background:none;border:none;cursor:pointer;font-size:0.72rem;color:var(--abu3);font-family:'DM Sans',sans-serif;}
+  .chat-messages-area{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;max-height:320px;}
+  .chat-msg{display:flex;gap:6px;align-items:flex-end;}
+  .chat-msg.dr-msg{flex-direction:row;}
+  .chat-msg.user-msg{flex-direction:row-reverse;}
+  .chat-msg-avatar{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;}
+  .chat-msg-avatar.dr-av{background:var(--hijau-bg);color:var(--hijau);}
+  .chat-msg-avatar.user-av{background:var(--biru-bg);color:var(--biru);}
+  .chat-bubble{max-width:80%;padding:8px 11px;border-radius:12px;font-size:0.82rem;line-height:1.55;}
+  .dr-msg .chat-bubble{background:var(--putih);border:1.5px solid var(--abu2);border-bottom-left-radius:3px;}
+  .user-msg .chat-bubble{background:var(--biru-tua);color:#fff;border-bottom-right-radius:3px;}
+  .chat-time{font-size:0.65rem;color:var(--abu3);margin-top:2px;}
+  .user-msg .chat-time{text-align:right;}
+  .typing-indicator{display:flex;align-items:center;gap:4px;padding:8px 12px;background:var(--putih);border-radius:12px;border:1.5px solid var(--abu2);width:fit-content;}
+  .typing-dot{width:5px;height:5px;border-radius:50%;background:var(--abu3);}
+  .typing-dot:nth-child(1){animation:td 0.9s 0s infinite;}
+  .typing-dot:nth-child(2){animation:td 0.9s 0.2s infinite;}
+  .typing-dot:nth-child(3){animation:td 0.9s 0.4s infinite;}
+  @keyframes td{0%,60%,100%{transform:translateY(0);}30%{transform:translateY(-5px);}}
+  .faq-area{padding:7px 10px;border-top:1.5px solid var(--abu2);}
+  .faq-lbl{font-size:0.65rem;font-weight:700;text-transform:uppercase;color:var(--abu3);margin-bottom:5px;letter-spacing:0.04em;}
+  .faq-chips-row{display:flex;gap:4px;flex-wrap:wrap;}
+  .faq-chip{padding:4px 9px;border-radius:14px;border:1.5px solid var(--abu2);background:var(--putih);font-size:0.72rem;color:var(--teks2);cursor:pointer;transition:all 0.12s;}
+  .faq-chip:hover{background:var(--biru-bg);color:var(--biru);border-color:var(--biru);}
+  .chat-input-bar{display:flex;gap:6px;align-items:center;padding:8px 10px;background:var(--putih);border-top:1.5px solid var(--abu2);}
+  .chat-input-field{flex:1;padding:8px 12px;border:1.5px solid var(--abu2);border-radius:18px;font-size:0.82rem;font-family:'DM Sans',sans-serif;background:var(--abu);outline:none;transition:border 0.15s;}
+  .chat-input-field:focus{border-color:var(--biru);background:var(--putih);}
+  .chat-send-btn{width:32px;height:32px;border-radius:50%;background:var(--hijau);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+
+  /* Laporan Rujukan tab */
+  .laporan-selector{background:var(--putih);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:0.75rem;}
+  .laporan-jenis-row{display:flex;gap:6px;margin-bottom:0.75rem;}
+  .laporan-jenis-btn{flex:1;padding:8px 6px;border-radius:9px;border:1.5px solid var(--abu2);background:var(--abu);cursor:pointer;font-size:0.72rem;font-weight:600;color:var(--teks2);text-align:center;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+  .laporan-jenis-btn.active{background:var(--biru-bg);border-color:var(--biru);color:var(--biru);}
+  .laporan-aksi-row{display:flex;gap:6px;}
+  .laporan-aksi-btn{flex:1;padding:10px 6px;border-radius:10px;border:none;cursor:pointer;font-size:0.78rem;font-weight:600;font-family:'DM Sans',sans-serif;display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .laporan-aksi-btn:active{transform:scale(0.97);}
+  .lab-preview{background:var(--biru-bg);color:var(--biru);}
+  .lab-cetak{background:var(--hijau-bg);color:var(--hijau);}
+  .lab-pdf{background:var(--biru-tua);color:#fff;}
+  /* ===== GRAFIK TREND ===== */
+  .grafik-card{background:var(--putih);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem;}
+  .grafik-title{font-size:0.82rem;font-weight:700;color:var(--biru-tua);margin-bottom:0.75rem;display:flex;align-items:center;gap:6px;}
+  .grafik-wrap{position:relative;width:100%;height:220px;}
+  .grafik-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;justify-content:center;}
+  .grafik-leg-item{display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--teks2);}
+  .grafik-leg-dot{width:10px;height:10px;border-radius:50%;}
+  .grafik-no-data{text-align:center;padding:3rem 1rem;color:var(--abu3);font-size:0.82rem;}
+  .stat-mini-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+  .stat-mini{background:var(--putih);border-radius:10px;padding:10px;text-align:center;box-shadow:var(--shadow);}
+  .stat-mini-num{font-size:1.4rem;font-weight:800;font-family:'Plus Jakarta Sans',sans-serif;}
+  .stat-mini-lbl{font-size:0.7rem;color:var(--teks2);margin-top:2px;}
+  /* ===== LAPORAN ===== */
+  .laporan-preview{background:var(--putih);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);border:2px solid var(--biru-bg);}
+  .lp-header{text-align:center;padding-bottom:10px;border-bottom:3px solid var(--biru-tua);margin-bottom:10px;}
+  .lp-title{font-size:1rem;font-weight:700;color:var(--biru-tua);letter-spacing:0.5px;}
+  .lp-subtitle{font-size:0.7rem;color:var(--hijau);font-weight:600;margin-top:2px;}
+  .lp-cetak-info{font-size:0.65rem;color:var(--abu3);margin-top:2px;}
+  .lp-divider{height:2px;background:linear-gradient(90deg,var(--biru-tua),var(--hijau));border-radius:1px;margin-bottom:10px;}
+  .lp-section{font-size:0.82rem;font-weight:700;color:var(--biru-tua);margin-bottom:6px;display:flex;align-items:center;gap:5px;border-bottom:1px solid var(--abu2);padding-bottom:4px;}
+  .lp-id-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:10px;}
+  .lp-id-item{}
+  .lp-id-lbl{font-size:0.65rem;color:var(--abu3);}
+  .lp-id-val{font-size:0.78rem;font-weight:600;color:var(--teks);}
+  .lp-vital-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:10px;}
+  .lp-vb{border-radius:7px;padding:6px 4px;text-align:center;border:1px solid var(--abu2);}
+  .lp-vb-lbl{font-size:0.6rem;color:var(--abu3);text-transform:uppercase;}
+  .lp-vb-val{font-size:0.88rem;font-weight:700;}
+  .lp-vb-unit{font-size:0.62rem;color:var(--abu3);}
+  .lp-vb.merah .lp-vb-val{color:var(--merah);}
+  .lp-vb.kuning .lp-vb-val{color:var(--kuning);}
+  .lp-vb.hijau .lp-vb-val{color:var(--hijau);}
+  .lp-vb.merah{background:var(--merah-bg);}
+  .lp-vb.kuning{background:var(--kuning-bg);}
+  .lp-vb.hijau{background:var(--hijau-bg);}
+  .lp-skrining-table{width:100%;border-collapse:collapse;font-size:0.72rem;margin-bottom:10px;}
+  .lp-skrining-table th{background:var(--biru-tua);color:#fff;padding:5px 6px;text-align:left;font-weight:600;}
+  .lp-skrining-table td{padding:5px 6px;border-bottom:1px solid var(--abu2);vertical-align:top;}
+  .lp-sk-badge{display:inline-block;padding:1px 7px;border-radius:8px;font-size:0.65rem;font-weight:600;}
+  .lp-sk-badge.hijau{background:var(--hijau-bg);color:var(--hijau);}
+  .lp-sk-badge.kuning{background:var(--kuning-bg);color:var(--kuning);}
+  .lp-sk-badge.merah{background:var(--merah-bg);color:var(--merah);}
+  .lp-catatan-box{background:var(--abu);border-radius:8px;padding:8px 10px;margin-bottom:10px;}
+  .lp-cat-entry{margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--abu2);}
+  .lp-cat-entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+  .lp-cat-tgl{font-size:0.7rem;color:var(--biru);font-weight:600;}
+  .lp-cat-text{font-size:0.75rem;color:var(--teks2);font-style:italic;margin-top:2px;}
+  .lp-petunjuk-box{border:1.5px dashed var(--merah);border-radius:8px;padding:8px 10px;margin-bottom:10px;}
+  .lp-petunjuk-title{font-size:0.78rem;font-weight:700;color:var(--merah);margin-bottom:3px;}
+  .lp-petunjuk-body{font-size:0.72rem;color:var(--teks2);line-height:1.55;}
+  .lp-ttd-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .lp-ttd-box{border:1px solid var(--abu2);border-radius:7px;padding:7px;text-align:center;}
+  .lp-ttd-lbl{font-size:0.65rem;color:var(--abu3);margin-bottom:10px;}
+  .lp-ttd-line{border-top:1px solid var(--teks);margin:0 8px 3px;}
+  .lp-ttd-nama{font-size:0.72rem;font-weight:600;color:var(--teks);}
+  .lp-ttd-verif{border:1px solid var(--hijau);border-radius:7px;padding:7px;text-align:center;}
+  .lp-ttd-verif-lbl{font-size:0.68rem;font-weight:700;color:var(--hijau);margin-bottom:3px;}
+  .laporan-riwayat-list{margin-top:0.75rem;}
+  .laporan-hist-item{background:var(--putih);border-radius:10px;padding:9px 11px;box-shadow:var(--shadow);margin-bottom:6px;display:flex;align-items:center;gap:8px;border-left:3px solid var(--abu2);}
+  .laporan-hist-item.hijau{border-left-color:var(--hijau);}
+  .laporan-hist-item.kuning{border-left-color:var(--kuning);}
+  .laporan-hist-item.merah{border-left-color:var(--merah);}
+  .lhi-body{flex:1;}
+  .lhi-nama{font-size:0.85rem;font-weight:600;color:var(--teks);}
+  .lhi-sub{font-size:0.72rem;color:var(--abu3);}
+  .lhi-actions{display:flex;gap:4px;flex-direction:column;align-items:flex-end;}
+  .btn-lap-pdf{background:var(--biru-tua);color:#fff;border:none;border-radius:7px;padding:4px 9px;font-size:0.68rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+  .btn-lap-cetak{background:var(--hijau-bg);color:var(--hijau);border:1px solid var(--hijau-border);border-radius:7px;padding:4px 9px;font-size:0.68rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+
+  /* Edukasi improvements */
+  .edukasi-hero{background:linear-gradient(135deg,#0d2d5e,#1a9c5b);color:#fff;border-radius:var(--radius);padding:1rem 1.2rem;margin-bottom:0.75rem;}
+  .edukasi-hero h3{font-size:0.95rem;}
+  .edukasi-hero p{font-size:0.72rem;opacity:0.8;margin-top:3px;}
+  .edukasi-hero-chips{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;}
+  .edukasi-hero-chip{font-size:0.68rem;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.18);color:rgba(255,255,255,0.9);font-weight:600;}
+  .edukasi-filter-row{display:flex;gap:5px;margin-bottom:0.75rem;overflow-x:auto;padding-bottom:2px;}
+  .edukasi-filter-btn{padding:4px 11px;border-radius:20px;border:1.5px solid var(--abu2);background:var(--putih);cursor:pointer;font-size:0.72rem;font-weight:600;color:var(--abu3);font-family:'DM Sans',sans-serif;white-space:nowrap;}
+  .edukasi-filter-btn.active{background:var(--biru-bg);border-color:var(--biru);color:var(--biru);}
+  .ed-cat-badge{font-size:0.65rem;font-weight:600;padding:1px 7px;border-radius:8px;display:inline-block;margin-bottom:4px;}
+  .ed-cat-badge.lansia{background:var(--hijau-bg);color:var(--hijau);}
+  .ed-cat-badge.klinis{background:var(--biru-bg);color:var(--biru);}
+  .ed-cat-badge.paliatif{background:#f3e8ff;color:#7e22ce;}
+  .ed-cat-badge.darurat{background:var(--merah-bg);color:var(--merah);}
+  .edukasi-card-new{background:var(--putih);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);cursor:pointer;transition:transform 0.15s;border-top:3px solid var(--abu2);}
+  .edukasi-card-new:hover{transform:translateY(-2px);}
+  .edukasi-card-new.cat-lansia{border-top-color:var(--hijau);}
+  .edukasi-card-new.cat-klinis{border-top-color:var(--biru);}
+  .edukasi-card-new.cat-paliatif{border-top-color:#7e22ce;}
+  .edukasi-card-new.cat-darurat{border-top-color:var(--merah);}
+  .ed-new-icon{font-size:1.6rem;margin-bottom:4px;}
+  .ed-new-title{font-size:0.8rem;font-weight:700;color:var(--biru-tua);}
+  .ed-new-sub{font-size:0.68rem;color:var(--teks2);margin-top:2px;line-height:1.4;}
+  .ed-new-read{font-size:0.68rem;color:var(--biru);margin-top:5px;font-weight:600;}
+
+  /* Modal edukasi baru */
+  .modal-edukasi-cat{font-size:0.72rem;font-weight:600;padding:2px 9px;border-radius:9px;display:inline-block;margin-bottom:8px;}
+  .modal-edukasi-section{margin-bottom:10px;}
+  .modal-edukasi-sec-title{font-size:0.82rem;font-weight:700;color:var(--biru-tua);margin-bottom:5px;}
+  .modal-edukasi-point{display:flex;gap:7px;align-items:flex-start;margin-bottom:4px;}
+  .modal-edukasi-bullet{width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;color:#fff;}
+  .modal-edukasi-bullet.g{background:var(--hijau);}
+  .modal-edukasi-bullet.b{background:var(--biru);}
+  .modal-edukasi-bullet.r{background:var(--merah);}
+  .modal-edukasi-bullet.y{background:var(--kuning);}
+  .modal-edukasi-text{font-size:0.83rem;color:var(--teks);line-height:1.55;}
+  .modal-edukasi-warning{background:var(--kuning-bg);border-left:3px solid var(--kuning);padding:7px 10px;border-radius:0 8px 8px 0;margin-top:8px;}
+  .modal-edukasi-warning p{font-size:0.78rem;color:#854f0b;line-height:1.5;}
+  .modal-edukasi-danger{background:var(--merah-bg);border-left:3px solid var(--merah);padding:7px 10px;border-radius:0 8px 8px 0;margin-top:8px;}
+  .modal-edukasi-danger p{font-size:0.78rem;color:#7f1d1d;line-height:1.5;}
+  .btn-mengerti{width:100%;padding:12px;background:linear-gradient(90deg,#0d2d5e,#1a9c5b);color:#fff;border:none;border-radius:11px;font-size:0.92rem;font-weight:600;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-top:12px;}
+
+  /* === CHECKLIST EDUKASI === */
+  .eduk-progress-bar-wrap{background:var(--abu2);border-radius:20px;height:7px;margin:6px 0 12px;}
+  .eduk-progress-bar-fill{height:7px;border-radius:20px;background:linear-gradient(90deg,var(--hijau),#2dd4bf);transition:width 0.3s;}
+  .eduk-progress-label{font-size:0.72rem;color:var(--abu3);margin-bottom:2px;}
+  .eduk-progress-label b{color:var(--hijau);}
+  .modal-edukasi-point.checkable{cursor:pointer;border-radius:8px;padding:5px 6px;transition:background 0.15s;}
+  .modal-edukasi-point.checkable:hover{background:var(--abu);}
+  .modal-edukasi-point.checkable.checked{background:var(--hijau-bg);}
+  .eduk-chk{width:18px;height:18px;border-radius:5px;border:2px solid var(--abu2);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;transition:all 0.15s;background:#fff;}
+  .modal-edukasi-point.checked .eduk-chk{background:var(--hijau);border-color:var(--hijau);color:#fff;}
+  .modal-edukasi-point.checked .modal-edukasi-text{text-decoration:line-through;color:var(--abu3);}
+  .ed-card-progress{margin-top:6px;}
+  .ed-card-prog-bar{background:var(--abu2);border-radius:10px;height:4px;margin-top:3px;}
+  .ed-card-prog-fill{height:4px;border-radius:10px;background:var(--hijau);transition:width 0.3s;}
+  .ed-card-prog-label{font-size:0.63rem;color:var(--abu3);}
+  .ed-card-prog-label.done{color:var(--hijau);font-weight:700;}
+  .eduk-visit-date{font-size:0.68rem;color:var(--abu3);margin-bottom:10px;padding:4px 8px;background:var(--abu);border-radius:7px;display:inline-block;}
+
+  /* Alert vital di beranda */
+  .alert-vital{background:var(--kuning-bg);border:1.5px solid var(--kuning-border);border-radius:10px;padding:9px 12px;margin-bottom:8px;display:flex;align-items:center;gap:9px;}
+  .alert-vital.merah{background:var(--merah-bg);border-color:var(--merah-border);}
+  .av-icon{font-size:1.2rem;}
+  .av-text p{font-size:0.82rem;font-weight:700;color:var(--kuning);}
+  .av-text.merah p{color:var(--merah);}
+  .av-text span{font-size:0.72rem;color:var(--teks2);}
+  .av-time{margin-left:auto;font-size:0.72rem;color:var(--kuning);font-weight:600;}
+
+  /* Jadwal strip di beranda */
+  .jadwal-strip{background:var(--putih);border-radius:10px;padding:9px 12px;margin-bottom:8px;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow);}
+  .jadwal-icon{font-size:1.3rem;}
+  .jadwal-text p{font-size:0.85rem;font-weight:600;color:var(--teks);}
+  .jadwal-text span{font-size:0.72rem;color:var(--teks2);}
+  .jadwal-counter{background:var(--biru-bg);color:var(--biru);border-radius:8px;padding:3px 9px;font-size:0.75rem;font-weight:600;margin-left:auto;}
+
+  /* @media print — tidak dipakai di halaman utama (cetak via jendela baru) */
+  @media print{
+    /* Sembunyikan semua UI jika print dipanggil langsung */
+    body > *{ display:none !important; }
+  }
 </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 <div class="notif-darurat" id="notifDarurat">🚨 Laporan darurat terkirim!</div>
@@ -356,6 +811,57 @@
   </div>
 </div>
 
+
+<!-- ====== GLOBAL SOS MODAL ====== -->
+<div class="sos-modal-overlay" id="sosGlobalModal">
+  <div class="sos-modal-box">
+    <div class="sos-modal-header">
+      <button class="sos-close-btn" onclick="tutupSOSGlobal()">✕</button>
+      <div class="sos-header-icon-wrap">📞</div>
+      <div class="sos-modal-title">MENU DARURAT (SOS)</div>
+      <div class="sos-modal-sub">Segera hubungi kontak di bawah untuk bantuan pertolongan pertama medis.</div>
+    </div>
+    <div class="sos-actions">
+      <div class="sos-sirine-row">
+        <div class="sos-row-icon kuning">🔊</div>
+        <div class="sos-row-body">
+          <div style="font-size:0.85rem;font-weight:700;color:var(--kuning);">Sirine Alarm Rumah</div>
+          <div style="font-size:0.72rem;color:var(--teks2);">Bunyi darurat lokal untuk menarik bantuan tetangga sekitar.</div>
+        </div>
+        <button class="sos-btn-sirine" id="btnSOSSirine" onclick="toggleSOSSirine()">NYALAKAN SIRINE</button>
+      </div>
+      <div class="sos-row">
+        <div class="sos-row-icon hijau">👥</div>
+        <div class="sos-row-body">
+          <div class="sos-row-label biru">KONTAK KELUARGA AKTIF</div>
+          <div class="sos-row-name" id="sosKontakNama">—</div>
+          <div class="sos-row-num" id="sosKontakNum">—</div>
+        </div>
+        <button class="sos-call-btn hijau" onclick="sosHubungiKeluarga()">📞</button>
+      </div>
+      <div class="sos-row">
+        <div class="sos-row-icon teal">🏥</div>
+        <div class="sos-row-body">
+          <div class="sos-row-label hijau">PUSKESMAS / FASKES RUJUKAN</div>
+          <div class="sos-row-name">Puskesmas Ciracas</div>
+          <div class="sos-row-num">021-8400-1234</div>
+        </div>
+        <button class="sos-call-btn teal" onclick="sosHubungiPuskesmas()">🏥</button>
+      </div>
+      <div class="sos-ambulans-row">
+        <div class="sos-ambulans-body">
+          <div class="sos-ambulans-label">AMBULANS NASIONAL TERPADU</div>
+          <div class="sos-ambulans-name">Call Center Gawat Darurat</div>
+          <div class="sos-ambulans-sub">Bebas Pulsa — Layanan Ambulans Kemenkes</div>
+        </div>
+        <button class="sos-btn-119" onclick="sosHubungi119()">🚑 119</button>
+      </div>
+    </div>
+    <div class="sos-cancel-row">
+      <button class="sos-cancel-link" onclick="tutupSOSGlobal()">Tutup Panggilan Darurat</button>
+    </div>
+  </div>
+</div>
 <!-- LOGIN -->
 <div id="screen-login" class="screen active">
   <div class="login-card">
@@ -379,25 +885,148 @@
   </div>
 </div>
 
-<!-- PETUGAS -->
+<!-- PETUGAS SCREEN -->
 <div id="screen-petugas" class="screen">
   <div class="topnav">
     <div class="nav-brand"><div class="nav-dot"></div><div><h2>Si Ciput</h2><span>Pasukan Putih</span></div></div>
-    <div class="nav-right"><span class="nav-user" id="namaUser">PW-001</span><button class="nav-logout" onclick="doLogout()">Keluar</button></div>
+    <div class="nav-right">
+      <span class="nav-user" id="namaUser">PW-001</span>
+      <button class="nav-logout" onclick="doLogout()">Keluar</button>
+      <div class="sos-fab" onclick="bukaSOSGlobal()" title="Emergency SOS">
+        <span class="sos-fab-icon">📞</span>
+        <span>SOS</span>
+      </div>
+    </div>
   </div>
+  <!-- TAB BERANDA -->
   <div id="tab-beranda" class="tab-content main-content">
     <div class="welcome-banner">
       <h3 id="welcomeNama">Selamat pagi 👋</h3>
       <p id="welcomeInfo">Memuat data...</p>
       <p class="tanggal" id="tglHariIni"></p>
     </div>
-    <div class="section-title">Kondisi Pasien Hari Ini</div>
-    <div class="stat-row">
+    <div id="alertVitalContainer"></div>
+    <div class="stat-row" style="grid-template-columns:repeat(4,1fr);">
       <div class="stat-card hijau"><div class="stat-num" id="statHijau">0</div><div class="stat-label">🟢 Stabil</div></div>
       <div class="stat-card kuning"><div class="stat-num" id="statKuning">0</div><div class="stat-label">🟡 Perhatian</div></div>
       <div class="stat-card merah"><div class="stat-num" id="statMerah">0</div><div class="stat-label">🔴 Darurat</div></div>
+      <div class="stat-card" style="background:var(--biru-bg);border-color:#85B7EB;"><div class="stat-num" style="color:var(--biru);font-size:1.3rem;" id="statDikunjungi">0/0</div><div class="stat-label">✓ Dikunjungi</div></div>
+    </div>
+    <div class="jadwal-strip" id="jadwalStrip" style="display:none;">
+      <span class="jadwal-icon">📅</span>
+      <div class="jadwal-text"><p>Jadwal kunjungan hari ini</p><span id="jadwalSubteks">Memuat...</span></div>
+      <span class="jadwal-counter" id="jadwalCounter">—</span>
     </div>
     <div class="section-title">Daftar Kunjungan Hari Ini</div>
+
+    <!-- PANEL LEGENDA KRITERIA KONDISI -->
+    <div style="margin-bottom:0.75rem;">
+      <!-- HIJAU -->
+      <div class="kondisi-info-panel" id="kip-hijau">
+        <div class="kondisi-info-header hijau" onclick="toggleKIP('hijau')">
+          <div class="kih-left">
+            <div class="kih-dot hijau"></div>
+            <span class="kih-label hijau">🟢 Stabil</span>
+            <span class="kih-count" id="kip-count-hijau">0 pasien</span>
+          </div>
+          <span class="kih-toggle" id="kih-arrow-hijau">▼</span>
+        </div>
+        <div class="kondisi-info-body" id="kib-hijau">
+          <div class="kib-grid">
+            <div>
+              <div class="kib-col-title">Kriteria</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--hijau);"></div>Kondisi stabil, tidak ada keluhan baru</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--hijau);"></div>ADL mandiri atau bantuan minimal</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--hijau);"></div>Kepatuhan minum obat baik</div>
+            </div>
+            <div>
+              <div class="kib-col-title">Pantau jika</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--abu3);"></div>Nafsu makan berkurang</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--abu3);"></div>Mobilitas mulai menurun</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--abu3);"></div>Keluhan ringan baru muncul</div>
+            </div>
+          </div>
+          <div class="kib-tindak">
+            <div class="kib-tindak-label hijau">Tindak Lanjut</div>
+            <div class="kib-tindak-item"><span>📅</span> Kunjungan rutin sesuai jadwal</div>
+            <div class="kib-tindak-item"><span>📋</span> Monitoring standar — isi checklist dan vital</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KUNING -->
+      <div class="kondisi-info-panel" id="kip-kuning" style="margin-top:6px;">
+        <div class="kondisi-info-header kuning" onclick="toggleKIP('kuning')">
+          <div class="kih-left">
+            <div class="kih-dot kuning"></div>
+            <span class="kih-label kuning">🟡 Perhatian</span>
+            <span class="kih-count" id="kip-count-kuning">0 pasien</span>
+          </div>
+          <span class="kih-toggle" id="kih-arrow-kuning">▼</span>
+        </div>
+        <div class="kondisi-info-body" id="kib-kuning">
+          <div class="kib-grid">
+            <div>
+              <div class="kib-col-title">Kriteria</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--kuning);"></div>Mobilitas menurun</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--kuning);"></div>Nafsu makan berkurang</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--kuning);"></div>Kepatuhan obat menurun</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--kuning);"></div>Risiko sedang — butuh bantuan sebagian</div>
+            </div>
+            <div>
+              <div class="kib-col-title">Waspadai</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Sesak napas ringan</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Penurunan kesadaran</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Jatuh tanpa cedera berat</div>
+            </div>
+          </div>
+          <div class="kib-tindak">
+            <div class="kib-tindak-label kuning">Tindak Lanjut</div>
+            <div class="kib-tindak-item"><span>🔁</span> Tingkatkan frekuensi pemantauan</div>
+            <div class="kib-tindak-item"><span>📨</span> Konsultasi dengan tenaga kesehatan Puskesmas</div>
+            <div class="kib-tindak-item"><span>📋</span> Laksanakan instruksi yang dikirim Puskesmas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MERAH -->
+      <div class="kondisi-info-panel" id="kip-merah" style="margin-top:6px;">
+        <div class="kondisi-info-header merah" onclick="toggleKIP('merah')">
+          <div class="kih-left">
+            <div class="kih-dot merah"></div>
+            <span class="kih-label merah">🔴 Darurat</span>
+            <span class="kih-count" id="kip-count-merah">0 pasien</span>
+          </div>
+          <span class="kih-toggle" id="kih-arrow-merah">▼</span>
+        </div>
+        <div class="kondisi-info-body" id="kib-merah">
+          <div class="kib-grid">
+            <div>
+              <div class="kib-col-title">Kriteria Darurat</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Sesak napas berat</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Tidak sadar / tidak merespons</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Kejang</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Jatuh dengan cedera</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Kondisi memburuk signifikan</div>
+            </div>
+            <div>
+              <div class="kib-col-title">Segera Lakukan</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Tekan tombol <strong>Lapor Cepat</strong></div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Aktifkan <strong>SOS Emergency</strong></div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Hubungi <strong>119</strong> bersamaan</div>
+              <div class="kib-item"><div class="kib-dot" style="background:var(--merah);"></div>Jangan tunggu — respons segera</div>
+            </div>
+          </div>
+          <div class="kib-tindak">
+            <div class="kib-tindak-label merah">⚠️ Tindak Lanjut Wajib</div>
+            <div class="kib-tindak-item"><span>🚨</span> Kirim Lapor Cepat di aplikasi DAN hubungi 119 secara bersamaan</div>
+            <div class="kib-tindak-item"><span>🏥</span> Antar pasien ke UGD terdekat tanpa menunggu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /PANEL LEGENDA -->
+
     <input type="text" class="search-bar" placeholder="🔍 Cari nama pasien..." id="searchPasien" oninput="filterPasien(this.value)">
     <div class="pasien-list" id="daftarPasien"></div>
   </div>
@@ -407,18 +1036,26 @@
     <div class="section-title">Rute Kunjungan Hari Ini</div>
     <div id="rutePasien"></div>
   </div>
+  <!-- TAB EDUKASI BARU -->
   <div id="tab-edukasi" class="tab-content main-content" style="display:none">
-    <div class="section-title">📚 Materi Edukasi</div>
-    <div class="edukasi-grid">
-      <div class="edukasi-card" onclick="showEdukasi('jatuh')"><div class="ed-icon">🦺</div><h4>Pencegahan Jatuh</h4><p>Tips aman untuk lansia</p></div>
-      <div class="edukasi-card" onclick="showEdukasi('lansia')"><div class="ed-icon">👴</div><h4>Perawatan Lansia</h4><p>Panduan dasar harian</p></div>
-      <div class="edukasi-card" onclick="showEdukasi('stroke')"><div class="ed-icon">🧠</div><h4>Pendampingan Stroke</h4><p>Rehabilitasi pasca stroke</p></div>
-      <div class="edukasi-card" onclick="showEdukasi('bahaya')"><div class="ed-icon">⚠️</div><h4>Tanda Bahaya</h4><p>Yang perlu dilaporkan</p></div>
-      <div class="edukasi-card" onclick="showEdukasi('paliatif')"><div class="ed-icon">💊</div><h4>Pasien Paliatif</h4><p>Perawatan akhir hayat</p></div>
-      <div class="edukasi-card" onclick="showEdukasi('disabilitas')"><div class="ed-icon">♿</div><h4>Disabilitas</h4><p>Panduan pendampingan</p></div>
+    <div class="edukasi-hero">
+      <h3>📚 Pusat Edukasi Petugas</h3>
+      <p>11 materi tervalidasi — lansia, klinis, darurat & paliatif</p>
+      <div class="edukasi-hero-chips">
+        <span class="edukasi-hero-chip">🌿 Lansia (5)</span>
+        <span class="edukasi-hero-chip">🏥 Klinis (3)</span>
+        <span class="edukasi-hero-chip">🚨 Darurat (1)</span>
+        <span class="edukasi-hero-chip">💜 Paliatif (2)</span>
+      </div>
     </div>
-    <div class="section-title" style="margin-top:1rem;">⏰ Pengingat Hari Ini</div>
-    <div id="daftarPengingat"></div>
+    <div class="edukasi-filter-row">
+      <button class="edukasi-filter-btn active" onclick="filterEdukasi('semua',this)">Semua</button>
+      <button class="edukasi-filter-btn" onclick="filterEdukasi('lansia',this)">🌿 Lansia</button>
+      <button class="edukasi-filter-btn" onclick="filterEdukasi('klinis',this)">🏥 Klinis</button>
+      <button class="edukasi-filter-btn" onclick="filterEdukasi('darurat',this)">🚨 Darurat</button>
+      <button class="edukasi-filter-btn" onclick="filterEdukasi('paliatif',this)">💜 Paliatif</button>
+    </div>
+    <div class="edukasi-grid" id="edukasiGrid"></div>
   </div>
   <div id="tab-riwayat" class="tab-content main-content" style="display:none">
     <div class="section-title">📋 Riwayat Kunjungan Saya</div>
@@ -428,6 +1065,63 @@
     <div class="section-title">📨 Instruksi dari Puskesmas</div>
     <div id="daftarInstruksi"></div>
   </div>
+  <!-- TAB TANYA PUSKESMAS -->
+  <div id="tab-tanya" class="tab-content main-content" style="display:none;padding:0;">
+    <div class="tanya-layout">
+      <div class="tanya-sidebar">
+        <div class="dr-card">
+          <div class="dr-avatar-wrap">
+            <div class="dr-avatar-circle">👨‍⚕️</div>
+            <div class="dr-online-dot"></div>
+          </div>
+          <div class="dr-name" id="drPiketNama">dr. Andi</div>
+          <div class="dr-role-text">Dokter Umum Puskesmas Ciracas</div>
+          <div class="dr-status-badge"><div class="dr-status-dot"></div>Konsultasi Aktif</div>
+        </div>
+        <div class="sidebar-info-sec">
+          <div class="si-label">Lokasi Layanan</div>
+          <div class="si-row"><span class="si-row-icon">📍</span><div class="si-row-text">Jl. Lapangan Tembak No.2, Ciracas, Jakarta Timur</div></div>
+        </div>
+        <div class="sidebar-info-sec">
+          <div class="si-label">Jam Operasional</div>
+          <div class="si-row"><span class="si-row-icon">🕐</span><div class="si-row-text"><strong>Senin–Sabtu:</strong> 07.30–16.00</div></div>
+          <div class="si-row"><span class="si-row-icon">🚑</span><div class="si-row-text"><strong>UGD/Rawat Inap:</strong> 24 Jam</div></div>
+        </div>
+        <div class="sidebar-info-sec">
+          <div class="si-label">Jadwal Dokter Piket</div>
+          <div class="shift-item"><span class="shift-nama" id="shift0Nama">dr. Andi</span><div class="shift-aktif" id="shift0Status"><div class="shift-aktif-dot"></div>07–14</div></div>
+          <div class="shift-item"><span class="shift-nama">dr. Sari</span><span class="shift-jam" id="shift1Status">14.00–21.00</span></div>
+          <div class="shift-item"><span class="shift-nama">dr. Budi</span><span class="shift-jam" id="shift2Status">21.00–07.00</span></div>
+        </div>
+        <div class="sidebar-btns-wrap">
+          <button class="btn-wa-puskesmas" onclick="hubungiWAPuskesmas()">📱 Hubungi WA Puskesmas</button>
+          <button class="btn-sos-tanya" onclick="bukaSOSGlobal()">🚨 EMERGENCY SOS</button>
+        </div>
+      </div>
+      <div class="tanya-chat-area">
+        <div class="chat-header-bar">
+          <div class="chb-left">
+            <div class="chb-avatar">dr</div>
+            <div>
+              <div class="chb-title">Konsultasi Digital Puskesmas Ciracas</div>
+              <div class="chb-sub">Menanggapi keluhan seputar <strong id="chatPasienLabel">—</strong></div>
+            </div>
+          </div>
+          <button class="btn-hapus-obrolan" onclick="hapusObrolan()">🗑 Hapus Obrolan</button>
+        </div>
+        <div class="chat-messages-area" id="chatMessages"></div>
+        <div class="faq-area">
+          <div class="faq-lbl">Rekomendasi Pertanyaan Cepat:</div>
+          <div class="faq-chips-row" id="faqChips"></div>
+        </div>
+        <div class="chat-input-bar">
+          <input class="chat-input-field" id="chatInput" type="text" placeholder="Tulis keluhan atau pertanyaan ke Puskesmas..." onkeydown="if(event.key==='Enter')kirimChatPesan()">
+          <button class="chat-send-btn" onclick="kirimChatPesan()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- TAB LAPORAN RUJUKAN -->
   <div id="tab-profil" class="tab-content main-content" style="display:none">
     <div class="profil-header" style="margin:-1.1rem -1rem 1rem;border-radius:0;">
       <div class="profil-avatar" id="profilEmoji">👤</div>
@@ -446,22 +1140,27 @@
     </div>
     <button class="btn btn-primary" style="margin-top:0.5rem;" onclick="doLogout()">Keluar dari Aplikasi</button>
   </div>
+  <!-- BOTTOM TAB BAR BARU -->
   <div class="bottom-tab">
-    <button class="tab-btn active" onclick="switchTab('beranda',this)"><span style="font-size:20px">🏠</span>Beranda</button>
-    <button class="tab-btn" onclick="switchTab('peta',this);initPeta()"><span style="font-size:20px">🗺️</span>Peta</button>
-    <button class="tab-btn" onclick="switchTab('edukasi',this)"><span style="font-size:20px">📚</span>Edukasi</button>
-    <button class="tab-btn" onclick="switchTab('riwayat',this);renderRiwayat()"><span style="font-size:20px">📋</span>Riwayat</button>
-    <button class="tab-btn" id="btnTabInstruksi" onclick="switchTab('instruksi',this);renderInstruksiPetugas()"><span style="font-size:20px">📨</span>Instruksi</button>
-    <button class="tab-btn" onclick="switchTab('profil',this);renderProfil()"><span style="font-size:20px">👤</span>Profil</button>
+    <button class="tab-btn active" onclick="switchTab('beranda',this)"><span style="font-size:18px">🏠</span>Beranda</button>
+    <button class="tab-btn" onclick="switchTab('peta',this);initPeta()"><span style="font-size:18px">🗺️</span>Peta</button>
+    <button class="tab-btn" onclick="switchTab('edukasi',this);renderEdukasiGrid()"><span style="font-size:18px">📚</span>Edukasi</button>
+    <button class="tab-btn" onclick="switchTab('riwayat',this);renderRiwayat()"><span style="font-size:18px">📋</span>Riwayat</button>
+    <button class="tab-btn" id="btnTabInstruksi" onclick="switchTab('instruksi',this);renderInstruksiPetugas()"><span style="font-size:18px">📨</span>Instruksi</button>
+    <button class="tab-btn" onclick="switchTab('tanya',this);initTanyaPuskesmas()"><span style="font-size:18px">💬</span>Tanya</button>
+    <button class="tab-btn" onclick="switchTab('profil',this);renderProfil()"><span style="font-size:18px">👤</span>Profil</button>
   </div>
 </div>
 
-<!-- KUNJUNGAN DETAIL — FIXED: No AI section, clean form only -->
+<!-- KUNJUNGAN DETAIL — ENHANCED with Vital + Skrining -->
 <div id="screen-kunjungan" class="screen">
   <div class="topnav">
     <div class="nav-brand">
       <button class="nav-back" onclick="backToPetugas()">←</button>
-      <div><h2>Formulir Kunjungan</h2><span>Pemantauan Pasien</span></div>
+      <div><h2>Catat Kesehatan</h2><span>Kunjungan Pasien</span></div>
+    </div>
+    <div class="nav-right">
+      <div class="sos-fab" onclick="bukaSOSGlobal()" title="Emergency SOS"><span class="sos-fab-icon">📞</span><span>SOS</span></div>
     </div>
   </div>
   <div class="main-content" style="padding-bottom:2rem;">
@@ -470,42 +1169,80 @@
       <p id="kunjungan-alamat">—</p>
       <p id="kunjungan-kategori" style="margin-top:6px;"></p>
     </div>
+
+    <!-- Kondisi -->
     <div class="kondisi-title">Kondisi Pasien Saat Ini *</div>
     <div class="kondisi-row">
       <div class="kondisi-btn hijau-opt" onclick="pilihKondisi('hijau',this)"><div class="kondisi-dot"></div>Stabil</div>
       <div class="kondisi-btn kuning-opt" onclick="pilihKondisi('kuning',this)"><div class="kondisi-dot"></div>Perhatian</div>
       <div class="kondisi-btn merah-opt" onclick="pilihKondisi('merah',this)"><div class="kondisi-dot"></div>Darurat</div>
     </div>
-    <div class="section-title">Checklist Kunjungan</div>
-    <div class="checklist-box">
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🍽️ Sudah makan</span></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">💊 Minum obat sesuai jadwal</span></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🚶 Tidak jatuh / cedera</span></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">💨 Tidak sesak napas</span></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🩹 Tidak ada luka / lecet baru</span></div>
-      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label alert-label">⚠️ Ada keluhan baru</span></div>
+
+    <!-- CATAT VITALITAS BARU -->
+    <div class="section-title">🩺 Catat Vitalitas</div>
+    <div style="background:var(--putih);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow);margin-bottom:1rem;">
+      <div style="margin-bottom:8px;">
+        <label style="font-size:0.78rem;color:var(--abu3);display:block;margin-bottom:4px;">Tekanan Darah (mmHg) <span style="font-size:0.65rem;color:var(--abu3);">Normal ≤120/80</span></label>
+        <div class="vf-tensi-row">
+          <input class="vf-input" id="vfSistolik" type="number" placeholder="Sistolik" oninput="cekVitalInput()" style="flex:1;">
+          <span class="vf-tensi-sep">/</span>
+          <input class="vf-input" id="vfDiastolik" type="number" placeholder="Diastolik" oninput="cekVitalInput()" style="flex:1;">
+        </div>
+        <div class="vf-hint" id="hintTensi"></div>
+      </div>
+      <div class="vital-form-grid">
+        <div class="vf-item"><label>Gula Darah (mg/dL)<br><span class="vf-normal-hint">&lt;140 stlh makan</span></label><input class="vf-input" id="vfGula" type="number" placeholder="cth. 135" oninput="cekVitalInput()"><div class="vf-hint" id="hintGula"></div></div>
+        <div class="vf-item"><label>Suhu Tubuh (°C)<br><span class="vf-normal-hint">36–37.5°C</span></label><input class="vf-input" id="vfSuhu" type="number" placeholder="cth. 36.5" step="0.1" oninput="cekVitalInput()"><div class="vf-hint" id="hintSuhu"></div></div>
+        <div class="vf-item"><label>Asam Urat (mg/dL)<br><span class="vf-normal-hint">P:2.6–6.0 / L:3.5–7.0</span></label><input class="vf-input" id="vfUrat" type="number" placeholder="cth. 5.2" step="0.1" oninput="cekVitalInput()"><div class="vf-hint" id="hintUrat"></div></div>
+        <div class="vf-item"><label>Kolesterol (mg/dL)<br><span class="vf-normal-hint">&lt;200</span></label><input class="vf-input" id="vfKol" type="number" placeholder="cth. 185" oninput="cekVitalInput()"><div class="vf-hint" id="hintKol"></div></div>
+        <div class="vf-item"><label>Berat Badan (kg)</label><input class="vf-input" id="vfBB" type="number" placeholder="cth. 64" step="0.1"></div>
+        <div class="vf-item"><label>Saturasi O₂ (%)<br><span class="vf-normal-hint">Normal ≥95%</span></label><input class="vf-input" id="vfSpO2" type="number" placeholder="cth. 98"></div>
+      </div>
     </div>
+
+    <!-- Riwayat vital ringkas -->
+    <div class="section-title">📈 Riwayat Pengukuran (3 Terakhir)</div>
+    <div class="riwayat-vital-list" id="riwayatVitalList"></div>
+
+    <!-- SKRINING CEPAT -->
+    <div class="section-title">📋 Skrining Cepat Lansia</div>
+    <div class="skrining-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <span style="font-size:0.78rem;color:var(--teks2);">Progress: <span id="skriningProgress">0/6 kategori</span></span>
+      </div>
+      <div class="skrining-progress"><div class="skrining-progress-fill" id="skriningProgressFill" style="width:0%"></div></div>
+      <div class="skrining-tab-row">
+        <button class="skrining-tab active" id="stab-0" onclick="switchSkrining(0)">🦺 Jatuh</button>
+        <button class="skrining-tab" id="stab-1" onclick="switchSkrining(1)">🧠 Kognitif</button>
+        <button class="skrining-tab" id="stab-2" onclick="switchSkrining(2)">😔 Mental</button>
+        <button class="skrining-tab" id="stab-3" onclick="switchSkrining(3)">🥗 Nutrisi</button>
+        <button class="skrining-tab" id="stab-4" onclick="switchSkrining(4)">👁 Indera</button>
+        <button class="skrining-tab" id="stab-5" onclick="switchSkrining(5)">🙌 Mandiri</button>
+        <button class="skrining-tab" id="stab-6" onclick="switchSkrining(6)">📊 Hasil</button>
+      </div>
+      <div id="skriningPanels"></div>
+    </div>
+
+    <!-- Keluhan harian -->
+    <div class="section-title">✍️ Keluhan Harian Lansia</div>
+    <textarea class="lapor-area" id="catatanTambahan" placeholder="Contoh: Pegal lutut kiri ringan, nafsu makan baik..." rows="3"></textarea>
+
+    <!-- Lapor darurat -->
     <div class="lapor-box">
       <h4>🚨 Lapor Cepat (Kondisi Darurat)</h4>
       <div class="lapor-btn-row">
-        <div class="lapor-action" onclick="ambilFoto()"><span class="la-icon">📷</span>Ambil Foto</div>
-        <div class="lapor-action" onclick="toggleRekamSuara()"><span class="la-icon">🎙️</span><span id="rekamLabel">Rekam Suara</span></div>
-        <div class="lapor-action" onclick="kirimDarurat()" style="background:var(--merah);color:#fff;border-color:var(--merah);"><span class="la-icon">📤</span>Kirim Darurat</div>
+        <div class="lapor-action" onclick="ambilFoto()"><span class="la-icon">📷</span>Foto</div>
+        <div class="lapor-action" onclick="toggleRekamSuara()"><span class="la-icon">🎙️</span><span id="rekamLabel">Rekam</span></div>
+        <div class="lapor-action" onclick="bukaSOSGlobal()" style="background:var(--merah);color:#fff;border-color:var(--merah);"><span class="la-icon">🚨</span>SOS</div>
+        <div class="lapor-action" onclick="kirimDarurat()" style="background:var(--merah);color:#fff;border-color:var(--merah);"><span class="la-icon">📤</span>Darurat</div>
       </div>
       <div class="foto-preview" id="fotoPreview"></div>
-      <div class="rekam-status" id="rekamStatus">
-        <div class="rekam-dot"></div>
-        <span id="rekamStatusTeks">Sedang merekam... (0s)</span>
-        <button onclick="stopRekam()" style="margin-left:auto;background:var(--merah);color:#fff;border:none;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:0.78rem;">Stop</button>
-      </div>
+      <div class="rekam-status" id="rekamStatus"><div class="rekam-dot"></div><span id="rekamStatusTeks">Sedang merekam... (0s)</span><button onclick="stopRekam()" style="margin-left:auto;background:var(--merah);color:#fff;border:none;border-radius:6px;padding:3px 10px;cursor:pointer;font-size:0.78rem;">Stop</button></div>
     </div>
-    <div class="section-title">Catatan Tambahan</div>
-    <textarea class="lapor-area" id="catatanTambahan" placeholder="Tulis catatan kondisi pasien di sini..." rows="4"></textarea>
-    <button class="btn btn-primary" onclick="simpanKunjungan()">✅ Simpan Laporan Kunjungan</button>
+
+    <button class="btn btn-primary" onclick="simpanKunjungan()">💾 Simpan Catatan Kesehatan</button>
   </div>
 </div>
-
-<!-- SUKSES -->
 <div id="screen-sukses" class="screen">
   <div class="topnav"><div class="nav-brand"><div class="nav-dot"></div><div><h2>Si Ciput</h2><span>Laporan Terkirim</span></div></div></div>
   <div class="main-content">
@@ -529,7 +1266,10 @@
 <div id="screen-dashboard" class="screen">
   <div class="topnav">
     <div class="nav-brand"><div class="nav-dot"></div><div><h2>Si Ciput — Puskesmas</h2><span>Dashboard Admin</span></div></div>
-    <div class="nav-right"><button class="nav-logout" onclick="doLogout()">Keluar</button></div>
+    <div class="nav-right">
+      <button class="nav-logout" onclick="doLogout()">Keluar</button>
+      <div class="sos-fab" onclick="bukaSOSGlobal()" title="Emergency SOS"><span class="sos-fab-icon">📞</span><span>SOS</span></div>
+    </div>
   </div>
   <div style="overflow-y:auto;flex:1;padding-bottom:1rem;">
     <div class="dash-header"><h2>📊 Puskesmas Kecamatan Ciracas</h2><p id="tglDashboard"></p></div>
@@ -537,7 +1277,8 @@
       <div class="dash-tab-row">
         <button class="dash-tab-btn active" onclick="switchDashTab('pasien',this)">🏥 Pasien</button>
         <button class="dash-tab-btn" onclick="switchDashTab('petugas',this)">👥 Petugas</button>
-        <button class="dash-tab-btn" onclick="switchDashTab('laporan',this)">📋 Laporan</button>
+        <button class="dash-tab-btn" onclick="switchDashTab('pengingat',this);renderPengingatDash()">🔔 Pengingat</button>
+        <button class="dash-tab-btn" onclick="switchDashTab('dashboard',this);renderDashboardLaporan()">📊 Dashboard</button>
         <button class="dash-tab-btn" onclick="switchDashTab('logger',this)">📝 Log</button>
         <button class="dash-tab-btn" onclick="switchDashTab('ringkasan',this)">📊 Ringkasan</button>
       </div>
@@ -585,13 +1326,190 @@
       </div>
       <div id="mgmtPetugasList"></div>
     </div>
-    <div id="dashpanel-laporan" class="dash-panel" style="padding:1rem;">
-      <div class="section-title">📋 Semua Laporan</div>
-      <div style="display:flex;gap:8px;margin-bottom:0.75rem;flex-wrap:wrap;">
-        <select id="filterLaporanPetugas" onchange="renderSemuaLaporan()" style="flex:1;padding:8px;border:1.5px solid var(--abu2);border-radius:9px;font-size:0.85rem;background:var(--putih);"><option value="">Semua Petugas</option></select>
-        <select id="filterLaporanKondisi" onchange="renderSemuaLaporan()" style="flex:1;padding:8px;border:1.5px solid var(--abu2);border-radius:9px;font-size:0.85rem;background:var(--putih);"><option value="">Semua Kondisi</option><option value="hijau">🟢 Stabil</option><option value="kuning">🟡 Perhatian</option><option value="merah">🔴 Darurat</option></select>
+    <!-- PANEL PENGINGAT — dikelola oleh Puskesmas -->
+    <div id="dashpanel-pengingat" class="dash-panel" style="padding:1rem;">
+      <div style="background:linear-gradient(90deg,#0d2d5e,#1565c0);color:#fff;border-radius:var(--radius);padding:1rem 1.2rem;margin-bottom:1rem;">
+        <h3 style="font-size:1rem;">🔔 Pengingat Obat & Aktivitas</h3>
+        <p style="font-size:0.78rem;opacity:0.8;margin-top:2px;">Kelola jadwal pengingat untuk seluruh pasien binaan</p>
       </div>
-      <div id="semuaLaporanList"></div>
+      <!-- Pilih pasien -->
+      <div style="margin-bottom:0.75rem;">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--teks2);margin-bottom:5px;">Untuk Pasien</div>
+        <select id="dashPingPasienSel" onchange="dashSetPingPasien(this.value)" style="width:100%;padding:9px 12px;border:1.5px solid var(--abu2);border-radius:9px;font-size:0.88rem;background:var(--putih);font-family:'DM Sans',sans-serif;"></select>
+      </div>
+      <!-- Counter -->
+      <div class="ping-counter-row">
+        <div class="ping-counter"><div class="num g" id="pingSelesai">0</div><div class="lbl">✓ Selesai</div></div>
+        <div class="ping-counter"><div class="num b" id="pingTotal">0</div><div class="lbl">Total</div></div>
+        <div class="ping-counter"><div class="num y" id="pingSisa">0</div><div class="lbl">Belum</div></div>
+      </div>
+      <!-- Filter -->
+      <div class="ping-filter-row">
+        <button class="ping-filter-btn active" onclick="filterPengingat('semua',this)">Semua</button>
+        <button class="ping-filter-btn" onclick="filterPengingat('obat',this)">💊 Obat</button>
+        <button class="ping-filter-btn" onclick="filterPengingat('aktv',this)">🚶 Aktivitas</button>
+        <button class="ping-filter-btn" onclick="filterPengingat('skrining',this)">📋 Skrining</button>
+        <button class="ping-filter-btn" onclick="filterPengingat('vital',this)">🩺 Cek Vital</button>
+      </div>
+      <div id="daftarPengingat"></div>
+      <!-- Form tambah -->
+      <div class="section-title" style="margin-top:1rem;">➕ Tambah Pengingat Baru</div>
+      <div class="ping-form-card">
+        <div style="font-size:0.8rem;font-weight:700;color:var(--biru-tua);margin-bottom:8px;">📌 Kategori Pengingat</div>
+        <div class="cat-sel-grid">
+          <div class="cat-sel-btn sel-obat" id="pcat-obat" onclick="setPingKat('obat')"><span class="cat-ic">💊</span>Minum Obat</div>
+          <div class="cat-sel-btn" id="pcat-aktv" onclick="setPingKat('aktv')"><span class="cat-ic">🚶</span>Aktivitas</div>
+          <div class="cat-sel-btn" id="pcat-skrining" onclick="setPingKat('skrining')"><span class="cat-ic">📋</span>Skrining</div>
+          <div class="cat-sel-btn" id="pcat-vital" onclick="setPingKat('vital')"><span class="cat-ic">🩺</span>Cek Vital</div>
+        </div>
+        <div style="font-size:0.8rem;font-weight:700;color:var(--biru-tua);margin-bottom:6px;">Untuk Pasien</div>
+        <div class="pasien-chips-row" id="pasienChipsRow"></div>
+        <!-- FORM OBAT -->
+        <div id="pingForm-obat" class="ping-dynamic-form">
+          <div class="ping-form-hint">💊 <b>Minum Obat</b> — pilih dari daftar atau ketik manual</div>
+          <div class="ping-quick-chips" id="pingObatChips"></div>
+          <div class="form-group"><label>Nama Obat</label><input type="text" id="pingNama-obat" placeholder="cth. Amlodipine 5mg, Metformin 500mg"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Dosis</label><input type="text" id="pingDosis" placeholder="cth. 1 tablet"></div>
+            <div class="form-group"><label>Jam Minum</label><input type="time" id="pingJam-obat" value="07:00"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Frekuensi</label>
+              <select id="pingFreq-obat"><option>Setiap Hari</option><option>2x Sehari</option><option>3x Sehari</option><option>Senin–Jumat</option><option>Mingguan</option></select>
+            </div>
+            <div class="form-group"><label>Aturan Pakai</label>
+              <select id="pingAturan"><option value="">— pilih —</option><option>Sebelum makan</option><option>Sesudah makan</option><option>Bersama makan</option><option>Malam sebelum tidur</option></select>
+            </div>
+          </div>
+          <div class="form-group"><label>Catatan Tambahan</label><input type="text" id="pingCatatan-obat" placeholder="cth. Perlu dipantau efek samping"></div>
+        </div>
+        <!-- FORM AKTIVITAS -->
+        <div id="pingForm-aktv" class="ping-dynamic-form" style="display:none">
+          <div class="ping-form-hint">🚶 <b>Aktivitas Fisik</b> — jadwalkan olahraga atau latihan rutin</div>
+          <div class="ping-quick-chips" id="pingAktvChips"></div>
+          <div class="form-group"><label>Jenis Aktivitas</label><input type="text" id="pingNama-aktv" placeholder="cth. Jalan kaki pagi, Senam lansia"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Durasi (menit)</label><input type="number" id="pingDurasi" placeholder="30" min="5" max="120" value="30"></div>
+            <div class="form-group"><label>Jam Mulai</label><input type="time" id="pingJam-aktv" value="06:30"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Frekuensi</label>
+              <select id="pingFreq-aktv"><option>Setiap Hari</option><option>Senin–Sabtu</option><option>Senin–Jumat</option><option>3x Seminggu</option><option>Mingguan</option></select>
+            </div>
+            <div class="form-group"><label>Intensitas</label>
+              <select id="pingIntensitas"><option value="ringan">🟢 Ringan</option><option value="sedang" selected>🟡 Sedang</option><option value="berat">🔴 Berat</option></select>
+            </div>
+          </div>
+          <div class="form-group"><label>Catatan Keamanan</label><input type="text" id="pingCatatan-aktv" placeholder="cth. Hentikan jika sesak napas atau pusing"></div>
+        </div>
+        <!-- FORM SKRINING -->
+        <div id="pingForm-skrining" class="ping-dynamic-form" style="display:none">
+          <div class="ping-form-hint">📋 <b>Skrining</b> — jadwalkan pemeriksaan rutin berkala</div>
+          <div class="ping-quick-chips" id="pingSkriningChips"></div>
+          <div class="form-group"><label>Jenis Skrining</label><input type="text" id="pingNama-skrining" placeholder="cth. Skrining kognitif MMSE, Skrining gizi MNA"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Jadwal / Jam</label><input type="time" id="pingJam-skrining" value="09:00"></div>
+            <div class="form-group"><label>Frekuensi</label>
+              <select id="pingFreq-skrining"><option>Setiap Kunjungan</option><option>Mingguan</option><option>2 Minggu Sekali</option><option>Bulanan</option><option>3 Bulan Sekali</option></select>
+            </div>
+          </div>
+          <div class="form-group"><label>Instrumen / Alat Ukur</label>
+            <select id="pingSkriningAlat"><option value="">— pilih jika ada —</option><option>MMSE (Kognitif)</option><option>MNA (Gizi)</option><option>GDS (Depresi Lansia)</option><option>ADL Barthel (Kemandirian)</option><option>Tes Timed Up and Go</option><option>Skala Nyeri VAS 0–10</option><option>Lainnya / Manual</option></select>
+          </div>
+          <div class="form-group"><label>Catatan Persiapan</label><input type="text" id="pingCatatan-skrining" placeholder="cth. Pasien harus dalam kondisi tenang dan segar"></div>
+        </div>
+        <!-- FORM CEK VITAL -->
+        <div id="pingForm-vital" class="ping-dynamic-form" style="display:none">
+          <div class="ping-form-hint">🩺 <b>Cek Vital</b> — jadwalkan pemantauan tanda vital</div>
+          <div class="ping-quick-chips" id="pingVitalChips"></div>
+          <div class="form-group"><label>Tanda Vital yang Dipantau</label><input type="text" id="pingNama-vital" placeholder="cth. Tekanan darah + nadi, Gula darah puasa"></div>
+          <div class="form-row">
+            <div class="form-group"><label>Jam Cek</label><input type="time" id="pingJam-vital" value="07:00"></div>
+            <div class="form-group"><label>Frekuensi</label>
+              <select id="pingFreq-vital"><option>Setiap Hari</option><option>2x Sehari</option><option>Senin–Sabtu</option><option>Mingguan</option><option>Bulanan</option></select>
+            </div>
+          </div>
+          <div class="ping-vital-target-row" id="pingVitalTargetRow"></div>
+          <div class="form-group"><label>Kondisi Pemantauan Khusus</label><input type="text" id="pingCatatan-vital" placeholder="cth. Sebelum minum obat tensi, kondisi puasa 8 jam"></div>
+        </div>
+        <button class="btn btn-primary" onclick="tambahPengingat()" style="margin-top:4px;">🔔 Jadwalkan Pengingat</button>
+      </div>
+    </div>
+
+    <!-- PANEL DASHBOARD LAPORAN PASIEN -->
+    <div id="dashpanel-dashboard" class="dash-panel" style="padding:1rem;">
+      <!-- Header -->
+      <div style="background:linear-gradient(90deg,#0d2d5e,#1565c0);color:#fff;border-radius:var(--radius);padding:1rem 1.2rem;margin-bottom:1rem;">
+        <h3 style="font-size:1rem;">📊 Dashboard Laporan Pasien</h3>
+        <p style="font-size:0.78rem;opacity:0.8;margin-top:2px;">Data real-time dari Pasukan Putih · Grafik Trend · Preview · Cetak · PDF</p>
+      </div>
+      <!-- Pilih Pasien -->
+      <div style="margin-bottom:0.75rem;">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--teks2);margin-bottom:5px;">Pilih Pasien</div>
+        <select id="dashPasienLaporan" onchange="dashPilihPasien(this.value)" style="width:100%;padding:9px 12px;border:1.5px solid var(--abu2);border-radius:9px;font-size:0.88rem;background:var(--putih);font-family:'DM Sans',sans-serif;color:var(--teks);"></select>
+      </div>
+      <!-- Jenis Laporan -->
+      <div style="font-size:0.8rem;font-weight:700;color:var(--biru-tua);margin-bottom:0.5rem;">Jenis Laporan</div>
+      <div class="laporan-jenis-row" style="margin-bottom:0.75rem;">
+        <button class="laporan-jenis-btn active" id="dlj-kunjungan" onclick="setDashJenis('kunjungan',this)">📋 Kunjungan Terakhir</button>
+        <button class="laporan-jenis-btn" id="dlj-mingguan" onclick="setDashJenis('mingguan',this)">📅 Rekap Mingguan</button>
+        <button class="laporan-jenis-btn" id="dlj-bulanan" onclick="setDashJenis('bulanan',this)">🗓️ Rekap Bulanan</button>
+        <button class="laporan-jenis-btn" id="dlj-rujukan" onclick="setDashJenis('rujukan',this)">🏥 Rujukan Puskesmas</button>
+      </div>
+      <!-- Tombol aksi -->
+      <div class="laporan-aksi-row" style="margin-bottom:1rem;">
+        <button class="laporan-aksi-btn lab-preview" onclick="dashTogglePreview()"><span style="font-size:1.2rem;">👁</span>Preview</button>
+        <button class="laporan-aksi-btn lab-cetak" onclick="dashCetak()"><span style="font-size:1.2rem;">🖨️</span>Cetak</button>
+        <button class="laporan-aksi-btn lab-pdf" onclick="dashPDF()"><span style="font-size:1.2rem;">⬇️</span>Unduh PDF</button>
+      </div>
+
+      <!-- AREA GRAFIK TREND — muncul saat pilih Mingguan atau Bulanan -->
+      <div id="dashGrafikArea" style="display:none;">
+        <!-- Statistik mini -->
+        <div class="stat-mini-row" id="dashStatMini"></div>
+        <!-- Grafik kondisi trend -->
+        <div class="grafik-card">
+          <div class="grafik-title">📈 Trend Kondisi Pasien</div>
+          <div class="grafik-wrap"><canvas id="grafikTrendKondisi"></canvas></div>
+          <div class="grafik-legend">
+            <div class="grafik-leg-item"><div class="grafik-leg-dot" style="background:#1a9c5b;"></div>Stabil</div>
+            <div class="grafik-leg-item"><div class="grafik-leg-dot" style="background:#f5a623;"></div>Perhatian</div>
+            <div class="grafik-leg-item"><div class="grafik-leg-dot" style="background:#e53935;"></div>Darurat</div>
+          </div>
+        </div>
+        <!-- Grafik vital pasien terpilih -->
+        <div class="grafik-card" id="dashGrafikVitalCard">
+          <div class="grafik-title">🩺 Trend Vital Pasien Terpilih</div>
+          <div class="grafik-wrap"><canvas id="grafikVital"></canvas></div>
+          <div class="grafik-legend">
+            <div class="grafik-leg-item"><div class="grafik-leg-dot" style="background:#1565c0;"></div>Sistolik</div>
+            <div class="grafik-leg-item"><div class="grafik-leg-dot" style="background:#85B7EB;"></div>Diastolik</div>
+            <div class="grafik-leg-item"><div class="grafik-leg-dot" style="background:#e53935;"></div>Gula Darah</div>
+          </div>
+        </div>
+        <!-- Grafik kunjungan per petugas -->
+        <div class="grafik-card">
+          <div class="grafik-title">👥 Kunjungan per Petugas</div>
+          <div class="grafik-wrap"><canvas id="grafikPerPetugas"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Area preview laporan cetak -->
+      <div id="dashPreviewArea" style="display:none;margin-bottom:1rem;">
+        <div class="laporan-preview" id="dashPrintArea">
+          <div class="lp-header">
+            <div class="lp-title">SI CIPUT</div>
+            <div class="lp-subtitle" id="dashLpSubtitle">Laporan Pasien — Puskesmas Kec. Ciracas</div>
+            <div class="lp-cetak-info" id="dashLpCetak">—</div>
+          </div>
+          <div class="lp-divider"></div>
+          <div id="dashLpContent"><div style="text-align:center;padding:2rem;color:var(--abu3);">Pilih pasien dan jenis laporan, lalu klik Preview.</div></div>
+        </div>
+      </div>
+
+      <!-- Rekap semua pasien -->
+      <div class="section-title">📁 Rekap Semua Pasien</div>
+      <div id="dashRiwayatPasienList"></div>
     </div>
     <div id="dashpanel-logger" class="dash-panel" style="padding:1rem;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
@@ -637,7 +1555,6 @@
     </div>
   </div>
 </div>
-
 <!-- MODALS -->
 <div class="modal-overlay" id="modalEdukasi">
   <div class="modal-box">
@@ -714,6 +1631,18 @@
   </div>
 </div>
 
+<!-- MODAL EDUKASI BARU (rich format) -->
+<div class="modal-overlay" id="modalEdukasiNew">
+  <div class="modal-box">
+    <div class="modal-edukasi-cat" id="edNewCat" style="background:var(--hijau-bg);color:var(--hijau);">🌿 Lansia</div>
+    <h3 id="edNewJudul" style="margin-bottom:0.5rem;">—</h3>
+    <div id="edNewVisitDate" class="eduk-visit-date"></div>
+    <div class="eduk-progress-label">Progress kunjungan ini: <b id="edNewProgNum">0/0</b></div>
+    <div class="eduk-progress-bar-wrap"><div class="eduk-progress-bar-fill" id="edNewProgBar" style="width:0%"></div></div>
+    <div id="edNewBody"></div>
+    <button class="btn-mengerti" onclick="tutupModal('modalEdukasiNew')">✓ Saya Mengerti</button>
+  </div>
+</div>
 <script>
 // =============================================
 // SI CIPUT v4.0 — Firebase Sync Engine
@@ -809,9 +1738,9 @@ async function fbAddDoc(colName, data){
 // DATA LAYER — Pasien
 // =============================================
 const DATA_PASIEN_AWAL=[
-  {id:1,nama:"Ibu Kartini Rahayu",alamat:"Jl. Mawar No. 12, RW 01",kategori:"Lansia · Diabetes",kondisi:"hijau",pw:"PW-001",jadwal:"08:30",lat:-6.3490,lng:106.8710},
-  {id:2,nama:"Bpk. Surya Atmaja",alamat:"Jl. Melati No. 4, RW 01",kategori:"Pasca Stroke",kondisi:"kuning",pw:"PW-001",jadwal:"09:15",lat:-6.3495,lng:106.8718},
-  {id:3,nama:"Ibu Wulandari",alamat:"Jl. Kenanga No. 8, RW 01",kategori:"Paliatif · Ca Paru",kondisi:"merah",pw:"PW-001",jadwal:"10:00",lat:-6.3502,lng:106.8705},
+  {id:1,nama:"Ibu Kartini Rahayu",alamat:"Jl. Mawar No. 12, RW 01",kategori:"Lansia · Diabetes",kondisi:"hijau",pw:"PW-001",jadwal:"08:30",lat:-6.3490,lng:106.8710,kontakDarurat:"Budi — Anak Kandung",noKontak:"0813-1234-5678",obat:"Metformin 500mg"},
+  {id:2,nama:"Bpk. Surya Atmaja",alamat:"Jl. Melati No. 4, RW 01",kategori:"Pasca Stroke",kondisi:"kuning",pw:"PW-001",jadwal:"09:15",lat:-6.3495,lng:106.8718,kontakDarurat:"Rina — Istri",noKontak:"0812-9876-5432",obat:"Candesartan 8mg"},
+  {id:3,nama:"Ibu Wulandari",alamat:"Jl. Kenanga No. 8, RW 01",kategori:"Paliatif · Ca Paru",kondisi:"merah",pw:"PW-001",jadwal:"10:00",lat:-6.3502,lng:106.8705,kontakDarurat:"Doni — Suami",noKontak:"0811-2233-4455",obat:"Morfin 10mg"},
   {id:4,nama:"Bpk. Hendra Wijaya",alamat:"Jl. Cempaka No. 3, RW 01",kategori:"Disabilitas",kondisi:"hijau",pw:"PW-001",jadwal:"11:00",lat:-6.3485,lng:106.8722},
   {id:5,nama:"Ibu Ratna Sari",alamat:"Jl. Flamboyan No. 9, RW 01",kategori:"Tirah Baring",kondisi:"kuning",pw:"PW-001",jadwal:"13:30",lat:-6.3508,lng:106.8715},
   {id:6,nama:"Bpk. Djoko Susanto",alamat:"Jl. Anggrek No. 7, RW 02",kategori:"Pasca Rawat Inap",kondisi:"merah",pw:"PW-002",jadwal:"08:00",lat:-6.3515,lng:106.8730},
@@ -941,9 +1870,12 @@ function subscribeRiwayat(){
   if(!USE_FB()) return;
   const { collection, onSnapshot } = FB();
   _riwayatListener = onSnapshot(collection(DB(), 'riwayat'), () => {
-    // Re-render laporan panel if dashboard open
+    // Auto-refresh dashboard Puskesmas saat data baru dari Pasukan Putih masuk
     if(currentUser?.role === 'puskesmas'){
-      renderSemuaLaporan();
+      // Refresh panel Dashboard jika sedang aktif
+      const dashPanel = document.getElementById('dashpanel-dashboard');
+      if(dashPanel && dashPanel.classList.contains('active')) renderDashboardLaporan();
+      // Selalu refresh ringkasan
       renderDashboard();
     }
     if(currentUser?.role === 'petugas') updateStatsBeranda();
@@ -1089,15 +2021,69 @@ async function clearLog(){
 
 // =============================================
 // EDUKASI
+
 // =============================================
-const edukasiData={
-  jatuh:{judul:"🦺 Pencegahan Jatuh pada Lansia",isi:"• Pastikan lantai tidak licin\n• Gunakan alas kaki anti-slip\n• Pasang pegangan di kamar mandi\n• Periksa penglihatan lansia secara rutin\n• Hindari karpet yang mudah tersangkut\n• Lakukan latihan keseimbangan ringan setiap hari"},
-  lansia:{judul:"👴 Perawatan Lansia Harian",isi:"• Pantau asupan makan dan minum minimal 1,5L/hari\n• Cek tekanan darah rutin\n• Dampingi aktivitas fisik ringan\n• Perhatikan kebersihan kulit untuk mencegah luka\n• Pastikan obat diminum sesuai jadwal"},
-  stroke:{judul:"🧠 Pendampingan Pasien Pasca Stroke",isi:"• Bantu latihan gerak (ROM) setiap hari\n• Waspadai tanda kekambuhan: wajah mencong, lengan lemah, bicara pelo\n• Dukung komunikasi dengan sabar\n• Jaga posisi tidur untuk mencegah bedsore"},
-  bahaya:{judul:"⚠️ Tanda Bahaya yang Harus Dilaporkan",isi:"Segera lapor jika:\n• Pasien tidak sadar\n• Sesak napas hebat\n• Nyeri dada\n• Perdarahan\n• Demam tinggi >38.5°C\n• Tidak mau makan 2 hari berturut-turut\n• Kondisi berubah drastis"},
-  paliatif:{judul:"💊 Pendampingan Pasien Paliatif",isi:"• Utamakan kenyamanan pasien\n• Dampingi keluarga secara emosional\n• Pastikan obat nyeri tersedia\n• Koordinasi dengan tenaga kesehatan untuk perubahan kondisi\n• Hargai keputusan pasien dan keluarga"},
-  disabilitas:{judul:"♿ Pendampingan Penyandang Disabilitas",isi:"• Bantu aktivitas sehari-hari sesuai kemampuan pasien\n• Dorong kemandirian\n• Pastikan alat bantu dalam kondisi baik\n• Laporkan jika ada luka tekan atau komplikasi baru"}
+// EDUKASI DATA (EXPANDED v5.0 — 11 topik)
+// =============================================
+const edukasiData = {
+  jatuh_detail: {cat:'lansia',catLabel:'🌿 Lansia',catStyle:'background:var(--hijau-bg);color:var(--hijau);',icon:'🦺',judul:'Panduan Pencegahan Jatuh Lansia',
+    sections:[
+      {title:'Mengapa lansia rentan jatuh?',color:'g',points:['Seiring usia, otot kaki melemah dan refleks berkurang sehingga keseimbangan terganggu','Gangguan penglihatan sering mengacaukan persepsi jarak dan permukaan']},
+      {title:'Modifikasi lingkungan rumah',color:'b',points:['Jangan letakkan karpet licin di koridor — gunakan keset karet berserat kasar','Pasang pegangan (handrail) di toilet, tangga, dan area mandi','Pasang sakelar lampu dekat tempat tidur agar tidak meraba-raba di malam hari']},
+      {title:'Latihan fisik penyeimbang',color:'g',points:['Latih kekuatan otot kaki: berdiri dari kursi tanpa tangan beberapa kali setiap pagi']}
+    ],warning:'Tanda harus segera berhenti: sesak napas, nyeri dada, pusing berlebihan, atau keluar keringat dingin saat latihan.'},
+  nutrisi: {cat:'lansia',catLabel:'🌿 Lansia',catStyle:'background:var(--hijau-bg);color:var(--hijau);',icon:'🥗',judul:'Nutrisi Sempurna Bagi Usia Lanjut',
+    sections:[
+      {title:'Tantangan pencernaan lansia',color:'y',points:['Berkurangnya air liur dan hilangnya gigi geligi menurunkan nafsu makan secara dramatis','Kepekaan indera pengecap sering berkurang seiring usia']},
+      {title:'Tips porsi sempurna',color:'g',points:['Pilih makanan berprotein lunak: tahu, tempe, ikan kukus, atau telur rebus','Beri makan porsi kecil tapi sering (5–6 kali sehari)','Cukupi serat dari sayuran matang berkuah dan sup hangat yang mudah ditelan']},
+      {title:'Batasi tiga musuh utama',color:'r',points:['Kurangi Garam — mencegah darah tinggi','Kurangi Gula — mencegah diabetes bertambah parah','Jauhkan Lemak Jenuh berlebih — hindari gorengan']}
+    ]},
+  aktivitas: {cat:'lansia',catLabel:'🌿 Lansia',catStyle:'background:var(--hijau-bg);color:var(--hijau);',icon:'🚶',judul:'Aktivitas Fisik yang Aman bagi Lansia',
+    sections:[
+      {title:'Olahraga yang dianjurkan',color:'b',points:['Jalan Kaki Santai: cukup 15–30 menit di permukaan rata saat pagi hari sambil berjemur','Senam Lansia: gerakan tanpa melompat yang menekankan peregangan tangan dan pinggul','Latihan Duduk: memutar pergelangan kaki dan meregangkan betis saat duduk santai']}
+    ],danger:'Tanda harus berhenti: sesak napas, nyeri dada, pusing berputar, atau keluar keringat dingin berlebihan.'},
+  mental: {cat:'lansia',catLabel:'🌿 Lansia',catStyle:'background:var(--hijau-bg);color:var(--hijau);',icon:'😊',judul:'Menjaga Kesehatan Mental & Pikiran Bahagia',
+    sections:[
+      {title:'Memahami kesepian lansia',color:'y',points:['Kehilangan pasangan hidup, pensiun, dan jarang diajak komunikasi oleh anak yang sibuk bekerja memicu sindrom hampa/depresi']},
+      {title:'Aktivitas sosial positif',color:'g',points:['Ajak lansia berkebun pot bunga mini atau memelihara burung kicau sederhana','Dorong lansia tetap berinteraksi dengan tetangga sebaya atau mengikuti pengajian berkala','Libatkan lansia dalam mendongeng atau memberi nasihat berharga kepada cucu-cucunya']}
+    ]},
+  obat: {cat:'lansia',catLabel:'🌿 Lansia',catStyle:'background:var(--hijau-bg);color:var(--hijau);',icon:'💊',judul:'Panduan Aman Penggunaan Obat-obatan',
+    sections:[
+      {title:'Apa itu polifarmasi?',color:'r',points:['Konsumsi lebih dari 4 jenis obat dalam sekali waktu rentan menimbulkan interaksi silang obat yang berbahaya bagi organ hati dan ginjal lansia']},
+      {title:'Aturan emas konsumsi obat',color:'g',points:['Gunakan Pill Box berlabel Pagi, Siang, Malam untuk mencegah lupa minum atau minum ganda','Jangan pernah menghentikan sepihak konsumsi obat tensi atau diabetes meskipun tubuh dirasa sudah sehat','Selalu bawa rekam/daftar obat saat periksa atau berganti dokter umum lain']}
+    ]},
+  lansia: {cat:'klinis',catLabel:'🏥 Klinis',catStyle:'background:var(--biru-bg);color:var(--biru);',icon:'👴',judul:'Perawatan Lansia Harian',
+    sections:[
+      {title:'Nutrisi & cairan harian',color:'g',points:['Pantau asupan makan — minum minimal 1,5 liter/hari','Waspadai tanda dehidrasi: bibir kering, urin pekat, atau jarang ke toilet']},
+      {title:'Pemantauan rutin',color:'b',points:['Cek tekanan darah setiap hari jika pasien hipertensi','Perhatikan kebersihan kulit — seka dengan lembut untuk mencegah luka lecet','Pastikan obat diminum sesuai jadwal dan dosis yang benar']}
+    ]},
+  stroke: {cat:'klinis',catLabel:'🏥 Klinis',catStyle:'background:var(--biru-bg);color:var(--biru);',icon:'🧠',judul:'Pendampingan Pasien Pasca Stroke',
+    sections:[
+      {title:'Latihan gerak harian (ROM)',color:'b',points:['Bantu gerakkan lengan dan kaki yang lemah secara perlahan setiap hari','Mulai dari gerakan kecil — tekuk dan luruskan jari, pergelangan, siku, lutut']},
+      {title:'Waspadai tanda kekambuhan',color:'r',points:['Wajah mencong mendadak atau senyum tidak simetris','Lengan atau kaki mendadak lemah di salah satu sisi','Bicara pelo, cadel, atau tiba-tiba tidak bisa bicara']}
+    ],danger:'Jika tanda kekambuhan muncul, kirim laporan darurat SEGERA dan antarkan ke UGD terdekat tanpa menunggu.'},
+  disabilitas: {cat:'klinis',catLabel:'🏥 Klinis',catStyle:'background:var(--biru-bg);color:var(--biru);',icon:'♿',judul:'Pendampingan Penyandang Disabilitas',
+    sections:[
+      {title:'Prinsip pendampingan',color:'b',points:['Bantu aktivitas sehari-hari sesuai kemampuan pasien — jangan ambil alih semua','Dorong kemandirian dalam hal yang masih bisa dilakukan sendiri']},
+      {title:'Pemantauan fisik',color:'g',points:['Pastikan alat bantu (kursi roda, tongkat, walker) dalam kondisi baik dan aman','Cek kulit di titik tekanan (pantat, tulang ekor, tumit) untuk mencegah luka tekan','Laporkan segera jika ada luka tekan baru atau tanda infeksi']}
+    ]},
+  bahaya: {cat:'darurat',catLabel:'🚨 Darurat',catStyle:'background:var(--merah-bg);color:var(--merah);',icon:'⚠️',judul:'Tanda Bahaya yang Harus Segera Dilaporkan',
+    sections:[
+      {title:'Lapor SEGERA — kondisi mengancam jiwa',color:'r',points:['Pasien tidak sadar atau tidak merespons panggilan','Sesak napas hebat atau napas berbunyi','Nyeri dada mendadak, terutama menjalar ke lengan atau rahang','Perdarahan yang tidak berhenti dalam 10 menit','Demam tinggi >38.5°C disertai kejang']},
+      {title:'Lapor dalam 24 jam',color:'y',points:['Tidak mau makan 2 hari berturut-turut','Kondisi mental berubah drastis — bingung, agitasi, atau sangat lemah','Muntah atau diare lebih dari 3 kali dalam sehari']}
+    ],danger:'Untuk kondisi mengancam jiwa: kirim Lapor Darurat di Si Ciput DAN hubungi 119 secara bersamaan.'},
+  paliatif: {cat:'paliatif',catLabel:'💜 Paliatif',catStyle:'background:#f3e8ff;color:#7e22ce;',icon:'🕊️',judul:'Pendampingan Pasien Paliatif',
+    sections:[
+      {title:'Prinsip utama',color:'b',points:['Utamakan kenyamanan dan kualitas hidup — bukan semata memperpanjang hidup','Hormati keputusan pasien dan keluarga terkait tindakan medis']},
+      {title:'Pendampingan praktis',color:'g',points:['Pastikan obat nyeri tersedia dan diberikan tepat waktu','Koordinasi dengan tenaga kesehatan untuk setiap perubahan kondisi','Dampingi keluarga secara emosional — dengarkan tanpa menghakimi']}
+    ],warning:'Koordinasikan setiap perubahan kondisi bermakna langsung dengan koordinator Puskesmas dalam hari yang sama.'},
+  berduka: {cat:'paliatif',catLabel:'💜 Paliatif',catStyle:'background:#f3e8ff;color:#7e22ce;',icon:'🤝',judul:'Dukungan Keluarga dalam Masa Berduka',
+    sections:[
+      {title:'Memahami proses berduka',color:'b',points:['Berduka adalah respons normal — setiap orang melewatinya dengan cara berbeda','Tidak ada tenggat waktu "seharusnya sudah pulih"']},
+      {title:'Cara mendampingi keluarga',color:'g',points:['Hadir dan dengarkan — kehadiran fisik petugas sangat berarti','Jangan memaksa keluarga untuk "kuat" atau "ikhlas" secara terburu-buru','Bantu urusan praktis: makanan, administrasi, atau menghubungi layanan konseling']}
+    ],warning:'Jika anggota keluarga menunjukkan tanda depresi berat lebih dari 2 minggu, sarankan rujukan ke konselor Puskesmas.'}
 };
+
 
 // =============================================
 // APP STATE
@@ -1208,39 +2194,6 @@ function switchTab(name,btn){
 }
 
 // =============================================
-// BERANDA PETUGAS
-// =============================================
-async function updateStatsBeranda(){
-  const list=pasienSaya();
-  document.getElementById('statHijau').textContent=list.filter(p=>p.kondisi==='hijau').length;
-  document.getElementById('statKuning').textContent=list.filter(p=>p.kondisi==='kuning').length;
-  document.getElementById('statMerah').textContent=list.filter(p=>p.kondisi==='merah').length;
-  const riwayat = await getRiwayat();
-  const rHariIni = riwayat.filter(r=>r.petugas===currentUser?.id&&r.tgl===tglISO());
-  const nama=currentUser?.nama?.split(' ')[0]||currentUser?.id;
-  const salam=new Date().getHours()<11?'pagi':new Date().getHours()<15?'siang':'sore';
-  document.getElementById('welcomeNama').textContent=`Selamat ${salam}, ${nama} 👋`;
-  document.getElementById('welcomeInfo').textContent=`${list.length} pasien binaan · ${rHariIni.length} sudah dikunjungi hari ini`;
-}
-
-async function renderPasienList(query=''){
-  const list=pasienSaya().filter(p=>!query||p.nama.toLowerCase().includes(query.toLowerCase()));
-  const riwayat = await getRiwayat();
-  const visited=new Set(riwayat.filter(r=>r.petugas===currentUser?.id&&r.tgl===tglISO()).map(r=>r.pasienId));
-  const el=document.getElementById('daftarPasien');
-  if(!list.length){el.innerHTML='<div class="no-data">Tidak ada pasien ditemukan.</div>';return;}
-  el.innerHTML=list.map(p=>{
-    const done=visited.has(p.id);
-    return `<div class="pasien-card ${p.kondisi}" onclick="bukaKunjungan(${p.id})">
-      <div class="pc-top"><span class="pc-nama">${p.nama}</span>${badgeKondisi(p.kondisi)}</div>
-      <div class="pc-alamat">📍 ${p.alamat}</div>
-      <div class="pc-kategori">🏷️ ${p.kategori} &nbsp;·&nbsp; ⏰ Jadwal: ${p.jadwal}</div>
-      ${done?'<div class="pc-visited">✅ Sudah dikunjungi hari ini</div>':''}
-    </div>`;
-  }).join('');
-}
-function filterPasien(q){ renderPasienList(q); }
-
 async function renderRute(){
   const list=pasienSaya();
   const riwayat = await getRiwayat();
@@ -1270,12 +2223,430 @@ function initPeta(){
   },100);
 }
 
-function renderPengingat(){
+
+// =============================================
+// BERANDA BARU — Update stats + vital alert
+// =============================================
+async function updateStatsBeranda(){
   const list=pasienSaya();
-  const el=document.getElementById('daftarPengingat');
-  if(!list.length){el.innerHTML='<div class="no-data">Tidak ada pengingat.</div>';return;}
-  el.innerHTML=list.map(p=>`<div class="pengingat-item"><div class="ping-icon">🏠</div><div class="ping-info"><p>${p.nama}</p><span>${p.alamat}</span></div><div class="ping-time">${p.jadwal}</div></div>`).join('');
+  const hCount=list.filter(p=>p.kondisi==='hijau').length;
+  const kCount=list.filter(p=>p.kondisi==='kuning').length;
+  const mCount=list.filter(p=>p.kondisi==='merah').length;
+  document.getElementById('statHijau').textContent=hCount;
+  document.getElementById('statKuning').textContent=kCount;
+  document.getElementById('statMerah').textContent=mCount;
+  // Update counter panel legenda
+  const ch=document.getElementById('kip-count-hijau'); if(ch) ch.textContent=hCount+' pasien';
+  const ck=document.getElementById('kip-count-kuning'); if(ck) ck.textContent=kCount+' pasien';
+  const cm=document.getElementById('kip-count-merah'); if(cm) cm.textContent=mCount+' pasien';
+  // Auto-buka panel merah jika ada pasien darurat
+  if(mCount>0){
+    const body=document.getElementById('kib-merah');
+    const arrow=document.getElementById('kih-arrow-merah');
+    if(body&&!body.classList.contains('open')){ body.classList.add('open'); if(arrow) arrow.classList.add('open'); }
+  }
+  const riwayat=await getRiwayat();
+  const rHariIni=riwayat.filter(r=>r.petugas===currentUser?.id&&r.tgl===tglISO());
+  const myP=pasienSaya();
+  document.getElementById('statDikunjungi').textContent=rHariIni.length+'/'+myP.length;
+  const nama=currentUser?.nama?.split(' ')[0]||currentUser?.id;
+  const salam=new Date().getHours()<11?'pagi':new Date().getHours()<15?'siang':'sore';
+  document.getElementById('welcomeNama').textContent=`Selamat ${salam}, ${nama} 👋`;
+  document.getElementById('welcomeInfo').textContent=`${myP.length} pasien binaan · ${rHariIni.length} sudah dikunjungi hari ini`;
+  const belum=myP.length-rHariIni.length;
+  const jadwalStrip=document.getElementById('jadwalStrip');
+  if(jadwalStrip){jadwalStrip.style.display='flex';document.getElementById('jadwalSubteks').textContent=belum>0?belum+' pasien belum dikunjungi':'Semua pasien sudah dikunjungi hari ini';document.getElementById('jadwalCounter').textContent=belum>0?belum+' tersisa':'✓ Selesai';}
+  // Alert vital pasien kritis
+  const alertCont=document.getElementById('alertVitalContainer');
+  if(alertCont){
+    const kritis=myP.filter(p=>p.kondisi==='merah');
+    alertCont.innerHTML=kritis.slice(0,2).map(p=>`<div class="alert-vital merah"><span class="av-icon">⚠️</span><div class="av-text merah"><p>${esc(p.nama)} — Kondisi Darurat</p><span>Perlu perhatian segera · ${p.kategori}</span></div></div>`).join('');
+  }
 }
+
+// =============================================
+// PASIEN LIST BARU — dengan vital mini row
+// =============================================
+async function renderPasienList(query=''){
+  const list=pasienSaya().filter(p=>!query||p.nama.toLowerCase().includes(query.toLowerCase()));
+  const riwayat=await getRiwayat();
+  const visited=new Set(riwayat.filter(r=>r.petugas===currentUser?.id&&r.tgl===tglISO()).map(r=>r.pasienId));
+  const el=document.getElementById('daftarPasien');
+  if(!list.length){el.innerHTML='<div class="no-data">Tidak ada pasien ditemukan.</div>';return;}
+  el.innerHTML=list.map(p=>{
+    const done=visited.has(p.id);
+    const vital=p.vital||null;
+    let vitalHtml='';
+    if(vital){
+      const tc=v=>v?'merah':'hijau';
+      vitalHtml=`<div class="pc-vital-row">
+        <div class="pv-item"><div class="pv-val ${vital.sistolik>140||vital.diastolik>90?'merah':vital.sistolik>120?'kuning':'hijau'}">${vital.sistolik||'—'}/${vital.diastolik||'—'}</div><div class="pv-lbl">Tensi</div></div>
+        <div class="pv-item"><div class="pv-val ${vital.gula>200?'merah':vital.gula>140?'kuning':'hijau'}">${vital.gula?vital.gula+' mg':'—'}</div><div class="pv-lbl">Gula</div></div>
+        <div class="pv-item"><div class="pv-val ${vital.suhu>37.5?'merah':'hijau'}">${vital.suhu?vital.suhu+'°C':'—'}</div><div class="pv-lbl">Suhu</div></div>
+      </div>`;
+    }
+    let skriningHtml='';
+    if(p.skrining){
+      skriningHtml='<div class="pc-skrining-row">'+Object.entries(p.skrining).map(([k,v])=>`<span class="sk-chip ${v}">${k==='jatuh'?'Jatuh':k==='kognitif'?'Kognitif':k==='mental'?'Mental':k==='nutrisi'?'Nutrisi':k==='indera'?'Indera':'Mandiri'}</span>`).join('')+'</div>';
+    }
+    return `<div class="pasien-card ${p.kondisi}" onclick="bukaKunjungan(${p.id})">
+      <div class="pc-top"><span class="pc-nama">${esc(p.nama)}</span>${badgeKondisi(p.kondisi)}</div>
+      <div class="pc-alamat">📍 ${esc(p.alamat)}</div>
+      <div class="pc-kategori">🏷️ ${esc(p.kategori)} &nbsp;·&nbsp; ⏰ ${p.jadwal}</div>
+      ${vitalHtml}${skriningHtml}
+      <div class="pc-kondisi-info ${p.kondisi}">
+        ${p.kondisi==='hijau'
+          ? `<span class="pc-ki-tindak">✅ Kunjungan rutin</span><div class="pc-ki-kriteria">Kondisi stabil · ADL mandiri/bantuan minimal · Monitoring standar</div>`
+          : p.kondisi==='kuning'
+          ? `<span class="pc-ki-tindak">⚠️ Perlu perhatian lebih</span><div class="pc-ki-kriteria">Mobilitas/nafsu makan/kepatuhan obat menurun · Konsultasi Puskesmas</div>`
+          : `<span class="pc-ki-tindak">🚨 DARURAT — Lapor Cepat segera!</span><div class="pc-ki-kriteria">Sesak napas / tidak sadar / kejang / jatuh cedera · Hubungi 119</div>`
+        }
+      </div>
+      ${done?'<div class="pc-visited">✅ Sudah dikunjungi hari ini</div>':''}
+      ${p.obat?`<div style="font-size:0.7rem;color:var(--abu3);margin-top:3px;">💊 ${esc(p.obat)}</div>`:''}
+    </div>`;
+  }).join('');
+}
+function filterPasien(q){ renderPasienList(q); }
+
+// Toggle panel legenda kriteria kondisi
+function toggleKIP(k){
+  const body=document.getElementById('kib-'+k);
+  const arrow=document.getElementById('kih-arrow-'+k);
+  if(!body) return;
+  body.classList.toggle('open');
+  if(arrow) arrow.classList.toggle('open');
+}
+
+// =============================================
+// PENGINGAT TAB
+// =============================================
+let daftarPengingatData=[];
+let selectedPingKat='obat';
+let selectedPingPasien='';
+
+function renderPengingatTab(){
+  const myP=pasienSaya();
+  selectedPingPasien=myP[0]?.id||'';
+  // Render pasien chips
+  const chipsEl=document.getElementById('pasienChipsRow');
+  if(chipsEl) chipsEl.innerHTML=myP.map(p=>`<div class="pasien-chip ${p.id==selectedPingPasien?'sel':''}" onclick="setSelectedPingPasien(${p.id},this)">${esc(p.nama.split(' ').slice(0,2).join(' '))}</div>`).join('');
+  initPingChips();
+  renderPengingatList();
+}
+
+function setSelectedPingPasien(id,el){
+  selectedPingPasien=id;
+  document.querySelectorAll('.pasien-chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function setPingKat(k){
+  selectedPingKat=k;
+  ['obat','aktv','skrining','vital'].forEach(c=>{
+    const el=document.getElementById('pcat-'+c);
+    if(el) el.className='cat-sel-btn'+(c===k?' sel-'+c:'');
+    const form=document.getElementById('pingForm-'+c);
+    if(form) form.style.display=c===k?'block':'none';
+  });
+  // Reset chip selections for current category
+  document.querySelectorAll(`#pingForm-${k} .ping-quick-chip`).forEach(ch=>ch.classList.remove('sel-chip'));
+}
+
+// Quick-chip presets per category
+const PING_PRESETS = {
+  obat: ['Amlodipine 5mg','Metformin 500mg','Captopril 25mg','Candesartan 8mg','Furosemide 40mg','Aspirin 80mg','Atorvastatin 20mg','Omeprazole 20mg','Paracetamol 500mg','Amlodipin 10mg'],
+  aktv: ['Jalan kaki pagi','Senam lansia','Latihan duduk & berdiri','ROM (gerak sendi)','Latihan pernapasan','Peregangan ringan','Bersepeda statis','Jalan santai sore'],
+  skrining: ['Skrining kognitif (MMSE)','Skrining gizi (MNA)','Skrining depresi (GDS)','Kemandirian (ADL Barthel)','Timed Up and Go','Risiko jatuh','Skrining nyeri','Skrining tekanan darah'],
+  vital: ['Tekanan darah','Nadi & saturasi','Gula darah puasa','Gula darah 2j pp','Suhu tubuh','Berat badan','Lingkar perut','Pernapasan (RR)']
+};
+
+function initPingChips(){
+  Object.entries(PING_PRESETS).forEach(([kat, items])=>{
+    const el=document.getElementById(`ping${kat.charAt(0).toUpperCase()+kat.slice(1)}Chips`)||
+              document.getElementById(`ping${kat==='aktv'?'Aktv':kat==='skrining'?'Skrining':'Vital'}Chips`);
+    // find by naming pattern
+    const chipEl = document.getElementById(
+      kat==='obat'?'pingObatChips':
+      kat==='aktv'?'pingAktvChips':
+      kat==='skrining'?'pingSkriningChips':'pingVitalChips'
+    );
+    if(!chipEl) return;
+    chipEl.innerHTML = items.map(item=>`<div class="ping-quick-chip" onclick="selectPingChip(this,'${kat}','${item}')">${item}</div>`).join('');
+  });
+  // Init vital target fields
+  renderVitalTargets();
+}
+
+function renderVitalTargets(){
+  const el=document.getElementById('pingVitalTargetRow');
+  if(!el) return;
+  el.innerHTML=`
+    <div class="ping-vital-target"><label>Target Atas (misal: TD <140)</label><input type="text" id="pingVitalMax" placeholder="cth. < 140/90 mmHg"></div>
+    <div class="ping-vital-target"><label>Target Bawah / Normal</label><input type="text" id="pingVitalMin" placeholder="cth. > 90/60 mmHg"></div>`;
+}
+
+function selectPingChip(el, kat, val){
+  // Toggle chip selection
+  const isActive = el.classList.contains('sel-chip');
+  document.querySelectorAll(`#pingForm-${kat} .ping-quick-chip`).forEach(c=>c.classList.remove('sel-chip'));
+  const nameEl = document.getElementById(`pingNama-${kat}`);
+  if(!isActive){
+    el.classList.add('sel-chip');
+    if(nameEl) nameEl.value = val;
+  } else {
+    if(nameEl) nameEl.value = '';
+  }
+}
+
+function tambahPengingat(){
+  const kat=selectedPingKat;
+  const nama=document.getElementById(`pingNama-${kat}`)?.value.trim();
+  const jam=document.getElementById(`pingJam-${kat}`)?.value||'07:00';
+  const freq=document.getElementById(`pingFreq-${kat}`)?.value||'Setiap Hari';
+  const catatan=document.getElementById(`pingCatatan-${kat}`)?.value.trim()||'';
+
+  if(!nama){alert('Nama wajib diisi.');return;}
+  const myP=pasienSaya();
+  const pasien=myP.find(p=>p.id==selectedPingPasien)||myP[0];
+
+  // Build extra detail per kategori
+  let detail={};
+  if(kat==='obat'){
+    detail.dosis=document.getElementById('pingDosis')?.value.trim()||'';
+    detail.aturan=document.getElementById('pingAturan')?.value||'';
+  } else if(kat==='aktv'){
+    detail.durasi=document.getElementById('pingDurasi')?.value||'30';
+    detail.intensitas=document.getElementById('pingIntensitas')?.value||'sedang';
+  } else if(kat==='skrining'){
+    detail.alat=document.getElementById('pingSkriningAlat')?.value||'';
+  } else if(kat==='vital'){
+    detail.targetMax=document.getElementById('pingVitalMax')?.value.trim()||'';
+    detail.targetMin=document.getElementById('pingVitalMin')?.value.trim()||'';
+  }
+
+  daftarPengingatData.unshift({id:Date.now(),kat,nama,jam,freq,catatan,detail,pasienId:pasien?.id,pasienNama:pasien?.nama||'—',selesai:false});
+
+  // Reset form fields
+  document.getElementById(`pingNama-${kat}`).value='';
+  document.getElementById(`pingCatatan-${kat}`).value='';
+  document.querySelectorAll(`#pingForm-${kat} .ping-quick-chip`).forEach(c=>c.classList.remove('sel-chip'));
+  if(kat==='obat') document.getElementById('pingDosis').value='';
+  if(kat==='vital'){ document.getElementById('pingVitalMax').value=''; document.getElementById('pingVitalMin').value=''; }
+
+  renderPengingatList();
+  showNotifSukses('🔔 Pengingat ditambahkan!');
+}
+
+function renderPengingatList(filter='semua'){
+  const el=document.getElementById('daftarPengingat');
+  if(!el)return;
+  const list=filter==='semua'?daftarPengingatData:daftarPengingatData.filter(p=>p.kat===filter);
+  // Update counters
+  const selesai=daftarPengingatData.filter(p=>p.selesai).length;
+  const total=daftarPengingatData.length;
+  const selEl=document.getElementById('pingSelesai'); if(selEl)selEl.textContent=selesai;
+  const totEl=document.getElementById('pingTotal'); if(totEl)totEl.textContent=total;
+  const sisEl=document.getElementById('pingSisa'); if(sisEl)sisEl.textContent=total-selesai;
+  if(!list.length){el.innerHTML='<div class="no-data">Belum ada pengingat. Tambahkan di bawah.</div>';return;}
+  const icons={obat:'💊',aktv:'🚶',skrining:'📋',vital:'🩺'};
+  const ibadge={obat:'pib-obat',aktv:'pib-aktv',skrining:'pib-skrining',vital:'pib-vital'};
+  const cats={obat:'pcat-obat Obat',aktv:'pcat-aktv Aktivitas',skrining:'pcat-skrining Skrining',vital:'pcat-vital Cek Vital'};
+  el.innerHTML=list.map(p=>{
+    const [catCls,catLbl]=cats[p.kat].split(' ');
+    // Build detail line
+    let detailHtml='';
+    if(p.detail){
+      const d=p.detail;
+      if(p.kat==='obat'){
+        const parts=[];
+        if(d.dosis) parts.push(`📦 ${d.dosis}`);
+        if(d.aturan) parts.push(`🍽️ ${d.aturan}`);
+        if(parts.length) detailHtml=`<div class="ping-card-detail">${parts.map(x=>`<span>${x}</span>`).join('')}</div>`;
+      } else if(p.kat==='aktv'){
+        const parts=[];
+        if(d.durasi) parts.push(`⏱️ ${d.durasi} mnt`);
+        if(d.intensitas) parts.push(d.intensitas==='ringan'?'🟢 Ringan':d.intensitas==='sedang'?'🟡 Sedang':'🔴 Berat');
+        if(parts.length) detailHtml=`<div class="ping-card-detail">${parts.map(x=>`<span>${x}</span>`).join('')}</div>`;
+      } else if(p.kat==='skrining'){
+        if(d.alat) detailHtml=`<div class="ping-card-detail"><span>🔬 ${d.alat}</span></div>`;
+      } else if(p.kat==='vital'){
+        const parts=[];
+        if(d.targetMax) parts.push(`↑ ${d.targetMax}`);
+        if(d.targetMin) parts.push(`↓ ${d.targetMin}`);
+        if(parts.length) detailHtml=`<div class="ping-card-detail">${parts.map(x=>`<span>${x}</span>`).join('')}</div>`;
+      }
+    }
+    return `<div class="ping-card-new ${p.selesai?'done':''}" onclick="togglePengingat(${p.id})">
+      <div class="ping-check-box"></div>
+      <div class="ping-icon-badge ${ibadge[p.kat]}">${icons[p.kat]}</div>
+      <div class="ping-body">
+        <div class="ping-nama-new">${esc(p.nama)}</div>
+        <div class="ping-pasien-new">${esc(p.pasienNama)}</div>
+        <div><span class="ping-cat-badge ${catCls}">${catLbl}</span> <span style="font-size:0.65rem;color:var(--abu3);">· ${p.freq}</span></div>
+        ${detailHtml}
+        ${p.catatan?`<div class="ping-note-new">${esc(p.catatan)}</div>`:''}
+      </div>
+      <div class="ping-right-new">
+        <div class="ping-jam-new">${p.jam}</div>
+        <button class="ping-del-btn" onclick="event.stopPropagation();hapusPengingat(${p.id})">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function togglePengingat(id){
+  const p=daftarPengingatData.find(x=>x.id===id);
+  if(p){p.selesai=!p.selesai;renderPengingatList();}
+}
+function hapusPengingat(id){
+  daftarPengingatData=daftarPengingatData.filter(x=>x.id!==id);
+  renderPengingatList();
+}
+function filterPengingat(f,el){
+  document.querySelectorAll('.ping-filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderPengingatList(f);
+}
+
+// =============================================
+// EDUKASI CHECKLIST HELPERS
+// =============================================
+let _edukActiveKey = null; // materi key yang sedang terbuka
+
+function _edukStorageKey(eduKey){
+  // Key per pasien per tanggal per materi
+  const pasienId = currentPasien?.id || currentUser?.id || 'guest';
+  const tgl = tglISO();
+  return `edchk_${pasienId}_${tgl}_${eduKey}`;
+}
+
+function _edukGetChecked(eduKey){
+  try { return JSON.parse(localStorage.getItem(_edukStorageKey(eduKey)) || '{}'); } catch(e){ return {}; }
+}
+
+function _edukSetChecked(eduKey, state){
+  localStorage.setItem(_edukStorageKey(eduKey), JSON.stringify(state));
+}
+
+function _edukCountAll(eduKey){
+  const d = edukasiData[eduKey];
+  if(!d) return {total:0, done:0};
+  let total = 0;
+  d.sections.forEach(s => total += s.points.length);
+  const state = _edukGetChecked(eduKey);
+  const done = Object.values(state).filter(Boolean).length;
+  return {total, done};
+}
+
+function toggleEdukasiItem(eduKey, itemIdx){
+  const state = _edukGetChecked(eduKey);
+  state[itemIdx] = !state[itemIdx];
+  _edukSetChecked(eduKey, state);
+  // Update visual
+  const el = document.querySelector(`.modal-edukasi-point[data-idx="${itemIdx}"]`);
+  if(el){
+    el.classList.toggle('checked', !!state[itemIdx]);
+    el.querySelector('.eduk-chk').textContent = state[itemIdx] ? '✓' : '';
+  }
+  // Update progress bar
+  const {total, done} = _edukCountAll(eduKey);
+  const pct = total ? Math.round(done/total*100) : 0;
+  const numEl = document.getElementById('edNewProgNum');
+  const barEl = document.getElementById('edNewProgBar');
+  if(numEl) numEl.textContent = `${done}/${total}`;
+  if(barEl) barEl.style.width = pct+'%';
+  // Refresh card in grid too
+  renderEdukasiGrid(_edukActiveFilter || 'semua');
+}
+
+let _edukActiveFilter = 'semua';
+
+// =============================================
+// EDUKASI GRID RENDER + FILTER
+// =============================================
+function renderEdukasiGrid(filter='semua'){
+  _edukActiveFilter = filter;
+  const grid=document.getElementById('edukasiGrid');
+  if(!grid)return;
+  const keys=Object.keys(edukasiData);
+  const filtered=filter==='semua'?keys:keys.filter(k=>edukasiData[k].cat===filter);
+  grid.innerHTML=filtered.map(k=>{
+    const d=edukasiData[k];
+    const {total, done} = _edukCountAll(k);
+    const pct = total ? Math.round(done/total*100) : 0;
+    const allDone = total > 0 && done === total;
+    const progressHtml = `<div class="ed-card-progress">
+      <div class="ed-card-prog-label ${allDone?'done':''}">${allDone?'✅ Selesai':done>0?`${done}/${total} item terceklis`:`${total} item`}</div>
+      <div class="ed-card-prog-bar"><div class="ed-card-prog-fill" style="width:${pct}%"></div></div>
+    </div>`;
+    return `<div class="edukasi-card-new cat-${d.cat}" onclick="showEdukasiNew('${k}')">
+      <div class="ed-cat-badge ${d.cat}">${d.catLabel}</div>
+      <div class="ed-new-icon">${d.icon}</div>
+      <h4 class="ed-new-title">${d.judul}</h4>
+      <p class="ed-new-sub">${d.sections[0]?.title||''}</p>
+      ${progressHtml}
+      <div class="ed-new-read">Baca selengkapnya →</div>
+    </div>`;
+  }).join('');
+}
+
+function filterEdukasi(f,el){
+  document.querySelectorAll('.edukasi-filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderEdukasiGrid(f);
+}
+
+function showEdukasiNew(key){
+  const d=edukasiData[key];
+  if(!d)return;
+  _edukActiveKey = key;
+  document.getElementById('edNewCat').textContent=d.catLabel;
+  document.getElementById('edNewCat').style.cssText=d.catStyle;
+  document.getElementById('edNewJudul').textContent=d.icon+' '+d.judul;
+
+  // Visit date label
+  const tgl = tglISO();
+  const pasienNama = currentPasien?.nama || '';
+  const visitDateEl = document.getElementById('edNewVisitDate');
+  if(visitDateEl) visitDateEl.textContent = `📅 Kunjungan: ${tgl}${pasienNama?' · '+pasienNama:''}`;
+
+  // Checklist state
+  const state = _edukGetChecked(key);
+  const {total, done} = _edukCountAll(key);
+  const pct = total ? Math.round(done/total*100) : 0;
+  const numEl = document.getElementById('edNewProgNum');
+  const barEl = document.getElementById('edNewProgBar');
+  if(numEl) numEl.textContent = `${done}/${total}`;
+  if(barEl) barEl.style.width = pct+'%';
+
+  // Build body with interactive checkboxes
+  let html='';
+  let globalIdx=0;
+  d.sections.forEach(s=>{
+    html+=`<div class="modal-edukasi-section"><div class="modal-edukasi-sec-title">${s.title}</div>`;
+    html+=s.points.map(pt=>{
+      const idx=globalIdx++;
+      const checked=!!state[idx];
+      return `<div class="modal-edukasi-point checkable${checked?' checked':''}" data-idx="${idx}" onclick="toggleEdukasiItem('${key}',${idx})">
+        <div class="eduk-chk">${checked?'✓':''}</div>
+        <div class="modal-edukasi-text">${pt}</div>
+      </div>`;
+    }).join('');
+    html+='</div>';
+  });
+  if(d.warning) html+=`<div class="modal-edukasi-warning"><p>⚠️ ${d.warning}</p></div>`;
+  if(d.danger) html+=`<div class="modal-edukasi-danger"><p>🚨 ${d.danger}</p></div>`;
+  document.getElementById('edNewBody').innerHTML=html;
+  document.getElementById('modalEdukasiNew').classList.add('open');
+}
+
+// Keep old showEdukasi for backward compat
+function showEdukasi(key){
+  const legacyMap={jatuh:'jatuh_detail',lansia:'lansia',stroke:'stroke',bahaya:'bahaya',paliatif:'paliatif',disabilitas:'disabilitas'};
+  showEdukasiNew(legacyMap[key]||key);
+}
+
 
 async function renderRiwayat(){
   const list = (await getRiwayat()).filter(r=>r.petugas===currentUser?.id);
@@ -1340,23 +2711,6 @@ function renderProfil(){
 // =============================================
 // KUNJUNGAN
 // =============================================
-function bukaKunjungan(id){
-  currentPasien=dataPasien.find(p=>p.id===id);
-  if(!currentPasien)return;
-  document.getElementById('kunjungan-nama').textContent=currentPasien.nama;
-  document.getElementById('kunjungan-alamat').textContent='📍 '+currentPasien.alamat;
-  document.getElementById('kunjungan-kategori').innerHTML=`<span class="badge biru">${currentPasien.kategori}</span>`;
-  document.querySelectorAll('.kondisi-btn').forEach(b=>b.classList.remove('selected'));
-  document.querySelectorAll('.checklist-item').forEach(c=>c.classList.remove('checked'));
-  document.getElementById('catatanTambahan').value='';
-  document.getElementById('fotoPreview').style.display='none';
-  document.getElementById('fotoPreview').innerHTML='';
-  document.getElementById('rekamStatus').style.display='none';
-  document.getElementById('rekamLabel').textContent='Rekam Suara';
-  selectedKondisi=''; fotoDataUrl=null;
-  if(isRekam)stopRekam();
-  showScreen('screen-kunjungan');
-}
 
 async function backToPetugas(){
   if(isRekam)stopRekam();
@@ -1445,16 +2799,47 @@ async function simpanKunjungan(){
   if(!selectedKondisi){alert('Pilih kondisi pasien terlebih dahulu!');return;}
   const checklist=[...document.querySelectorAll('.checklist-item.checked')].map(el=>el.querySelector('.check-label').textContent.trim());
   const catatan=document.getElementById('catatanTambahan').value.trim();
+
+  // Kumpulkan data vital dari form
+  const vitalData={
+    sistolik: parseInt(document.getElementById('vfSistolik')?.value)||null,
+    diastolik: parseInt(document.getElementById('vfDiastolik')?.value)||null,
+    gula:     parseInt(document.getElementById('vfGula')?.value)||null,
+    suhu:     parseFloat(document.getElementById('vfSuhu')?.value)||null,
+    urat:     parseFloat(document.getElementById('vfUrat')?.value)||null,
+    kol:      parseInt(document.getElementById('vfKol')?.value)||null,
+    bb:       parseFloat(document.getElementById('vfBB')?.value)||null,
+    spo2:     parseInt(document.getElementById('vfSpO2')?.value)||null,
+  };
+  // Hanya simpan vital jika ada setidaknya satu nilai
+  const adaVital = Object.values(vitalData).some(v=>v!==null&&v>0);
+
   const laporan={
     id:Date.now(), pasienId:currentPasien.id, namaPasien:currentPasien.nama,
     kondisi:selectedKondisi, catatan, checklist,
-    petugas:currentUser?.id||'?', tgl:tglISO(), jam:jamSekarang(),
+    vital: adaVital ? vitalData : null,
+    petugas:currentUser?.id||'?', petugasNama:currentUser?.nama||currentUser?.id||'?',
+    tgl:tglISO(), jam:jamSekarang(),
     waktu:new Date().toISOString(), foto:fotoDataUrl?true:false
   };
+
   await addRiwayat(laporan);
+
+  // Update data pasien: kondisi, vital terakhir, dan riwayat vital
   const p=dataPasien.find(x=>x.id===currentPasien.id);
-  if(p){ p.kondisi=selectedKondisi; await saveDataPasien(); }
-  addLog('kunjungan','SIMPAN',`Kunjungan: ${currentPasien.nama}`,`Kondisi: ${selectedKondisi.toUpperCase()} | Checklist: ${checklist.join(', ')||'-'} | Catatan: ${catatan.slice(0,80)||'-'}`);
+  if(p){
+    p.kondisi=selectedKondisi;
+    if(adaVital){
+      p.vital=vitalData;
+      // Simpan riwayat vital (maks 30 entri terakhir)
+      if(!p.riwayatVital) p.riwayatVital=[];
+      p.riwayatVital.unshift({...vitalData, tgl:laporan.tgl, jam:laporan.jam, waktu:laporan.waktu});
+      if(p.riwayatVital.length>30) p.riwayatVital=p.riwayatVital.slice(0,30);
+    }
+    await saveDataPasien();
+  }
+
+  addLog('kunjungan','SIMPAN',`Kunjungan: ${currentPasien.nama}`,`Kondisi: ${selectedKondisi.toUpperCase()} | Vital: ${adaVital?`${vitalData.sistolik||'?'}/${vitalData.diastolik||'?'} mmHg Gula:${vitalData.gula||'?'}`:'-'} | Catatan: ${catatan.slice(0,60)||'-'}`);
   if(isRekam) stopRekam();
   document.getElementById('sukses-nama').textContent=currentPasien.nama;
   document.getElementById('sukses-kondisi').innerHTML=badgeKondisi(selectedKondisi);
@@ -1582,12 +2967,1057 @@ Analisis singkat dalam Bahasa Indonesia:
 // =============================================
 // EDUKASI
 // =============================================
-function showEdukasi(key){
-  const d=edukasiData[key];
-  document.getElementById('edukasi-judul').textContent=d.judul;
-  document.getElementById('edukasi-isi').textContent=d.isi;
-  document.getElementById('modalEdukasi').classList.add('open');
+
+// =============================================
+// VITAL INPUT VALIDATION
+// =============================================
+function cekVitalInput(){
+  const setStatus=(inp,hint,ok,warn,okTxt,warnTxt,badTxt)=>{
+    const el=document.getElementById(inp);const hEl=document.getElementById(hint);
+    if(!el||!el.value)return;
+    const cls=ok?'ok':warn?'warn':'bad';
+    el.className='vf-input '+cls;
+    if(hEl){hEl.className='vf-hint '+cls;hEl.textContent=ok?okTxt:warn?warnTxt:badTxt;}
+  };
+  const s=+document.getElementById('vfSistolik')?.value;
+  const d=+document.getElementById('vfDiastolik')?.value;
+  if(s&&d){
+    const ok=s<=120&&d<=80;const warn=s<=140&&d<=90&&!ok;
+    ['vfSistolik','vfDiastolik'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='vf-input '+(ok?'ok':warn?'warn':'bad');});
+    const hEl=document.getElementById('hintTensi');if(hEl){hEl.className='vf-hint '+(ok?'ok':warn?'warn':'bad');hEl.textContent=ok?'✓ Normal':warn?'~ Perlu pantau':'⚠ Di atas normal — perlu perhatian';}
+  }
+  const g=+document.getElementById('vfGula')?.value;
+  if(g){const ok=g<140;const warn=g>=140&&g<200;setStatus('vfGula','hintGula',ok,warn,'✓ Normal','~ Perlu pantau','⚠ Di atas normal');}
+  const su=+document.getElementById('vfSuhu')?.value;
+  if(su){const ok=su>=36&&su<=37.5;const warn=su>37.5&&su<=37.8;setStatus('vfSuhu','hintSuhu',ok,warn,'✓ Normal','~ Subfebris','⚠ Demam');}
+  const u=+document.getElementById('vfUrat')?.value;
+  if(u){const ok=u<=6.0;const warn=u>6.0&&u<=7.0;setStatus('vfUrat','hintUrat',ok,warn,'✓ Normal','~ Batas atas','⚠ Tinggi');}
+  const kol=+document.getElementById('vfKol')?.value;
+  if(kol){const ok=kol<200;const warn=kol>=200&&kol<240;setStatus('vfKol','hintKol',ok,warn,'✓ Normal','~ Batas tinggi','⚠ Tinggi');}
 }
+
+function renderRiwayatVital(){
+  const el=document.getElementById('riwayatVitalList');
+  if(!el)return;
+  const riwayatVital=currentPasien?.riwayatVital||[];
+  if(!riwayatVital.length){el.innerHTML='<div class="no-data" style="font-size:0.8rem;">Belum ada riwayat vital.</div>';return;}
+  el.innerHTML=riwayatVital.slice(0,3).map(rv=>{
+    const k=rv.sistolik>140?'merah':rv.sistolik>120?'kuning':'hijau';
+    return `<div class="rv-item ${k}">
+      <div class="rv-tgl">📅 ${rv.tgl} ${rv.jam}</div>
+      <div class="rv-vals">
+        <div class="rv-val-item"><div class="rv-val-num" style="color:var(--${rv.sistolik>140?'merah':rv.sistolik>120?'kuning':'hijau'})">${rv.sistolik}/${rv.diastolik}</div><div class="rv-val-lbl">Tensi</div></div>
+        <div class="rv-val-item"><div class="rv-val-num" style="color:var(--${rv.gula>200?'merah':rv.gula>140?'kuning':'hijau'})">${rv.gula||'—'} mg</div><div class="rv-val-lbl">Gula</div></div>
+        <div class="rv-val-item"><div class="rv-val-num" style="color:var(--${rv.suhu>37.5?'merah':'hijau'})">${rv.suhu||'—'}°C</div><div class="rv-val-lbl">Suhu</div></div>
+      </div>
+      ${rv.catatan?`<div class="rv-catatan">"${esc(rv.catatan.slice(0,80))}"</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// =============================================
+// SKRINING FUNCTIONS
+// =============================================
+const skriningAnswers={};
+const adlAnswers={};
+const skriningDone=[false,false,false,false,false,false];
+let skriningCurrentTab=0;
+
+const skriningPanelData=[
+  {id:'jatuh',title:'A. Skrining Risiko Jatuh',sub:'Mengevaluasi keseimbangan motorik & riwayat instabilitas fisik',qs:[
+    {id:'j1',text:'Apakah lansia pernah jatuh dalam 12 bulan terakhir?',opts:['ya','tidak']},
+    {id:'j2',text:'Apakah lansia merasa tidak seimbang saat berjalan?',opts:['ya','tidak']},
+    {id:'j3',text:'Apakah memerlukan bantuan saat berdiri atau berjalan?',opts:['ya','tidak']}
+  ]},
+  {id:'kognitif',title:'B. Skrining Fungsi Kognitif',sub:'Mendeteksi tanda-tanda pikun atau penurunan daya ingat',qs:[
+    {id:'k1',text:'Hari apa sekarang? (Tanyakan langsung — jika salah pilih "Salah")',opts:['salah','benar']},
+    {id:'k2',text:'Sedang berada di mana? (Mampu mengenali lokasi rumah/faskes saat ini?)',opts:['salah','benar']},
+    {id:'k3',text:'Mengingat 3 benda (Kursi, Apel, Kunci) selama 5 menit. Mampukah?',opts:['lupa','ingat']}
+  ]},
+  {id:'mental',title:'C. Skrining Depresi / Kesehatan Mental',sub:'Mendeteksi tanda-tanda depresi atau isolasi sosial',qs:[
+    {id:'m1',text:'Apakah lansia sering merasa sedih, murung, atau tidak bersemangat dalam 2 minggu terakhir?',opts:['ya','tidak']},
+    {id:'m2',text:'Apakah lansia kehilangan minat pada aktivitas yang biasanya disukai?',opts:['ya','tidak']},
+    {id:'m3',text:'Apakah lansia sering merasa kesepian atau jarang berinteraksi dengan orang lain?',opts:['ya','tidak']}
+  ]},
+  {id:'nutrisi',title:'D. Skrining Status Gizi / Nutrisi',sub:'Mendeteksi risiko malnutrisi pada lansia',qs:[
+    {id:'n1',text:'Apakah nafsu makan lansia berkurang dalam 3 bulan terakhir?',opts:['ya','tidak']},
+    {id:'n2',text:'Apakah berat badan turun drastis tanpa direncanakan dalam 3 bulan terakhir?',opts:['ya','tidak']},
+    {id:'n3',text:'Apakah lansia kesulitan mengunyah atau menelan makanan?',opts:['ya','tidak']}
+  ]},
+  {id:'indera',title:'E & F. Skrining Penglihatan & Pendengaran',sub:'Mengukur fungsi panca indera utama',qs:[
+    {id:'e1',text:'Penglihatan kabur atau sulit membaca tulisan ukuran biasa?',opts:['ya','tidak']},
+    {id:'f1',text:'Sering meminta lawan bicara mengulang kalimat atau kesulitan mendengar percakapan normal?',opts:['ya','tidak']}
+  ]}
+];
+
+const adlItems=['Makan & Minum','Mandi Sendiri','Berpakaian','Berjalan','Toilet (BAB/BAK)','Pindah Tempat'];
+
+function initSkriningPanels(){
+  const container=document.getElementById('skriningPanels');
+  if(!container)return;
+  let html='';
+  skriningPanelData.forEach((panel,i)=>{
+    html+=`<div class="skrining-panel ${i===0?'active':''}" id="spanel-${i}">
+      <div class="skrining-header"><h4>${panel.title}</h4><p>${panel.sub}</p></div>
+      ${panel.qs.map(q=>`<div class="skrining-q">
+        <p>${q.text}</p>
+        <div class="skrining-btns">
+          ${q.opts.map(opt=>`<button class="skrining-btn" id="sqb-${q.id}-${opt}" onclick="pilihSkrining('${q.id}','${opt}')">${opt.charAt(0).toUpperCase()+opt.slice(1)}</button>`).join('')}
+        </div>
+      </div>`).join('')}
+      <button class="btn btn-primary btn-sm" style="margin-top:8px;" onclick="switchSkrining(${i+1})">Lanjut →</button>
+    </div>`;
+  });
+  // ADL panel
+  html+=`<div class="skrining-panel" id="spanel-5">
+    <div class="skrining-header"><h4>G. Kemandirian Aktivitas Harian (ADL)</h4><p>Apakah lansia memerlukan bantuan orang lain?</p></div>
+    <div class="adl-grid">${adlItems.map((item,i)=>`<div class="adl-item"><div class="adl-lbl">${item}</div><div class="adl-btns">
+      <button class="adl-btn" id="adlb-${i}-bantuan" onclick="pilihADL(${i},'bantuan')">Bantuan</button>
+      <button class="adl-btn" id="adlb-${i}-mandiri" onclick="pilihADL(${i},'mandiri')">Mandiri</button>
+    </div></div>`).join('')}</div>
+    <button class="btn btn-primary btn-sm" style="margin-top:10px;" onclick="hitungHasilSkrining()">📊 Hitung Hasil Skrining Otomatis</button>
+  </div>`;
+  // Hasil panel
+  html+=`<div class="skrining-panel" id="spanel-6">
+    <div class="skrining-header"><h4>📋 Rekapitulasi Hasil Skrining</h4><p>Otomatis dihitung dari jawaban di atas</p></div>
+    <div class="hasil-skrining-grid" id="hasilSkriningGrid"></div>
+    <div id="hasilSkriningCatatan" style="background:var(--abu);border-radius:8px;padding:8px 10px;font-size:0.82rem;color:var(--teks2);line-height:1.6;margin-bottom:1rem;"></div>
+  </div>`;
+  container.innerHTML=html;
+}
+
+function pilihSkrining(qid,val){
+  skriningAnswers[qid]=val;
+  const allBtns=document.querySelectorAll(`[id^="sqb-${qid}-"]`);
+  allBtns.forEach(b=>{b.className='skrining-btn';});
+  const sel=document.getElementById(`sqb-${qid}-${val}`);
+  if(sel) sel.className=`skrining-btn sel-${val}`;
+  updateSkriningProgress();
+}
+
+function pilihADL(idx,val){
+  adlAnswers[idx]=val;
+  ['bantuan','mandiri'].forEach(v=>{const b=document.getElementById(`adlb-${idx}-${v}`);if(b)b.className='adl-btn'+(v===val?' sel-'+v:'');});
+  updateSkriningProgress();
+}
+
+function updateSkriningProgress(){
+  skriningDone[0]=skriningPanelData[0].qs.every(q=>skriningAnswers[q.id]);
+  skriningDone[1]=skriningPanelData[1].qs.every(q=>skriningAnswers[q.id]);
+  skriningDone[2]=skriningPanelData[2].qs.every(q=>skriningAnswers[q.id]);
+  skriningDone[3]=skriningPanelData[3].qs.every(q=>skriningAnswers[q.id]);
+  skriningDone[4]=skriningPanelData[4].qs.every(q=>skriningAnswers[q.id]);
+  skriningDone[5]=adlItems.every((_,i)=>adlAnswers[i]);
+  const done=skriningDone.filter(Boolean).length;
+  const pEl=document.getElementById('skriningProgress');if(pEl)pEl.textContent=done+'/6 kategori';
+  const pfEl=document.getElementById('skriningProgressFill');if(pfEl)pfEl.style.width=Math.round(done/6*100)+'%';
+  skriningDone.forEach((v,i)=>{const t=document.getElementById('stab-'+i);if(t&&v)t.classList.add('done');});
+}
+
+function switchSkrining(idx){
+  document.querySelectorAll('.skrining-panel').forEach((p,i)=>{p.classList.toggle('active',i===idx);});
+  document.querySelectorAll('.skrining-tab').forEach((t,i)=>{t.classList.toggle('active',i===idx);});
+  skriningCurrentTab=idx;
+}
+
+function hitungHasilSkrining(){
+  const badVals=['ya','salah','lupa'];
+  const scores={
+    jatuh:['j1','j2','j3'].filter(k=>badVals.includes(skriningAnswers[k])).length,
+    kognitif:['k1','k2','k3'].filter(k=>badVals.includes(skriningAnswers[k])).length,
+    mental:['m1','m2','m3'].filter(k=>badVals.includes(skriningAnswers[k])).length,
+    nutrisi:['n1','n2','n3'].filter(k=>badVals.includes(skriningAnswers[k])).length,
+    penglihatan:skriningAnswers['e1']==='ya'?1:0,
+    pendengaran:skriningAnswers['f1']==='ya'?1:0,
+    adl:adlItems.filter((_,i)=>adlAnswers[i]==='bantuan').length
+  };
+  const results=[
+    {icon:'🦺',label:'Risiko Jatuh',s:scores.jatuh,max:3,teks:scores.jatuh===0?'Risiko Rendah':scores.jatuh===1?'Perlu Pantau':'Risiko Tinggi'},
+    {icon:'🧠',label:'Fungsi Kognitif',s:scores.kognitif,max:3,teks:scores.kognitif===0?'Daya Ingat Baik':scores.kognitif===1?'Perlu Evaluasi':'Penurunan Nyata'},
+    {icon:'😔',label:'Kesehatan Mental',s:scores.mental,max:3,teks:scores.mental===0?'Stabil & Bahagia':scores.mental===1?'Perlu Dukungan':'Risiko Depresi'},
+    {icon:'🥗',label:'Status Gizi',s:scores.nutrisi,max:3,teks:scores.nutrisi===0?'Gizi Sangat Baik':scores.nutrisi===1?'Perlu Pantau':'Risiko Malnutrisi'},
+    {icon:'👁',label:'Penglihatan',s:scores.penglihatan,max:1,teks:scores.penglihatan===0?'Cukup Jelas':'Perlu Cek Mata'},
+    {icon:'👂',label:'Pendengaran',s:scores.pendengaran,max:1,teks:scores.pendengaran===0?'Jelas':'Perlu Evaluasi'},
+    {icon:'🙌',label:'Kemandirian ADL',s:scores.adl,max:6,teks:scores.adl===0?'Mandiri Penuh':scores.adl<=2?'Sebagian Mandiri':'Perlu Pendampingan'}
+  ];
+  const getK=(s,max)=>s===0?'hijau':s<=Math.ceil(max/2)?'kuning':'merah';
+  const grid=document.getElementById('hasilSkriningGrid');
+  if(grid){grid.innerHTML=results.map(r=>{const k=getK(r.s,r.max);return `<div class="hs-item ${k}"><div class="hs-icon">${r.icon}</div><div class="hs-label">${r.label}</div><div class="hs-status">${r.teks}</div></div>`;}).join('');}
+  const merah=results.filter(r=>getK(r.s,r.max)==='merah');
+  const kuning=results.filter(r=>getK(r.s,r.max)==='kuning');
+  let catatan='';
+  if(merah.length) catatan+=`<strong>⚠ Perlu tindak lanjut segera:</strong> ${merah.map(r=>r.label).join(', ')}<br>`;
+  if(kuning.length) catatan+=`<strong>~ Pantau lebih ketat:</strong> ${kuning.map(r=>r.label).join(', ')}<br>`;
+  if(!merah.length&&!kuning.length) catatan='<strong>✓ Semua kategori dalam kondisi baik.</strong> Lanjutkan pemantauan rutin bulanan.';
+  const cEl=document.getElementById('hasilSkriningCatatan');if(cEl)cEl.innerHTML=catatan;
+  // Save to currentPasien
+  if(currentPasien){
+    const skriningResult={};
+    results.forEach(r=>{skriningResult[r.label.toLowerCase().replace(/\s/g,'_')]=getK(r.s,r.max);});
+    currentPasien.skrining_hasil=skriningResult;
+  }
+  switchSkrining(6);
+}
+
+// =============================================
+// TANYA PUSKESMAS
+// =============================================
+const drShifts=[
+  {nama:'dr. Andi',mulai:7,selesai:14},
+  {nama:'dr. Sari',mulai:14,selesai:21},
+  {nama:'dr. Budi',mulai:21,selesai:7}
+];
+
+function getDrPiket(){
+  const h=new Date().getHours();
+  if(h>=7&&h<14) return drShifts[0];
+  if(h>=14&&h<21) return drShifts[1];
+  return drShifts[2];
+}
+
+const aiResponsesTanya={
+  'tensi':['Tekanan darah tersebut termasuk hipertensi stadium 1. Pastikan pasien sudah minum obat tensi hari ini, istirahat cukup, dan hindari makanan asin. Pantau ulang tensi 2 jam kemudian. Jika >160/100 atau disertai sakit kepala berat, segera hubungi Puskesmas.'],
+  'gula':['Gula darah tersebut perlu dipantau. Saran: kurangi nasi putih, ganti sebagian dengan sayuran, hindari minuman manis. Jalan kaki ringan 15–20 menit setelah makan. Cek ulang gula puasa besok pagi. Jika >200 mg/dL, harap segera hubungi kami.'],
+  'obat':['Pastikan pasien minum obat sesuai jadwal dan dosis yang tertera. Jangan hentikan obat tensi atau diabetes tanpa ijin dokter. Gunakan pill box berlabel Pagi/Siang/Malam untuk menghindari lupa atau double-dosis.'],
+  'jatuh':['Untuk mencegah jatuh: pasang pegangan di kamar mandi dan tangga, gunakan alas kaki anti-slip, pastikan pencahayaan cukup di malam hari, dan latih kekuatan kaki setiap pagi. Jika pasien pernah jatuh sebelumnya, dampingi lebih ketat saat berjalan.'],
+  'pegal':['Pegal pada lansia sering terkait asam urat atau kelelahan otot. Kompres hangat 15 menit 2x sehari, perbanyak minum air putih minimal 8 gelas/hari, hindari jongkok lama. Jika pegal disertai bengkak atau nyeri hebat, mohon jadwalkan kunjungan.'],
+  'rujuk':['Segera bawa pasien ke Puskesmas jika: tensi >160/100 tidak turun setelah istirahat, gula darah >250 mg/dL, nyeri dada atau sesak napas, pusing berputar disertai mual, kaki bengkak mendadak, atau kondisi berubah drastis dalam 24 jam.'],
+  'default':['Terima kasih atas pertanyaannya. Berdasarkan rekam medis yang ada, kondisi pasien perlu diperhatikan secara berkala. Saya sarankan untuk terus memantau tanda vital sesuai jadwal kunjungan dan segera hubungi Puskesmas jika ada perubahan kondisi yang signifikan.']
+};
+
+function initTanyaPuskesmas(){
+  const dr=getDrPiket();
+  const drEl=document.getElementById('drPiketNama');if(drEl)drEl.textContent=dr.nama;
+  const lblEl=document.getElementById('chatPasienLabel');
+  const myP=pasienSaya();
+  if(lblEl) lblEl.textContent=myP[0]?.nama||'Pasien';
+  // Update shift display
+  drShifts.forEach((s,i)=>{
+    const el=document.getElementById('shift'+i+'Status');
+    if(!el)return;
+    const isActive=s===dr;
+    if(isActive){el.innerHTML=`<div class="shift-aktif-dot"></div>${s.mulai}.00–${s.selesai}.00`;el.className='shift-aktif';}
+    else{el.textContent=`${s.mulai}.00–${s.selesai===7?'07':s.selesai}.00`;el.className='shift-jam';}
+  });
+  // Init chat if empty
+  const msgEl=document.getElementById('chatMessages');
+  if(msgEl&&!msgEl.children.length){
+    const p=myP[0];
+    addChatMsg('dr',`Halo! Saya ${dr.nama} dari Puskesmas Ciracas. Saya telah membaca rekam medis digital <strong>${p?esc(p.nama):'pasien'}</strong>${p?' ('+p.kategori+')':''}. Ada keluhan kesehatan atau hal yang ingin Anda tanyakan mengenai kondisi beliau hari ini?`);
+  }
+  // Init FAQ chips
+  renderFAQChips();
+}
+
+function renderFAQChips(){
+  const el=document.getElementById('faqChips');if(!el)return;
+  const myP=pasienSaya();const p=myP[0];
+  const faqList=[
+    p?.kondisi==='merah'?`Apa yang harus dilakukan segera untuk ${p?esc(p.nama.split(' ')[1]):'pasien'}?`:null,
+    'Tensi pasien tinggi, apa tindakannya?',
+    'Gula darah tinggi, cara kontrol di rumah?',
+    'Kapan harus dirujuk ke Puskesmas?',
+    'Bolehkah obat tensi dihentikan sendiri?',
+    'Pasien mengeluh pegal, saran dokter?',
+    'Pantangan makanan hipertensi + diabetes?'
+  ].filter(Boolean);
+  el.innerHTML=faqList.map((f,idx)=>'<div class="faq-chip" data-q="'+encodeURIComponent(f)+'" onclick="kirimFAQChipClick(this)">'+f+'</div>').join('');
+}
+
+function kirimFAQChipClick(el){
+  var text=decodeURIComponent(el.getAttribute('data-q')||'');
+  if(!text)return;
+  kirimFAQChat(text,el);
+}
+function kirimFAQChat(text,el){
+  el.style.opacity='0.5';setTimeout(()=>el.style.opacity='1',800);
+  addChatMsg('user',text);showTypingChat();
+  setTimeout(()=>{removeTypingChat();addChatMsg('dr',getAIResponseTanya(text));},1100);
+}
+
+function kirimChatPesan(){
+  const inp=document.getElementById('chatInput');
+  const text=inp.value.trim();if(!text)return;
+  inp.value='';
+  addChatMsg('user',text);showTypingChat();
+  setTimeout(()=>{removeTypingChat();addChatMsg('dr',getAIResponseTanya(text));},1000);
+}
+
+function getAIResponseTanya(text){
+  const t=text.toLowerCase();
+  if(t.includes('tensi')||t.includes('darah tinggi')||t.includes('hipertensi')) return aiResponsesTanya['tensi'][0];
+  if(t.includes('gula')||t.includes('diabetes')||t.includes('dm')) return aiResponsesTanya['gula'][0];
+  if(t.includes('obat')||t.includes('amlodipine')||t.includes('minum')) return aiResponsesTanya['obat'][0];
+  if(t.includes('jatuh')||t.includes('keseimbangan')||t.includes('berjalan')) return aiResponsesTanya['jatuh'][0];
+  if(t.includes('pegal')||t.includes('nyeri')||t.includes('sakit')) return aiResponsesTanya['pegal'][0];
+  if(t.includes('rujuk')||t.includes('kapan')||t.includes('puskesmas')) return aiResponsesTanya['rujuk'][0];
+  return aiResponsesTanya['default'][0];
+}
+
+function addChatMsg(role,text){
+  const el=document.getElementById('chatMessages');if(!el)return;
+  const dr=getDrPiket();
+  const isdr=role==='dr';
+  const div=document.createElement('div');
+  div.className='chat-msg '+(isdr?'dr-msg':'user-msg');
+  div.innerHTML=`<div class="chat-msg-avatar ${isdr?'dr-av':'user-av'}">${isdr?'dr':'PW'}</div><div><div class="chat-bubble">${text}</div><div class="chat-time">${jamSekarang()}${isdr?' — '+dr.nama:' — Petugas'}</div></div>`;
+  el.appendChild(div);el.scrollTop=el.scrollHeight;
+}
+
+function showTypingChat(){
+  const el=document.getElementById('chatMessages');if(!el)return;
+  const div=document.createElement('div');div.className='chat-msg dr-msg';div.id='chatTyping';
+  div.innerHTML=`<div class="chat-msg-avatar dr-av">dr</div><div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  el.appendChild(div);el.scrollTop=el.scrollHeight;
+}
+function removeTypingChat(){const t=document.getElementById('chatTyping');if(t)t.remove();}
+function hapusObrolan(){const el=document.getElementById('chatMessages');if(el)el.innerHTML='';initTanyaPuskesmas();}
+
+function hubungiWAPuskesmas(){
+  const myP=pasienSaya();const p=myP[0];
+  const msg=encodeURIComponent(`Halo Puskesmas Ciracas, saya ${currentUser?.nama||'Petugas'} (${currentUser?.id||'—'}). Ingin berkonsultasi mengenai kondisi pasien ${p?p.nama:'—'}. Mohon arahan dokter.`);
+  window.open(`https://wa.me/6221840001234?text=${msg}`,'_blank');
+}
+
+// =============================================
+// LAPORAN RUJUKAN
+// =============================================
+let laporanJenis='kunjungan';
+
+
+// =============================================
+// DASHBOARD LAPORAN — Puskesmas (real-time + grafik)
+// =============================================
+let dashJenis = 'kunjungan';
+let dashPasienId = null;
+let _chartTrend = null, _chartVital = null, _chartPetugas = null;
+
+function destroyCharts(){
+  if(_chartTrend){ _chartTrend.destroy(); _chartTrend=null; }
+  if(_chartVital){ _chartVital.destroy(); _chartVital=null; }
+  if(_chartPetugas){ _chartPetugas.destroy(); _chartPetugas=null; }
+}
+
+function setDashJenis(j, el){
+  dashJenis = j;
+  document.querySelectorAll('.laporan-jenis-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  const ga = document.getElementById('dashGrafikArea');
+  const pa = document.getElementById('dashPreviewArea');
+  if(j === 'mingguan' || j === 'bulanan'){
+    if(pa) pa.style.display = 'none';
+    if(ga){ ga.style.display = 'block'; renderGrafikTrend(); }
+  } else {
+    if(ga){ ga.style.display = 'none'; destroyCharts(); }
+    if(pa && pa.style.display !== 'none') renderDashLpContent();
+  }
+}
+
+function dashPilihPasien(id){
+  dashPasienId = parseInt(id);
+  const ga = document.getElementById('dashGrafikArea');
+  if(ga && ga.style.display !== 'none') renderGrafikTrend();
+  const pa = document.getElementById('dashPreviewArea');
+  if(pa && pa.style.display !== 'none') renderDashLpContent();
+}
+
+function dashTogglePreview(){
+  const area = document.getElementById('dashPreviewArea');
+  const ga   = document.getElementById('dashGrafikArea');
+  if(!area) return;
+  if(area.style.display === 'none' || !area.style.display){
+    renderDashLpContent();
+    area.style.display = 'block';
+    if(ga){ ga.style.display = 'none'; destroyCharts(); }
+  } else {
+    area.style.display = 'none';
+  }
+}
+
+// =============================================
+// CETAK & PDF — pakai Blob URL (tidak butuh popup)
+// =============================================
+const PRINT_CSS = `
+@page{margin:15mm;}
+*{box-sizing:border-box;}
+body{font-family:Arial,sans-serif;font-size:11pt;color:#1a1a1a;background:#fff;margin:0;padding:20px;}
+h1{font-size:22pt;font-weight:800;color:#0d2d5e;text-align:center;margin:0 0 4px;}
+.lp-header{text-align:center;padding-bottom:10px;border-bottom:3px solid #0d2d5e;margin-bottom:10px;}
+.lp-title{font-size:22pt;font-weight:800;color:#0d2d5e;}
+.lp-subtitle{font-size:12pt;color:#333;margin-top:4px;}
+.lp-cetak-info{font-size:9pt;color:#666;margin-top:4px;}
+.lp-divider{height:3px;background:#0d2d5e;margin-bottom:14px;}
+.lp-section{font-weight:700;font-size:10.5pt;margin-top:16px;margin-bottom:6px;
+  border-bottom:1.5px solid #ccc;padding-bottom:3px;color:#0d2d5e;}
+.lp-id-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;}
+.lp-id-item{padding:5px 8px;background:#f0f6ff;border-radius:5px;}
+.lp-id-lbl{font-size:8pt;color:#666;font-weight:600;}
+.lp-id-val{font-size:10pt;font-weight:600;color:#1a1a1a;}
+.lp-vital-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px;}
+.lp-vb{border:1.5px solid #ccc;border-radius:7px;padding:8px;text-align:center;background:#fafafa;}
+.lp-vb.hijau{border-color:#1a9c5b;background:#f0fff6;}
+.lp-vb.kuning{border-color:#f5a623;background:#fffbf0;}
+.lp-vb.merah{border-color:#c62828;background:#fff0f0;}
+.lp-vb-lbl{font-size:8pt;color:#555;display:block;}
+.lp-vb-val{font-size:13pt;font-weight:800;color:#1a1a1a;display:block;}
+.lp-skrining-table{width:100%;border-collapse:collapse;margin-bottom:12px;}
+.lp-skrining-table th{background:#0d2d5e;color:#fff;padding:6px 8px;font-size:9pt;text-align:left;}
+.lp-skrining-table td{border:1px solid #ddd;padding:5px 8px;font-size:9.5pt;}
+.lp-skrining-table tr:nth-child(even) td{background:#f9f9f9;}
+.lp-sk-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:8pt;font-weight:700;}
+.lp-sk-badge.hijau{background:#e8f5e9;color:#1a9c5b;}
+.lp-sk-badge.kuning{background:#fff8e1;color:#f5a623;}
+.lp-sk-badge.merah{background:#ffebee;color:#c62828;}
+.lp-petunjuk-box{border:1.5px solid #999;background:#f5f5f5;border-radius:7px;
+  padding:10px 14px;margin-bottom:12px;}
+.lp-petunjuk-title{font-weight:700;font-size:10pt;margin-bottom:4px;}
+.lp-petunjuk-body{font-size:9.5pt;color:#333;line-height:1.6;}
+.lp-ttd-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:24px;}
+.lp-ttd-box,.lp-ttd-verif{border:1px solid #ccc;border-radius:7px;padding:10px 14px;background:#fafafa;}
+.lp-ttd-lbl{font-size:8.5pt;color:#666;}
+.lp-ttd-line{border-bottom:1px solid #333;margin:20px 0 4px;}
+.lp-ttd-nama{font-size:8pt;color:#444;}
+.lp-ttd-verif-lbl{font-weight:700;font-size:8.5pt;color:#0d2d5e;margin-bottom:4px;}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:9pt;font-weight:700;}
+.badge.hijau{background:#e8f5e9;color:#1a9c5b;}
+.badge.kuning{background:#fff8e1;color:#f5a623;}
+.badge.merah{background:#ffebee;color:#c62828;}
+.no-data{color:#999;font-style:italic;font-size:9.5pt;padding:8px 0;display:block;}
+small{font-size:8pt;color:#888;}
+strong{font-weight:700;}
+`;
+
+async function buildLaporanHTML(){
+  const p = dataPasien.find(x=>x.id==dashPasienId) || dataPasien[0];
+  if(!p) return null;
+
+  const riwayat = await getRiwayat();
+  const rp = riwayat.filter(r=>r.pasienId===p.id).sort((a,b)=>new Date(b.waktu)-new Date(a.waktu));
+  const lastVitalEntry = rp.find(r=>r.vital && Object.values(r.vital).some(v=>v));
+  const vital = lastVitalEntry?.vital || p.vital || {};
+  const now = new Date();
+
+  const labelJenis = {
+    kunjungan:'Laporan Kunjungan Terakhir',
+    mingguan:'Rekap Kunjungan Mingguan (7 Hari)',
+    bulanan:'Rekap Kunjungan Bulanan (30 Hari)',
+    rujukan:'Laporan Rujukan ke Puskesmas'
+  };
+
+  const vb = (val,lbl,cls) =>
+    `<div class="lp-vb ${cls}"><span class="lp-vb-lbl">${lbl}</span><span class="lp-vb-val">${val}</span></div>`;
+
+  const vitalSection = () => {
+    if(!vital.sistolik && !vital.gula) return '';
+    return `<div class="lp-section">❤️ Data Vital Terakhir <small>— kunjungan ${lastVitalEntry?.tgl||'—'}</small></div>
+    <div class="lp-vital-boxes">
+      ${vb((vital.sistolik||'—')+'/'+(vital.diastolik||'—'),'Tekanan Darah',vital.sistolik>140?'merah':vital.sistolik>120?'kuning':'hijau')}
+      ${vb(vital.gula?(vital.gula+' mg/dL'):'—','Gula Darah',vital.gula>200?'merah':vital.gula>140?'kuning':'hijau')}
+      ${vb(vital.urat?(vital.urat+' mg/dL'):'—','Asam Urat',vital.urat>7?'merah':vital.urat>6?'kuning':'hijau')}
+      ${vb(vital.kol?(vital.kol+' mg/dL'):'—','Kolesterol',vital.kol>240?'merah':vital.kol>200?'kuning':'hijau')}
+      ${vb(vital.bb?(vital.bb+' kg'):'—','Berat Badan','hijau')}
+      ${vb(vital.suhu?(vital.suhu+'°C'):'—','Suhu',vital.suhu>37.5?'merah':'hijau')}
+    </div>`;
+  };
+
+  let body = `
+  <div class="lp-header">
+    <div class="lp-title">SI CIPUT</div>
+    <div class="lp-subtitle">${labelJenis[dashJenis]||dashJenis} — ${esc(p.nama)}</div>
+    <div class="lp-cetak-info">Puskesmas Kec. Ciracas &nbsp;·&nbsp; Dicetak: ${now.toLocaleString('id-ID')}</div>
+  </div>
+  <div class="lp-divider"></div>
+  <div class="lp-section">👤 Identitas Pasien</div>
+  <div class="lp-id-grid">
+    <div class="lp-id-item"><div class="lp-id-lbl">Nama</div><div class="lp-id-val">${esc(p.nama)}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Kategori</div><div class="lp-id-val">${esc(p.kategori)}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Alamat</div><div class="lp-id-val">${esc(p.alamat)}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Kondisi</div><div class="lp-id-val">${p.kondisi==='hijau'?'✓ Stabil':p.kondisi==='kuning'?'⚠ Perhatian':'🔴 Darurat'}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Petugas Binaan</div><div class="lp-id-val">${esc(rp[0]?.petugasNama||rp[0]?.petugas||p.pw||'—')}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Puskesmas</div><div class="lp-id-val">Puskesmas Kec. Ciracas</div></div>
+  </div>`;
+
+  if(dashJenis === 'kunjungan'){
+    const last = rp[0];
+    body += `<div class="lp-section">📋 Kunjungan Terakhir</div>`;
+    if(!last){
+      body += '<span class="no-data">Belum ada riwayat kunjungan.</span>';
+    } else {
+      body += `<div style="background:#f5f5f5;border-radius:8px;padding:10px 14px;margin-bottom:12px;line-height:1.9;">
+        <div><strong>Tanggal / Jam:</strong> ${last.tgl} · ${last.jam}</div>
+        <div><strong>Kondisi:</strong> ${last.kondisi==='hijau'?'🟢 Stabil':last.kondisi==='kuning'?'🟡 Perhatian':'🔴 Darurat'}</div>
+        <div><strong>Petugas:</strong> ${esc(last.petugasNama||last.petugas)}</div>
+        ${last.catatan?`<div><strong>Keluhan:</strong> ${esc(last.catatan)}</div>`:''}
+        ${last.checklist?.length?`<div><strong>Checklist:</strong> ${last.checklist.map(c=>'✓ '+esc(c)).join(' · ')}</div>`:''}
+      </div>`;
+      body += vitalSection();
+    }
+
+  } else if(dashJenis === 'mingguan' || dashJenis === 'bulanan'){
+    const hari = dashJenis==='mingguan'?7:30;
+    const batas = new Date(); batas.setDate(batas.getDate()-hari);
+    const fil = rp.filter(r=>new Date(r.waktu)>=batas);
+    body += `<div class="lp-section">📅 Rekap ${dashJenis==='mingguan'?'Mingguan (7 Hari)':'Bulanan (30 Hari)'}</div>`;
+    if(!fil.length){
+      body += '<span class="no-data">Tidak ada kunjungan dalam periode ini.</span>';
+    } else {
+      const h=fil.filter(r=>r.kondisi==='hijau').length,ku=fil.filter(r=>r.kondisi==='kuning').length,m=fil.filter(r=>r.kondisi==='merah').length;
+      body += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;text-align:center;">
+        <div style="background:#e8f5e9;border-radius:8px;padding:10px;"><div style="font-size:1.5rem;font-weight:800;color:#1a9c5b;">${h}</div><div style="font-size:8pt;color:#1a9c5b;">Stabil</div></div>
+        <div style="background:#fff8e1;border-radius:8px;padding:10px;"><div style="font-size:1.5rem;font-weight:800;color:#f5a623;">${ku}</div><div style="font-size:8pt;color:#f5a623;">Perhatian</div></div>
+        <div style="background:#ffebee;border-radius:8px;padding:10px;"><div style="font-size:1.5rem;font-weight:800;color:#c62828;">${m}</div><div style="font-size:8pt;color:#c62828;">Darurat</div></div>
+      </div>`;
+      body += fil.map(r=>`<div style="border-left:4px solid ${r.kondisi==='hijau'?'#1a9c5b':r.kondisi==='kuning'?'#f5a623':'#c62828'};
+        background:#fafafa;border-radius:6px;padding:6px 10px;margin-bottom:6px;font-size:9.5pt;line-height:1.7;">
+        <strong>${r.tgl} · ${r.jam}</strong> — ${r.kondisi==='hijau'?'Stabil':r.kondisi==='kuning'?'Perhatian':'Darurat'} &nbsp;|&nbsp; 👤 ${esc(r.petugasNama||r.petugas)}
+        ${r.catatan?`<br><em>"${esc(r.catatan.slice(0,80))}"</em>`:''}
+        ${r.vital?.sistolik?`<br>🩺 ${r.vital.sistolik}/${r.vital.diastolik} mmHg${r.vital.gula?' · Gula: '+r.vital.gula+' mg/dL':''}`:''}
+      </div>`).join('');
+      body += vitalSection();
+    }
+
+  } else if(dashJenis === 'rujukan'){
+    body += vitalSection();
+    const sk = p.skrining_hasil||{};
+    if(Object.keys(sk).length){
+      const rows = Object.entries(sk).map(([k,v])=>`<tr>
+        <td>${k.replace(/_/g,' ')}</td>
+        <td><span class="lp-sk-badge ${v}">${v==='hijau'?'✓ Baik':v==='kuning'?'~ Pantau':'⚠ Risiko'}</span></td>
+        <td style="font-size:8.5pt;color:#555;">Sesuai rekomendasi</td></tr>`).join('');
+      body += `<div class="lp-section">📋 Hasil Skrining</div>
+      <table class="lp-skrining-table"><thead><tr><th>Kategori</th><th>Status</th><th>Rekomendasi</th></tr></thead><tbody>${rows}</tbody></table>`;
+    }
+    const pengingat = daftarPengingatData.filter(pg=>pg.pasienId===p.id);
+    if(pengingat.length){
+      body += `<div class="lp-section">🔔 Jadwal Pengingat Aktif</div>
+      ${pengingat.map(pg=>`<div style="border-left:3px solid #1565c0;background:#f0f6ff;border-radius:6px;
+        padding:5px 10px;margin-bottom:5px;font-size:9.5pt;">
+        <strong>${esc(pg.nama)}</strong> — ${esc(pg.kategori)} · ${esc(pg.frekuensi||'')}</div>`).join('')}`;
+    }
+    const last = rp[0];
+    if(last){
+      body += `<div class="lp-section">📋 Kunjungan Terakhir</div>
+      <div style="background:#f5f5f5;border-radius:8px;padding:10px 14px;margin-bottom:12px;line-height:1.9;font-size:9.5pt;">
+        <div><strong>Tanggal:</strong> ${last.tgl} · ${last.jam}</div>
+        <div><strong>Kondisi:</strong> ${last.kondisi==='hijau'?'🟢 Stabil':last.kondisi==='kuning'?'🟡 Perhatian':'🔴 Darurat'}</div>
+        <div><strong>Petugas:</strong> ${esc(last.petugasNama||last.petugas)}</div>
+        ${last.catatan?`<div><strong>Keluhan:</strong> ${esc(last.catatan)}</div>`:''}
+      </div>`;
+    }
+    body += `<div class="lp-section">🏥 Petunjuk Tenaga Medis</div>
+    <div class="lp-petunjuk-box">
+      <div class="lp-petunjuk-title">Catatan untuk Dokter / Tenaga Medis:</div>
+      <div class="lp-petunjuk-body">Laporan ini dihasilkan oleh sistem Si Ciput — Puskesmas Kec. Ciracas.
+      Temuan berkategori <strong>Merah</strong> atau <strong>Kuning</strong> memerlukan pemeriksaan lanjut.</div>
+    </div>
+    <div class="lp-ttd-row">
+      <div class="lp-ttd-box"><div class="lp-ttd-lbl">Petugas Kunjungan</div><div class="lp-ttd-line"></div>
+        <div class="lp-ttd-nama">${esc(rp[0]?.petugasNama||rp[0]?.petugas||'—')}</div></div>
+      <div class="lp-ttd-verif"><div class="lp-ttd-verif-lbl">VERIFIKASI PUSKESMAS</div>
+        <div class="lp-ttd-lbl">Tanda Tangan &amp; Stempel:</div><div class="lp-ttd-line"></div>
+        <div class="lp-ttd-nama">Puskesmas Kec. Ciracas</div></div>
+    </div>`;
+  }
+
+  return body;
+}
+
+async function dashCetak(){
+  if(!dashPasienId && dataPasien[0]) dashPasienId = dataPasien[0].id;
+  const p = dataPasien.find(x=>x.id==dashPasienId);
+  if(!p){ showNotifSukses('⚠️ Pilih pasien terlebih dahulu!'); return; }
+
+  showNotifSukses('⏳ Menyiapkan laporan...');
+  const body = await buildLaporanHTML();
+  if(!body){ showNotifSukses('⚠️ Gagal memuat data laporan.'); return; }
+
+  const judul = p.nama.replace(/[^a-zA-Z0-9]/g,'_');
+  const fullHTML = `<!DOCTYPE html><html lang="id"><head>
+<meta charset="UTF-8">
+<title>SiCiput_${dashJenis}_${judul}_${tglISO()}</title>
+<style>${PRINT_CSS}
+.toolbar{text-align:center;margin:28px 0;padding-top:16px;border-top:2px dashed #ccc;}
+@media print{.toolbar{display:none!important;}body{padding:0;}}
+</style></head><body>
+${body}
+<div class="toolbar">
+  <button onclick="window.print()" style="background:#0d2d5e;color:#fff;border:none;
+    padding:12px 32px;border-radius:8px;font-size:12pt;cursor:pointer;margin-right:10px;font-family:Arial,sans-serif;">
+    🖨️ Cetak / Save as PDF
+  </button>
+  <button onclick="window.close()" style="background:#f0f0f0;color:#555;border:1.5px solid #ccc;
+    padding:12px 22px;border-radius:8px;font-size:12pt;cursor:pointer;font-family:Arial,sans-serif;">
+    ✕ Tutup
+  </button>
+</div>
+</body></html>`;
+
+  // Gunakan Blob URL — tidak butuh popup permission
+  const blob = new Blob([fullHTML], {type:'text/html;charset=utf-8'});
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.target   = '_blank';
+  a.rel      = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 10000);
+}
+
+async function dashPDF(){ await dashCetak(); }
+
+
+async function renderGrafikTrend(){
+  const hari    = dashJenis === 'mingguan' ? 7 : 30;
+  const batas   = new Date(); batas.setDate(batas.getDate() - hari);
+  const riwayat = await getRiwayat();
+  const filtered = riwayat.filter(r => new Date(r.waktu) >= batas);
+
+  // — Stat mini —
+  const total  = filtered.length;
+  const hijauC = filtered.filter(r=>r.kondisi==='hijau').length;
+  const merahC = filtered.filter(r=>r.kondisi==='merah'||r.kondisi==='kuning').length;
+  const statEl = document.getElementById('dashStatMini');
+  if(statEl) statEl.innerHTML = `
+    <div class="stat-mini"><div class="stat-mini-num" style="color:var(--biru);">${total}</div><div class="stat-mini-lbl">Total Kunjungan</div></div>
+    <div class="stat-mini"><div class="stat-mini-num" style="color:var(--hijau);">${hijauC}</div><div class="stat-mini-lbl">🟢 Stabil</div></div>
+    <div class="stat-mini"><div class="stat-mini-num" style="color:var(--merah);">${merahC}</div><div class="stat-mini-lbl">⚠️ Perlu Perhatian</div></div>`;
+
+  // — Label per hari —
+  const labels = [], dateKeys = [];
+  for(let i = hari-1; i >= 0; i--){
+    const d = new Date(); d.setDate(d.getDate()-i);
+    labels.push(d.toLocaleDateString('id-ID',{day:'2-digit',month:'short'}));
+    dateKeys.push(d.toISOString().slice(0,10));
+  }
+
+  destroyCharts();
+
+  // — GRAFIK 1: Trend Kondisi Semua Pasien —
+  const hijauData  = dateKeys.map(dk=>filtered.filter(r=>r.tgl===dk&&r.kondisi==='hijau').length);
+  const kuningData = dateKeys.map(dk=>filtered.filter(r=>r.tgl===dk&&r.kondisi==='kuning').length);
+  const merahData  = dateKeys.map(dk=>filtered.filter(r=>r.tgl===dk&&r.kondisi==='merah').length);
+  const ctx1 = document.getElementById('grafikTrendKondisi');
+  if(ctx1){
+    _chartTrend = new Chart(ctx1.getContext('2d'), {
+      type:'line',
+      data:{
+        labels,
+        datasets:[
+          {label:'Stabil',   data:hijauData,  borderColor:'#1a9c5b', backgroundColor:'rgba(26,156,91,0.1)',  tension:0.4, fill:true, pointRadius:3},
+          {label:'Perhatian',data:kuningData, borderColor:'#f5a623', backgroundColor:'rgba(245,166,35,0.1)', tension:0.4, fill:true, pointRadius:3},
+          {label:'Darurat',  data:merahData,  borderColor:'#e53935', backgroundColor:'rgba(229,57,53,0.1)',  tension:0.4, fill:true, pointRadius:3},
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}, tooltip:{mode:'index',intersect:false}},
+        scales:{
+          x:{grid:{display:false}, ticks:{font:{size:10}, maxTicksLimit:hari===7?7:10}},
+          y:{beginAtZero:true, ticks:{stepSize:1,font:{size:10}}, grid:{color:'rgba(0,0,0,0.05)'}}
+        }
+      }
+    });
+  }
+
+  // — GRAFIK 2: Trend Vital Pasien Terpilih —
+  const p  = dataPasien.find(x=>x.id==dashPasienId);
+  const vitalCard = document.getElementById('dashGrafikVitalCard');
+  const ctx2 = document.getElementById('grafikVital');
+  if(p && ctx2){
+    // Ambil data vital dari RIWAYAT (bukan hanya p.vital)
+    const rpVital = riwayat
+      .filter(r => r.pasienId === p.id && r.vital && new Date(r.waktu) >= batas)
+      .sort((a,b) => new Date(a.waktu)-new Date(b.waktu));
+
+    if(rpVital.length >= 1){
+      if(vitalCard) vitalCard.style.display = 'block';
+      const vLabels  = rpVital.map(r=>r.tgl+' '+r.jam.slice(0,5));
+      const sistolik = rpVital.map(r=>r.vital.sistolik||null);
+      const diastolik= rpVital.map(r=>r.vital.diastolik||null);
+      const gula     = rpVital.map(r=>r.vital.gula||null);
+      const suhu     = rpVital.map(r=>r.vital.suhu||null);
+      const bb       = rpVital.map(r=>r.vital.bb||null);
+
+      _chartVital = new Chart(ctx2.getContext('2d'), {
+        type:'line',
+        data:{
+          labels: vLabels,
+          datasets:[
+            {label:'Sistolik',  data:sistolik,  borderColor:'#1565c0', backgroundColor:'rgba(21,101,192,0.07)', tension:0.4, pointRadius:4, spanGaps:true, yAxisID:'yBP'},
+            {label:'Diastolik', data:diastolik, borderColor:'#85B7EB', backgroundColor:'rgba(133,183,235,0.07)',tension:0.4, pointRadius:4, spanGaps:true, yAxisID:'yBP'},
+            {label:'Gula (mg/dL)', data:gula,   borderColor:'#e53935', backgroundColor:'rgba(229,57,53,0.07)', tension:0.4, pointRadius:4, spanGaps:true, yAxisID:'yGula'},
+            {label:'Suhu (°C)',    data:suhu,   borderColor:'#f5a623', backgroundColor:'rgba(245,166,35,0.07)',tension:0.4, pointRadius:3, spanGaps:true, yAxisID:'ySuhu', borderDash:[4,3]},
+            {label:'BB (kg)',      data:bb,     borderColor:'#7b1fa2', backgroundColor:'rgba(123,31,162,0.07)', tension:0.4, pointRadius:3, spanGaps:true, yAxisID:'ySuhu', borderDash:[2,3]},
+          ]
+        },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{
+            legend:{display:true, position:'bottom', labels:{font:{size:9}, boxWidth:10, padding:8}},
+            tooltip:{mode:'index',intersect:false}
+          },
+          scales:{
+            x:{grid:{display:false}, ticks:{font:{size:9}, maxRotation:45}},
+            yBP:  {position:'left',  beginAtZero:false, title:{display:true,text:'mmHg',font:{size:9}}, ticks:{font:{size:9}}, grid:{color:'rgba(0,0,0,0.04)'}},
+            yGula:{position:'right', beginAtZero:false, title:{display:true,text:'mg/dL',font:{size:9}}, ticks:{font:{size:9}}, grid:{drawOnChartArea:false}},
+            ySuhu:{display:false}
+          }
+        }
+      });
+    } else {
+      if(vitalCard){
+        vitalCard.style.display = 'block';
+        vitalCard.querySelector('.grafik-wrap').innerHTML = '<div class="grafik-no-data">Belum ada data vital untuk periode ini.<br><small>Pastikan Pasukan Putih mengisi data vital saat kunjungan.</small></div>';
+      }
+    }
+  } else {
+    if(vitalCard) vitalCard.style.display = 'none';
+  }
+
+  // — GRAFIK 3: Kunjungan per Petugas —
+  const ctx3 = document.getElementById('grafikPerPetugas');
+  if(ctx3){
+    const petugasMap = {};
+    filtered.forEach(r=>{ petugasMap[r.petugas]=(petugasMap[r.petugas]||0)+1; });
+    const ptLabels = Object.keys(petugasMap);
+    const ptData   = Object.values(petugasMap);
+    const colors   = ['#1565c0','#1a9c5b','#f5a623','#e53935','#7b1fa2','#00838f','#ef6c00','#2e7d32'];
+    _chartPetugas = new Chart(ctx3.getContext('2d'), {
+      type:'bar',
+      data:{
+        labels: ptLabels,
+        datasets:[{
+          label:'Kunjungan',
+          data: ptData,
+          backgroundColor: ptLabels.map((_,i)=>colors[i%colors.length]+'bb'),
+          borderColor:     ptLabels.map((_,i)=>colors[i%colors.length]),
+          borderWidth:1.5, borderRadius:6
+        }]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{grid:{display:false}, ticks:{font:{size:10}}},
+          y:{beginAtZero:true, ticks:{stepSize:1,font:{size:10}}, grid:{color:'rgba(0,0,0,0.05)'}}
+        }
+      }
+    });
+  }
+}
+
+// =============================================
+// RENDER KONTEN LAPORAN CETAK
+// =============================================
+async function renderDashLpContent(){
+  const p = dataPasien.find(x=>x.id==dashPasienId) || dataPasien[0];
+  if(!p){
+    document.getElementById('dashLpContent').innerHTML='<div class="no-data">Pilih pasien terlebih dahulu.</div>';
+    return;
+  }
+  const riwayat = await getRiwayat();
+  const rp = riwayat.filter(r=>r.pasienId===p.id).sort((a,b)=>new Date(b.waktu)-new Date(a.waktu));
+
+  // Vital: ambil dari kunjungan terakhir yang punya data vital
+  const lastVitalEntry = rp.find(r=>r.vital && Object.values(r.vital).some(v=>v));
+  const vital = lastVitalEntry?.vital || p.vital || {};
+  const now   = new Date();
+  const labels = {
+    kunjungan:'Laporan Kunjungan Terakhir',
+    mingguan:'Rekap Kunjungan Mingguan (7 Hari)',
+    bulanan:'Rekap Kunjungan Bulanan (30 Hari)',
+    rujukan:'Laporan Rujukan ke Puskesmas'
+  };
+  document.getElementById('dashLpSubtitle').textContent = labels[dashJenis]+' — '+esc(p.nama);
+  document.getElementById('dashLpCetak').textContent = 'Dicetak: '+now.toLocaleString('id-ID');
+
+  const vb = (val,lbl,cls) => `<div class="lp-vb ${cls}"><div class="lp-vb-lbl">${lbl}</div><div class="lp-vb-val">${val}</div></div>`;
+  const kondisiVital = () => {
+    if(!vital.sistolik) return '';
+    return `<div class="lp-section">❤️ Data Vital Terakhir <small style="font-weight:400;color:var(--abu3);"> — diambil dari kunjungan ${lastVitalEntry?.tgl||'—'}</small></div>
+    <div class="lp-vital-boxes">
+      ${vb((vital.sistolik||'—')+'/'+(vital.diastolik||'—'),'Tekanan Darah',vital.sistolik>140?'merah':vital.sistolik>120?'kuning':'hijau')}
+      ${vb(vital.gula?(vital.gula+' mg/dL'):'—','Gula Darah',vital.gula>200?'merah':vital.gula>140?'kuning':'hijau')}
+      ${vb(vital.urat?(vital.urat+' mg/dL'):'—','Asam Urat',vital.urat>7?'merah':vital.urat>6?'kuning':'hijau')}
+      ${vb(vital.kol?(vital.kol+' mg/dL'):'—','Kolesterol',vital.kol>240?'merah':vital.kol>200?'kuning':'hijau')}
+      ${vb(vital.bb?(vital.bb+' kg'):'—','Berat Badan','hijau')}
+      ${vb(vital.suhu?(vital.suhu+'°C'):'—','Suhu',vital.suhu>37.5?'merah':'hijau')}
+    </div>`;
+  };
+
+  // — Identitas selalu ada —
+  let html = `<div class="lp-section">👤 I. Identitas Pasien</div>
+  <div class="lp-id-grid">
+    <div class="lp-id-item"><div class="lp-id-lbl">Nama Lengkap</div><div class="lp-id-val">${esc(p.nama)}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Kategori Penyakit</div><div class="lp-id-val">${esc(p.kategori)}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Alamat</div><div class="lp-id-val">${esc(p.alamat)}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Kondisi Saat Ini</div><div class="lp-id-val">${p.kondisi==='hijau'?'✓ Stabil':p.kondisi==='kuning'?'⚠ Perhatian':'🔴 Darurat'}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Petugas Binaan</div><div class="lp-id-val">${esc(rp[0]?.petugasNama||rp[0]?.petugas||p.pw||'—')}</div></div>
+    <div class="lp-id-item"><div class="lp-id-lbl">Puskesmas</div><div class="lp-id-val">Puskesmas Kec. Ciracas</div></div>
+  </div>`;
+
+  if(dashJenis === 'kunjungan'){
+    const last = rp[0];
+    html += `<div class="lp-section">📋 II. Kunjungan Terakhir</div>`;
+    if(!last){
+      html += '<div class="no-data">Belum ada riwayat kunjungan.</div>';
+    } else {
+      html += `<div style="background:var(--abu);border-radius:10px;padding:0.9rem;margin-bottom:1rem;font-size:0.85rem;line-height:1.9;">
+        <div><strong>Tanggal / Jam:</strong> ${last.tgl} · ${last.jam}</div>
+        <div><strong>Kondisi:</strong> ${last.kondisi==='hijau'?'🟢 Stabil':last.kondisi==='kuning'?'🟡 Perhatian':'🔴 Darurat'}</div>
+        <div><strong>Petugas:</strong> ${esc(last.petugasNama||last.petugas)}</div>
+        ${last.catatan?`<div><strong>Keluhan Pasien:</strong> ${esc(last.catatan)}</div>`:''}
+        ${last.checklist?.length?`<div><strong>Checklist:</strong> ${last.checklist.map(c=>'✓ '+esc(c)).join(' · ')}</div>`:''}
+      </div>`;
+      html += kondisiVital();
+    }
+
+  } else if(dashJenis === 'mingguan' || dashJenis === 'bulanan'){
+    const hari   = dashJenis==='mingguan' ? 7 : 30;
+    const label  = dashJenis==='mingguan' ? 'Mingguan (7 Hari Terakhir)' : 'Bulanan (30 Hari Terakhir)';
+    const batas  = new Date(); batas.setDate(batas.getDate()-hari);
+    const filtered = rp.filter(r=>new Date(r.waktu)>=batas);
+    html += `<div class="lp-section">📅 II. Rekap ${label}</div>`;
+    if(!filtered.length){
+      html += '<div class="no-data">Tidak ada kunjungan dalam periode ini.</div>';
+    } else {
+      const h=filtered.filter(r=>r.kondisi==='hijau').length;
+      const ku=filtered.filter(r=>r.kondisi==='kuning').length;
+      const m=filtered.filter(r=>r.kondisi==='merah').length;
+      html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;">
+        <div style="background:var(--hijau-bg);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--hijau);">${h}</div><div style="font-size:0.72rem;color:var(--hijau);">Stabil</div></div>
+        <div style="background:var(--kuning-bg);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--kuning);">${ku}</div><div style="font-size:0.72rem;color:var(--kuning);">Perhatian</div></div>
+        <div style="background:var(--merah-bg);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:1.5rem;font-weight:700;color:var(--merah);">${m}</div><div style="font-size:0.72rem;color:var(--merah);">Darurat</div></div>
+      </div>`;
+      html += filtered.map(r=>`<div style="background:var(--putih);border-left:4px solid var(--${r.kondisi});border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:0.82rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;"><strong>${r.tgl} · ${r.jam}</strong>${badgeKondisi(r.kondisi)}</div>
+        <div style="font-size:0.75rem;color:var(--abu3);">👤 ${esc(r.petugasNama||r.petugas)}</div>
+        ${r.catatan?`<div style="color:var(--teks2);font-style:italic;margin-top:2px;">"${esc(r.catatan.slice(0,80))}"</div>`:''}
+        ${r.vital?.sistolik?`<div style="font-size:0.75rem;color:var(--biru);margin-top:2px;">🩺 ${r.vital.sistolik}/${r.vital.diastolik} mmHg${r.vital.gula?' · Gula: '+r.vital.gula+' mg/dL':''}</div>`:''}
+      </div>`).join('');
+    }
+    html += kondisiVital();
+
+  } else if(dashJenis === 'rujukan'){
+    // Vital dari riwayat terbaru
+    html += kondisiVital();
+    // Skrining
+    const sk = p.skrining_hasil||{};
+    if(Object.keys(sk).length){
+      const skRows = Object.entries(sk).map(([k,v])=>`<tr>
+        <td>${k.replace(/_/g,' ')}</td>
+        <td><span class="lp-sk-badge ${v}">${v==='hijau'?'✓ Baik':v==='kuning'?'~ Pantau':'⚠ Risiko'}</span></td>
+        <td style="font-size:0.7rem;color:var(--teks2);">Sesuai rekomendasi</td>
+      </tr>`).join('');
+      html += `<div class="lp-section">📋 Hasil Skrining</div>
+      <table class="lp-skrining-table"><thead><tr><th>Kategori</th><th>Status</th><th>Rekomendasi</th></tr></thead><tbody>${skRows}</tbody></table>`;
+    }
+    // Pengingat aktif
+    const pengingatAktif = daftarPengingatData.filter(pg=>pg.pasienId===p.id);
+    if(pengingatAktif.length){
+      html += `<div class="lp-section">🔔 Jadwal Pengingat Aktif</div>
+      ${pengingatAktif.map(pg=>`<div style="background:var(--putih);border-radius:8px;padding:8px 12px;margin-bottom:5px;border-left:3px solid var(--biru);font-size:0.82rem;"><strong>${esc(pg.nama)}</strong> — ${esc(pg.kategori)} · ${esc(pg.frekuensi||'')}</div>`).join('')}`;
+    }
+    // Kunjungan terakhir
+    const last = rp[0];
+    if(last){
+      html += `<div class="lp-section">📋 Kunjungan Terakhir</div>
+      <div style="background:var(--abu);border-radius:10px;padding:0.9rem;font-size:0.85rem;line-height:1.8;margin-bottom:1rem;">
+        <div><strong>Tanggal:</strong> ${last.tgl} · ${last.jam}</div>
+        <div><strong>Kondisi:</strong> ${last.kondisi==='hijau'?'🟢 Stabil':last.kondisi==='kuning'?'🟡 Perhatian':'🔴 Darurat'}</div>
+        <div><strong>Petugas:</strong> ${esc(last.petugasNama||last.petugas)}</div>
+        ${last.catatan?`<div><strong>Keluhan:</strong> ${esc(last.catatan)}</div>`:''}
+      </div>`;
+    }
+    // Petunjuk
+    html += `<div class="lp-section">🏥 Petunjuk Tenaga Medis</div>
+    <div class="lp-petunjuk-box">
+      <div class="lp-petunjuk-title">Catatan untuk Dokter/Tenaga Medis:</div>
+      <div class="lp-petunjuk-body">Laporan ini dihasilkan secara otomatis oleh sistem Si Ciput — Puskesmas Kec. Ciracas berdasarkan data kunjungan rumah oleh Pasukan Putih. Temuan berkategori <strong>Merah</strong> atau <strong>Kuning</strong> memerlukan pemeriksaan lanjut.</div>
+    </div>
+    <div class="lp-ttd-row">
+      <div class="lp-ttd-box"><div class="lp-ttd-lbl">Petugas Kunjungan</div><div style="height:24px;"></div><div class="lp-ttd-line"></div><div class="lp-ttd-nama">${esc(rp[0]?.petugasNama||rp[0]?.petugas||'—')}</div></div>
+      <div class="lp-ttd-verif"><div class="lp-ttd-verif-lbl">VERIFIKASI PUSKESMAS</div><div class="lp-ttd-lbl">Tanda Tangan & Stempel:</div><div style="height:24px;"></div><div class="lp-ttd-line"></div><div class="lp-ttd-nama" style="font-size:0.7rem;">Puskesmas Kec. Ciracas</div></div>
+    </div>`;
+  }
+
+  document.getElementById('dashLpContent').innerHTML = html;
+}
+
+// =============================================
+// INIT DASHBOARD LAPORAN
+// =============================================
+async function renderDashboardLaporan(){
+  // Isi dropdown semua pasien
+  const sel = document.getElementById('dashPasienLaporan');
+  if(sel){
+    sel.innerHTML = dataPasien.map(p=>`<option value="${p.id}">${esc(p.nama)} — ${p.kondisi==='hijau'?'🟢':p.kondisi==='kuning'?'🟡':'🔴'} ${esc(p.kategori)}</option>`).join('');
+    if(!dashPasienId && dataPasien[0]) dashPasienId = dataPasien[0].id;
+    if(dashPasienId) sel.value = String(dashPasienId);
+  }
+  // Refresh panel yang sedang aktif
+  const ga = document.getElementById('dashGrafikArea');
+  const pa = document.getElementById('dashPreviewArea');
+  if(ga && ga.style.display !== 'none') await renderGrafikTrend();
+  else if(pa && pa.style.display !== 'none') await renderDashLpContent();
+  // Render rekap list bawah
+  const riwayat = await getRiwayat();
+  const el = document.getElementById('dashRiwayatPasienList');
+  if(!el) return;
+  if(!dataPasien.length){ el.innerHTML='<div class="no-data">Belum ada pasien.</div>'; return; }
+  el.innerHTML = dataPasien.map(p=>{
+    const rp   = riwayat.filter(r=>r.pasienId===p.id).sort((a,b)=>new Date(b.waktu)-new Date(a.waktu));
+    const last = rp[0];
+    const info = last
+      ? `${last.tgl} · ${last.jam} — ${last.kondisi==='hijau'?'Stabil':last.kondisi==='kuning'?'Perhatian':'Darurat'}${last.vital?.sistolik?' · 🩺 '+last.vital.sistolik+'/'+last.vital.diastolik:''}`
+      : 'Belum ada kunjungan';
+    return `<div class="laporan-hist-item ${p.kondisi}" style="margin-bottom:8px;">
+      <div class="lhi-body">
+        <div class="lhi-nama">${esc(p.nama)}</div>
+        <div class="lhi-sub" style="font-size:0.72rem;">${esc(info)}</div>
+      </div>
+      <div class="lhi-actions">
+        <button class="btn-lap-pdf" onclick="dashPasienId=${p.id};document.getElementById('dashPasienLaporan').value='${p.id}';dashJenis='rujukan';dashPDF()">⬇ PDF</button>
+        <button class="btn-lap-cetak" onclick="dashPasienId=${p.id};document.getElementById('dashPasienLaporan').value='${p.id}';dashJenis='rujukan';dashCetak()">🖨 Cetak</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Alias backward-compat
+function setLaporanJenis(j,el){ setDashJenis(j,el); }
+function toggleLaporanPreview(){ dashTogglePreview(); }
+function renderLaporanContent(){ renderDashLpContent(); }
+function cetakLaporan(){ dashCetak(); }
+function unduhLaporanPDF(){ dashPDF(); }
+function pilihPasienLaporan(id){ dashPasienId=parseInt(id); }
+function renderRiwayatLaporan(){ /* tidak digunakan */ }
+async function renderSemuaLaporan(){ /* dipindah ke renderDashboardLaporan */ }
+async function populateFilterLaporan(){ /* tidak digunakan */ }
+
+
+// =============================================
+// SIMPAN KUNJUNGAN ENHANCED (with vital)
+// =============================================
+
+// =============================================
+// BUKA KUNJUNGAN ENHANCED
+// =============================================
+function bukaKunjunganNew(id){
+  currentPasien=dataPasien.find(p=>p.id===id);
+  if(!currentPasien)return;
+  document.getElementById('kunjungan-nama').textContent=currentPasien.nama;
+  document.getElementById('kunjungan-alamat').textContent='📍 '+currentPasien.alamat;
+  document.getElementById('kunjungan-kategori').innerHTML=`<span class="badge biru">${currentPasien.kategori}</span>`;
+  document.querySelectorAll('.kondisi-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('catatanTambahan').value='';
+  document.getElementById('fotoPreview').style.display='none';
+  document.getElementById('fotoPreview').innerHTML='';
+  document.getElementById('rekamStatus').style.display='none';
+  document.getElementById('rekamLabel').textContent='Rekam';
+  selectedKondisi=''; fotoDataUrl=null;
+  if(isRekam)stopRekam();
+  // Reset vital fields
+  ['vfSistolik','vfDiastolik','vfGula','vfSuhu','vfUrat','vfKol','vfBB','vfSpO2'].forEach(id=>{
+    const el=document.getElementById(id);if(el){el.value='';el.className='vf-input';}
+  });
+  ['hintTensi','hintGula','hintSuhu','hintUrat','hintKol'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='';});
+  // Pre-fill from last vital
+  if(currentPasien.vital){
+    const v=currentPasien.vital;
+    const set=(id,val)=>{const el=document.getElementById(id);if(el&&val){el.value=val;}};
+    set('vfSistolik',v.sistolik);set('vfDiastolik',v.diastolik);set('vfGula',v.gula);set('vfSuhu',v.suhu);set('vfUrat',v.urat);set('vfKol',v.kol);set('vfBB',v.bb);set('vfSpO2',v.spo2);
+    cekVitalInput();
+  }
+  // Render riwayat vital
+  renderRiwayatVital();
+  // Init skrining panels
+  Object.keys(skriningAnswers).forEach(k=>delete skriningAnswers[k]);
+  Object.keys(adlAnswers).forEach(k=>delete adlAnswers[k]);
+  skriningDone.fill(false);
+  skriningCurrentTab=0;
+  initSkriningPanels();
+  showScreen('screen-kunjungan');
+}
+// Override old bukaKunjungan
+function bukaKunjungan(id){ bukaKunjunganNew(id); }
+
+// =============================================
+// SOS GLOBAL FUNCTIONS
+// =============================================
+let sosGlobalOpen=false;
+let sosAudioCtx=null;
+let sosOscillator=null;
+let sosSirineOn=false;
+
+function bukaSOSGlobal(){
+  sosGlobalOpen=true;
+  document.getElementById('sosGlobalModal').classList.add('open');
+  // Update kontak from currentPasien
+  const kontakNama=currentPasien?.kontakDarurat||'—';
+  const kontakNum=currentPasien?.noKontak||'—';
+  document.getElementById('sosKontakNama').textContent=kontakNama;
+  document.getElementById('sosKontakNum').textContent=kontakNum;
+  // Log to Firestore
+  if(currentPasien){
+    addDarurat({nama:currentPasien.nama,alamat:currentPasien.alamat,petugas:currentUser?.id||'—',waktu:new Date().toISOString(),jam:jamSekarang(),tgl:tglISO(),tipe:'SOS_dibuka'});
+  }
+}
+
+function tutupSOSGlobal(){
+  sosGlobalOpen=false;
+  document.getElementById('sosGlobalModal').classList.remove('open');
+  if(sosSirineOn) stopSOSSirine();
+}
+
+function toggleSOSSirine(){
+  if(!sosSirineOn){startSOSSirine();}else{stopSOSSirine();}
+}
+
+function startSOSSirine(){
+  sosSirineOn=true;
+  document.getElementById('btnSOSSirine').textContent='MATIKAN SIRINE';
+  document.getElementById('btnSOSSirine').classList.add('aktif');
+  try{
+    sosAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    sosOscillator=sosAudioCtx.createOscillator();
+    const gain=sosAudioCtx.createGain();
+    sosOscillator.connect(gain);gain.connect(sosAudioCtx.destination);
+    sosOscillator.type='sine';gain.gain.value=0.4;
+    let up=true;sosOscillator.frequency.value=800;
+    window._sosInterval=setInterval(()=>{if(!sosSirineOn){clearInterval(window._sosInterval);return;}sosOscillator.frequency.value=up?1200:800;up=!up;},400);
+    sosOscillator.start();
+    showNotifSukses('🔊 Sirine aktif!');
+  }catch(e){showNotifSukses('Sirine tersedia di perangkat nyata');}
+}
+
+function stopSOSSirine(){
+  sosSirineOn=false;
+  document.getElementById('btnSOSSirine').textContent='NYALAKAN SIRINE';
+  document.getElementById('btnSOSSirine').classList.remove('aktif');
+  try{clearInterval(window._sosInterval);if(sosOscillator)sosOscillator.stop();if(sosAudioCtx)sosAudioCtx.close();}catch(e){}
+}
+
+function sosHubungiKeluarga(){
+  const num=document.getElementById('sosKontakNum').textContent;
+  if(num&&num!=='—'){window.location.href='tel:'+num.replace(/[-\s]/g,'');}
+  else{alert('Nomor kontak darurat belum diisi pada data pasien.');}
+  tutupSOSGlobal();
+}
+
+function sosHubungiPuskesmas(){
+  window.location.href='tel:02184001234';
+  tutupSOSGlobal();
+}
+
+function sosHubungi119(){
+  if(currentPasien){addDarurat({nama:currentPasien.nama,alamat:currentPasien.alamat,petugas:currentUser?.id||'—',waktu:new Date().toISOString(),jam:jamSekarang(),tgl:tglISO(),tipe:'119_dipanggil'});}
+  window.location.href='tel:119';
+  tutupSOSGlobal();
+}
+
 function tutupModal(id){ document.getElementById(id).classList.remove('open'); }
 
 // =============================================
@@ -1639,9 +4069,34 @@ function switchDashTab(name,btn){
   document.querySelectorAll('.dash-tab-btn').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active');
   if(name==='pasien') renderMgmtPasien();
   if(name==='petugas') renderMgmtPetugas();
-  if(name==='laporan'){renderSemuaLaporan(); populateFilterLaporan();}
+  if(name==='pengingat') renderPengingatDash();
+  if(name==='dashboard') renderDashboardLaporan();
   if(name==='logger') renderLogger();
   if(name==='ringkasan') renderDashboard();
+}
+
+// Inisialisasi panel Pengingat di Puskesmas — isi dropdown pasien lalu render list
+async function renderPengingatDash(){
+  const sel=document.getElementById('dashPingPasienSel');
+  if(sel){
+    sel.innerHTML=dataPasien.map(p=>`<option value="${p.id}">${esc(p.nama)} — ${esc(p.kategori)}</option>`).join('');
+    if(!selectedPingPasien && dataPasien[0]) selectedPingPasien = dataPasien[0].id;
+    if(selectedPingPasien) sel.value = String(selectedPingPasien);
+  }
+  // Isi chips pasien di form tambah
+  const chipsEl=document.getElementById('pasienChipsRow');
+  if(chipsEl) chipsEl.innerHTML=dataPasien.map(p=>`<div class="pasien-chip ${p.id==selectedPingPasien?'sel':''}" onclick="setSelectedPingPasien(${p.id},this)">${esc(p.nama.split(' ').slice(0,2).join(' '))}</div>`).join('');
+  initPingChips();
+  renderPengingatList();
+}
+
+function dashSetPingPasien(id){
+  selectedPingPasien = parseInt(id);
+  // Sync chips
+  document.querySelectorAll('.pasien-chip').forEach(c=>c.classList.remove('sel'));
+  const target=document.querySelector(`.pasien-chip[onclick*="setSelectedPingPasien(${id},"]`);
+  if(target) target.classList.add('sel');
+  renderPengingatList();
 }
 
 async function renderDashboard(){
@@ -1804,19 +4259,6 @@ async function hapusLaporan(laporanId){
   await deleteRiwayat(laporanId); await renderRiwayat(); await updateStatsBeranda(); showNotifSukses('🗑️ Laporan dihapus.');
 }
 
-async function populateFilterLaporan(){
-  const sel=document.getElementById('filterLaporanPetugas'), cur=sel.value;
-  await loadUsers();
-  sel.innerHTML='<option value="">Semua Petugas</option>'+allPetugasList().map(p=>`<option value="${p.id}"${p.id===cur?' selected':''}>${p.id} — ${esc(p.nama)}</option>`).join('');
-}
-async function renderSemuaLaporan(){
-  const fP=document.getElementById('filterLaporanPetugas').value, fK=document.getElementById('filterLaporanKondisi').value;
-  let list=await getRiwayat(); if(fP)list=list.filter(r=>r.petugas===fP); if(fK)list=list.filter(r=>r.kondisi===fK);
-  const el=document.getElementById('semuaLaporanList');
-  if(!list.length){el.innerHTML='<div class="no-data">Tidak ada laporan.</div>';return;}
-  el.innerHTML=list.map(r=>`<div class="riwayat-item ${r.kondisi}" style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;font-size:0.9rem;">${esc(r.namaPasien)}</span>${badgeKondisi(r.kondisi)}</div><div style="font-size:0.75rem;color:var(--abu3);">👤 <span class="badge-pw">${r.petugas}</span> · 📅 ${r.tgl} ⏰ ${r.jam}${r.diubah?` <em>(diubah ${r.diubah})</em>`:''}</div>${r.catatan?`<div style="font-size:0.82rem;color:var(--teks2);margin-top:4px;font-style:italic;">"${esc(r.catatan).slice(0,100)}"</div>`:''} ${r.checklist?.length?`<div style="font-size:0.75rem;color:var(--hijau);margin-top:3px;">✓ ${r.checklist.join(', ')}</div>`:''}<div style="margin-top:8px;"><button class="btn-edit-kecil" onclick="bukaKirimInstruksi('${esc(r.namaPasien)}')">📨 Instruksi</button></div></div>`).join('');
-}
-
 // =============================================
 // ACTIVITY LOG
 // =============================================
@@ -1937,7 +4379,6 @@ var FIREBASE_CONFIG_INJECTED = false;
 
 initApp().then(()=>{ updateAIKeyUI(); });
 </script>
-
 <!-- MODAL SETUP GOOGLE AI STUDIO -->
 <div class="modal-overlay" id="modalAISetup">
   <div class="modal-box" style="max-width:420px;">
